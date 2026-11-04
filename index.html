@@ -779,6 +779,8 @@ const MILESTONES = {
   ]
  ]
 };
+// What to chase right now: [from, to, text]
+const CHASE = [[1, 9, "Any weapon with higher DPS than yours. Keep a **sharpening stone** on it."], [10, 15, "**Hammer of Orgrimmar** (Hidden Enemies, Ragefire Chasm). Use a **one-hander and shield** until 20."], [16, 20, "**Hammer of Orgrimmar** from Ragefire Chasm. Start the **Brutal Hauberk** chain at 20."], [21, 27, "**Wingblade** (Wailing Caverns quest), then **Shadowfang Keep** drops. Two weapons now, fast one in the off-hand."], [28, 30, "**Outlaw Sabre** (Baron Aquanis, Blackfathom Deeps). Finish the **Brutal Hauberk**."], [31, 33, "**Pronged Reaver** (Razorfen Kraul). Mail with Strength and Agility."], [34, 39, "**Sword of Omen** (Into The Scarlet Monastery) and a lucky **Ravager** from Herod. Save **120 gold** for riding."], [40, 47, "**Plate** with Strength and Agility, and the **Officer’s** set if you craft it. Keep a shield for Protection."], [48, 49, "**Zul’Farrak swords**, then **Thrash Blade** (Maraudon, Corruption of Earth and Seed): top priority."], [50, 59, "**Hit** on gear, toward 8%. **Linken’s Sword of Mastery** (Un’Goro) and Blackrock Depths drops."], [60, 60, "Pre-raid gear from Blackrock Spire, Stratholme, Scholomance and Dire Maul. Ask Claude for the latest best-in-slot list."]];
 // [name, min, max, zone, why go]
 const DUNGEONS = [
  ['Ragefire Chasm',13,18,'Orgrimmar','Hidden Enemies quest chain for Hammer of Orgrimmar'],
@@ -3739,6 +3741,11 @@ function nowScreen(){
        '<p class="muted" style="margin:0">'+(open.length?'Nothing due at your level. Keep questing.':'Stage complete. Level up to unlock the next one.')+'</p>')+
      '<button type="button" class="btn primary" data-go="'+st.id+'">Open the full stage</button>'+
    '</div>'+
+   (()=>{ const rot=(st.rotation.find(b=>b[0]==='ol')||[])[1]; const ch=CHASE.find(c=>level>=c[0]&&level<=c[1]);
+     return '<div class="card"><h3>Right now</h3>'+
+       (rot?'<div class="label" style="justify-content:flex-start">How to fight</div><ol class="howto">'+rot.map(x=>'<li>'+fmt(x)+'</li>').join('')+'</ol>':'')+
+       (ch?'<div class="label" style="justify-content:flex-start">Gear to chase</div><p style="margin:0">'+fmt(ch[2])+'</p>':'')+
+       '<button type="button" class="btn ghost" data-go="'+st.id+'" data-seg="3">Full fight guide and tips</button></div>'; })()+
    (dg.length?'<div class="card"><h3>Dungeons at your level</h3>'+table(['Levels','Dungeon'], dg.map(d=>[rangeLabel(d[1],d[2]), d[0]+(d[4]?' · <span class="muted">'+esc(d[4])+'</span>':'')]))+'</div>':'')+
    '<button type="button" class="btn primary" data-go="upgrades">Quest reward? How to choose</button>'+
    '<div class="btn-row"><button type="button" class="btn ghost" data-go="profs">Professions</button><button type="button" class="btn ghost" data-go="basics">Warrior basics</button></div>'+
