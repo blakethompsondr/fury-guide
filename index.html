@@ -650,7 +650,7 @@ const STAGES = [
    ],
    [
     13,
-    "Run **Ragefire Chasm** in Orgrimmar. Do the **Hidden Enemies** quests for Hammer of Orgrimmar.",
+    "Pick up the **Hidden Enemies** quests in Orgrimmar (Hammer of Orgrimmar reward). RestedXP’s Dungeon guide sends you into Ragefire Chasm around 16.",
     "d07"
    ],
    [
@@ -742,6 +742,16 @@ const STAGES = [
     16,
     "Check the Auction House for **Linen Bags** or **Wool Bags** from tailors. Cheap and much bigger than vendor bags.",
     "d25"
+   ],
+   [
+    13,
+    "**Dungeon timing: follow RestedXP’s Dungeon guide.** Kargoz’s preview: Ragefire Chasm at about **16** (later than usual), then straight onto the zeppelin to Tirisfal for **Ruins of Lordaeron**. Loot and use the Crest of Lordaeron there for a bonus quest. Then Wailing Caverns.",
+    "d26"
+   ],
+   [
+    16,
+    "Do the **Deadmines** once if you can find a group: it counts towards your first dungeon **Legacy point** (Kargoz).",
+    "d27"
    ]
   ],
   "gear": [
@@ -775,7 +785,8 @@ const STAGES = [
    "Pick up a dungeon’s quests before you go in.",
    "Check the dungeon’s level range below before joining a group.",
    "Kargoz says dungeon quests give **double XP** in Forever and grinding is slightly nerfed, so pick up every dungeon quest you can.",
-   "Choosing between quest rewards? Open **Picking upgrades** in Look up."
+   "Choosing between quest rewards? Open **Picking upgrades** in Look up.",
+   "**Kargoz’s dungeon rule:** do each dungeon **once**, for its quests, when it is slightly easy for you (green enemies). Dungeons are about 40% of your total XP. Get your dungeon weapons early."
   ]
  },
  {
@@ -871,6 +882,11 @@ const STAGES = [
     22,
     "In Shadowfang Keep, **Commander Springvale** can drop **Blueprint: Toxin Study** (First Aid 140): a camp item that also holds potions and anti-venom.",
     "d16"
+   ],
+   [
+    24,
+    "Kargoz’s dungeon route: Shadowfang Keep at **24 to 25**, Blackfathom Deeps at **28 to 29**, then Razorfen Kraul (go early for Corpsemaker if you can). Excavation Site: Wetlands and City of Dalaran are worth doing back to back on Horde.",
+    "d17"
    ]
   ],
   "gear": [
@@ -999,6 +1015,16 @@ const STAGES = [
     33,
     "In Arathi Highlands, **Syndicate Mercenaries** drop **Manual: Greater Healing Potion** (First Aid 155). You will want these potions.",
     "d17"
+   ],
+   [
+    30,
+    "**Scarlet Monastery: do it even if RestedXP’s Dungeon guide skips it.** Kargoz overrules the guide here for Warriors, because Herod in the Armory drops **Ravager**.",
+    "d18"
+   ],
+   [
+    38,
+    "Kargoz’s route: Razorfen Downs at about 38, then Badlands quests at 39 to 40.",
+    "d19"
    ]
   ],
   "gear": [
@@ -1112,6 +1138,11 @@ const STAGES = [
     40,
     "Blacksmithing from 150 to 225: the **Officer’s** plate set (Strength, Agility, Stamina). Belt from the trainer at 150, gauntlets at 175, pauldrons at 210 and wristguards at 225 from a vendor. Great once you wear plate.",
     "d14"
+   ],
+   [
+    48,
+    "RestedXP’s Dungeon guide does **Zul’Farrak at about 48** and **Maraudon at 49 to 50** (Kargoz thinks Zul’Farrak at 48 is late, but trust the guide on a first run).",
+    "d15"
    ]
   ],
   "gear": [
@@ -1226,6 +1257,11 @@ const STAGES = [
     55,
     "Start the **Onyxia attunement** for the **Drakefire Amulet**. The Horde chain starts in the Badlands and runs through Lower and Upper Blackrock Spire, Desolace, Western Plaguelands and Dustwallow Marsh. Bring friends for the elite quests.",
     "d10"
+   ],
+   [
+    56,
+    "RestedXP’s Dungeon guide does Blackrock Depths at about **56 to 57**. It skips Dire Maul.",
+    "d11"
    ]
   ],
   "gear": [
@@ -1716,7 +1752,7 @@ const REF = [
     "addcfg",
     [
      [
-      "**/rxp**: pick the levelling guide for Skyborne, scale the guide window up so you can read it from the sofa, turn the waypoint arrow on, and keep its auto accept and hand-in on",
+      "**/rxp**: choose the **Dungeon guide** for your starting area, not the normal speedrun guide (Kargoz, confirmed with the RestedXP authors). It routes you through the dungeons at the right levels and drops quests you no longer need.",
       "addcfg-01"
      ],
      [
@@ -1742,6 +1778,14 @@ const REF = [
      [
       "DungeonJournal: open it and check for Ruins of Lordaeron or Krol’Dok Stronghold. Not there? Untick it",
       "addcfg-07"
+     ],
+     [
+      "**/rxp** options (Kargoz): turn **off flight path automation** (it can send you the wrong way), and turn on the **inventory manager**: auto sell junk, and discard junk when your bags are full. There is also a new keybind to delete your cheapest junk item.",
+      "addcfg-08"
+     ],
+     [
+      "**/rxp** options, optional: dark mode, and speedrun splits if you like seeing your time per level.",
+      "addcfg-09"
      ]
     ]
    ],
