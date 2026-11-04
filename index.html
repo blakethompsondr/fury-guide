@@ -166,6 +166,8 @@ strong{color:var(--gold)}
 .row .when{display:block;font-size:13.5px;color:var(--class);font-family:var(--display);letter-spacing:.03em;margin-top:3px}
 .howto{margin:0;padding-left:1.3em;display:grid;gap:8px}
 .howto li::marker{color:var(--gold);font-family:var(--display);font-weight:700}
+.lvmust{margin:0;padding-left:1.25em;display:grid;gap:8px}
+.lvmust li::marker{color:var(--gold)}
 /* stage detail tabs */
 .seg{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--bar-h) + 3px);z-index:12;padding-block:8px;background:linear-gradient(var(--bg) 70%,transparent)}
 .seg .seg-in{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
@@ -453,6 +455,330 @@ const GLOSSARY = [["Rage","Rage","The resource your abilities cost. It builds wh
  ["Enrage","Enrage","A talent: after you get hit, you sometimes deal 10% more damage for 12 seconds."],
  ["Unbridled Wrath","Unbridled Wrath","A talent: your hits sometimes give extra Rage."],
  ["Furious Precision","Furious Precision","A talent: your off-hand weapon misses much less."]];
+// Level-up pop-ups: [title, intro, must-dos, [button label, page id]]
+const MILESTONES = {
+ "2": [
+  "Welcome to Azeroth",
+  "Keep it simple for now.",
+  [
+   "Kill everything near you and sell the loot for silver.",
+   "Buy **Battle Shout** and keep it up.",
+   "Grind to level 4 before you quest hard (Kargoz)."
+  ],
+  [
+   [
+    "Warrior basics",
+    "basics"
+   ]
+  ]
+ ],
+ "3": [
+  "Professions time",
+  "Your first crafting choices.",
+  [
+   "Learn **First Aid**, **Mining**, **Blacksmithing** and **Cooking** from the trainers.",
+   "Skyborne: take **Mining for Dummies** from the Harvesting Windstones quest.",
+   "Mine every ore node you pass from now on."
+  ],
+  [
+   [
+    "Professions step by step",
+    "profs"
+   ]
+  ]
+ ],
+ "4": [
+  "Charge and Rend",
+  "Your real fighting starts here.",
+  [
+   "Train **Charge** and **Rend**.",
+   "Your opener is now: Charge, Rend, then auto attack.",
+   "Save Heroic Strike for when you have spare Rage."
+  ],
+  [
+   [
+    "Warrior basics",
+    "basics"
+   ]
+  ]
+ ],
+ "5": [
+  "Set up base",
+  "A quick housekeeping stop.",
+  [
+   "Set your **Hearthstone** in Shen’dar Village.",
+   "Buy your first **bag** as soon as you can.",
+   "Use the Shen’dar Warrior trainer from now on."
+  ],
+  [
+   [
+    "Everyday habits",
+    "habits"
+   ]
+  ]
+ ],
+ "10": [
+  "You’re level 10: talents unlock",
+  "One of the big ones.",
+  [
+   "Spend your first talent point: **Cruelty**.",
+   "Do the **Defensive Stance** class quest with Seena Skybreaker in Valanaar.",
+   "Train **Journeyman** in your professions.",
+   "Head to **Orgrimmar**, learn **Thrown**, and set your Hearthstone there.",
+   "Visit the supply camp outside the Crossroads for your first Shipping Label quest."
+  ],
+  [
+   [
+    "Stats explained",
+    "stats"
+   ],
+   [
+    "Picking upgrades",
+    "upgrades"
+   ]
+  ]
+ ],
+ "13": [
+  "Dungeons are coming",
+  "Your first group content is a few levels away.",
+  [
+   "Read **Everyday habits**: loot rules and group manners.",
+   "Read the dungeon part of **Dungeons and raids**.",
+   "Pick up the Hidden Enemies quests in Orgrimmar."
+  ],
+  [
+   [
+    "Everyday habits",
+    "habits"
+   ],
+   [
+    "Dungeons and raids",
+    "groups"
+   ]
+  ]
+ ],
+ "16": [
+  "Ragefire Chasm",
+  "RestedXP’s Dungeon guide takes you into your first dungeon now.",
+  [
+   "Find a group with the Looking for Group tool and walk to Ragefire Chasm in Orgrimmar.",
+   "Take **Hammer of Orgrimmar** from Hidden Enemies.",
+   "Then straight to Ruins of Lordaeron on the zeppelin."
+  ],
+  [
+   [
+    "Picking upgrades",
+    "upgrades"
+   ]
+  ]
+ ],
+ "20": [
+  "You’re level 20: two weapons",
+  "A huge change to how you play.",
+  [
+   "Train **Dual Wield** and equip two one-handers.",
+   "Talent: **Furious Precision**, so your off-hand stops missing.",
+   "Train **Expert** professions once you have 125 skill.",
+   "Start the **Brutal Hauberk** chain for your chest piece."
+  ],
+  [
+   [
+    "Picking upgrades",
+    "upgrades"
+   ],
+   [
+    "Professions step by step",
+    "profs"
+   ]
+  ]
+ ],
+ "25": [
+  "Your first Legacy point",
+  "Account-wide bonuses unlock.",
+  [
+   "Press **Y** and spend your point.",
+   "Playing a lot? Take **Thrill of Adventure**. Short sessions? **Well Rested** (Wowhead)."
+  ],
+  [
+   [
+    "Professions and consumables",
+    "kit"
+   ]
+  ]
+ ],
+ "28": [
+  "New button: Reckless Swings",
+  "A new talent from the final patch.",
+  [
+   "Take **Reckless Swings** and put it on your bars.",
+   "Press it when Rage is low and you have health to spare."
+  ],
+  []
+ ],
+ "30": [
+  "You’re level 30: Berserker",
+  "The Fury Warrior arrives.",
+  [
+   "Take **Death Wish**.",
+   "Do the **Berserker Stance** class quest (The Islander, Fray Island).",
+   "Fight in Berserker Stance from now and read the new **Fight** tab.",
+   "Keep training every rank of Rend."
+  ],
+  []
+ ],
+ "34": [
+  "Scarlet Monastery",
+  "Not in RestedXP’s route, but Warriors should do it.",
+  [
+   "Take **Into The Scarlet Monastery** from Varimathras in the Undercity.",
+   "Run the wings in order and hope for **Ravager** from Herod.",
+   "Choose **Sword of Omen** as the reward if its DPS beats yours."
+  ],
+  [
+   [
+    "Picking upgrades",
+    "upgrades"
+   ]
+  ]
+ ],
+ "35": [
+  "Artisan professions",
+  "The last profession rank.",
+  [
+   "Train **Artisan** Blacksmithing (Booty Bay) and Mining once you have 200 skill.",
+   "Cooking and First Aid Artisan come from quests: see the checklist."
+  ],
+  [
+   [
+    "Professions step by step",
+    "profs"
+   ]
+  ]
+ ],
+ "36": [
+  "Whirlwind",
+  "Your best attack until 40.",
+  [
+   "Train **Whirlwind** and use it on cooldown, even on one enemy.",
+   "Talents: **Improved Whirlwind** makes it ready every 8 seconds."
+  ],
+  []
+ ],
+ "39": [
+  "Save for your mount",
+  "Level 40 is next.",
+  [
+   "Have about **120 gold** ready for riding and a mount.",
+   "Keep a one-hander and shield in your bags for Protection."
+  ],
+  []
+ ],
+ "40": [
+  "You’re level 40: the big one",
+  "More changes at once than any other level.",
+  [
+   "Take **Bloodthirst**. Your rotation changes, so read the Fight tab.",
+   "Train **plate armour**.",
+   "Learn **riding** and buy your **mount** (about 120 gold) from Genn Fairweather on Zephras Isle.",
+   "Turn on **dual spec** and build **Protection**.",
+   "Re-read the Protection part of Dungeons and raids."
+  ],
+  [
+   [
+    "Dungeons and raids",
+    "groups"
+   ]
+  ]
+ ],
+ "48": [
+  "Zul’Farrak",
+  "Swords and more swords.",
+  [
+   "RestedXP takes you into **Zul’Farrak** now.",
+   "Compare every sword that drops by weapon DPS."
+  ],
+  [
+   [
+    "Picking upgrades",
+    "upgrades"
+   ]
+  ]
+ ],
+ "49": [
+  "Maraudon and Thrash Blade",
+  "Your best levelling weapon.",
+  [
+   "Do **Corruption of Earth and Seed** in Maraudon for **Thrash Blade**.",
+   "Put it in your main hand if its DPS is higher."
+  ],
+  []
+ ],
+ "50": [
+  "You’re level 50",
+  "The home stretch.",
+  [
+   "Train **Recklessness**: use it with Death Wish on bosses.",
+   "Upgrade to **Elixir of the Mongoose**.",
+   "Start looking for hit on gear.",
+   "Be in a guild that raids."
+  ],
+  [
+   [
+    "Dungeons and raids",
+    "groups"
+   ]
+  ]
+ ],
+ "55": [
+  "Onyxia attunement",
+  "Raids open on 9 December.",
+  [
+   "Start the **Drakefire Amulet** chain in the Badlands.",
+   "You will need groups for its elite quests and dungeons.",
+   "Start collecting fire resistance gear."
+  ],
+  [
+   [
+    "Dungeons and raids",
+    "groups"
+   ]
+  ]
+ ],
+ "59": [
+  "Save for epic riding",
+  "Level 60 is close.",
+  [
+   "Journeyman Riding at 60 costs about 1,000 gold, plus 200 for the mount.",
+   "Being Honored with your home faction takes 10% off."
+  ],
+  [
+   [
+    "Professions and consumables",
+    "kit"
+   ]
+  ]
+ ],
+ "60": [
+  "You’re level 60!",
+  "Levelling is done. Now the gear chase.",
+  [
+   "Respec to the raid build, but ask Claude for the latest version first.",
+   "Run Blackrock Spire, Stratholme, Scholomance and Dire Maul for pre-raid gear.",
+   "Get to 8% hit, then expertise.",
+   "Stock raid consumables before 9 December."
+  ],
+  [
+   [
+    "Dungeons and raids",
+    "groups"
+   ],
+   [
+    "Picking upgrades",
+    "upgrades"
+   ]
+  ]
+ ]
+};
 // [name, min, max, zone, why go]
 const DUNGEONS = [
  ['Ragefire Chasm',13,18,'Orgrimmar','Hidden Enemies quest chain for Hammer of Orgrimmar'],
@@ -3525,15 +3851,22 @@ function showFollow(inp){ if(!inp.checked) return; const t=inp.closest('label').
   setTimeout(()=>openSheet('<h2 id="sheetTitle">'+esc(f.t)+'</h2><p style="margin:0">'+fmt(f.b)+'</p><button type="button" class="btn primary" id="fuOk">Got it</button>',()=>{ $('fuOk').onclick=closeSheet; }),350); }
 function levelUpSheet(l){
   if(store.get('sfw2.lvpop.off',false)) return;
-  const st=stageFor(l); const items=levelItems(st).filter(i=>i.lv===l); const dg=DUNGEONS.filter(d=>d[1]===l);
-  const newStage=st.range[0]===l&&l>1;
-  if(!items.length&&!dg.length&&!newStage) return;
-  openSheet('<h2 id="sheetTitle">Level '+l+'</h2>'+
-    (newStage?'<div class="note"><strong>New stage: '+esc(st.t)+'.</strong> Open it once and skim its <strong>Gear</strong> and <strong>Fight</strong> tabs.</div>':'')+
-    (items.length?'<ul class="plain" style="margin:0;padding-left:1.2em;display:grid;gap:6px">'+items.map(i=>'<li>'+fmt(i.text)+'</li>').join('')+'</ul>':'')+
-    dg.map(d=>'<p class="dgline">Dungeon now possible: <strong>'+esc(d[0])+'</strong>. RestedXP decides when you go.</p>').join('')+
-    '<div class="btn-row">'+(newStage?'<button type="button" class="btn ghost" id="luStage">Open stage</button>':'<button type="button" class="btn ghost" id="luOff">Stop these pop-ups</button>')+'<button type="button" class="btn primary" id="luOk">Got it</button></div>',
-    ()=>{ $('luOk').onclick=closeSheet; if($('luStage')) $('luStage').onclick=()=>{ closeSheet(); go(st.id); }; if($('luOff')) $('luOff').onclick=()=>{ store.set('sfw2.lvpop.off',true); closeSheet(); toast('Level pop-ups off'); }; });
+  const st=stageFor(l); const ms=MILESTONES[l]; const newStage=st.range[0]===l&&l>1;
+  const tal=TAL_LV[l], trn=TRAIN_LV[l]; const dg=DUNGEONS.filter(d=>d[1]===l);
+  const extra=levelItems(st).filter(i=>i.lv===l&&i.kind==='do').length;
+  let body='<h2 id="sheetTitle">'+esc(ms?ms[0]:'Level '+l)+'</h2>';
+  if(ms) body+='<p class="muted" style="margin:0">'+fmt(ms[1])+'</p><ul class="lvmust">'+ms[2].map(x=>'<li>'+fmt(x)+'</li>').join('')+'</ul>';
+  const quick=[]; if(tal&&!(ms&&ms[2].some(x=>x.includes(tal.t.split(' ')[0])))) quick.push('**Talent:** '+tal.t+'.');
+  if(trn&&!ms) quick.push('**Trainer:** '+trn+'.');
+  if(quick.length) body+='<p style="margin:0">'+quick.map(fmt).join('<br>')+'</p>';
+  if(newStage) body+='<div class="note"><strong>New stage: '+esc(st.t)+'.</strong> Skim its <strong>Gear</strong> and <strong>Fight</strong> tabs once.</div>';
+  if(!ms&&!quick.length&&!newStage&&!extra) return;
+  if(extra) body+='<p class="muted" style="margin:0">'+(ms?'Everything else for this level':'Your '+extra+' task'+(extra>1?'s':'')+' for this level')+' is in <strong>Do next</strong>.</p>';
+  const links=(ms?ms[3]:[]).slice(0,2); if(newStage) links.unshift(['Open stage',st.id]);
+  body+=(links.length?'<div class="btn-row lvlinks">'+links.slice(0,2).map(x=>'<button type="button" class="btn ghost" data-lu="'+x[1]+'">'+esc(x[0])+'</button>').join('')+'</div>':'')+
+    '<div class="btn-row"><button type="button" class="btn ghost" id="luOff">Stop pop-ups</button><button type="button" class="btn primary" id="luOk">Got it</button></div>';
+  openSheet(body,()=>{ $('luOk').onclick=closeSheet; $('luOff').onclick=()=>{ store.set('sfw2.lvpop.off',true); closeSheet(); toast('Level pop-ups off'); };
+    $('sheet').querySelectorAll('[data-lu]').forEach(b=>b.onclick=()=>{ closeSheet(); go(b.dataset.lu); }); });
 }
 /* ===== router ===== */
 const TABS=['now','stages','lookup','progress'];
