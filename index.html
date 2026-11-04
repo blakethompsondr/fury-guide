@@ -163,6 +163,9 @@ strong{color:var(--gold)}
 .dgline{margin:0;font-size:15.5px;color:var(--muted);padding-left:4px}
 .gl{all:unset;display:inline;cursor:help;color:inherit;font:inherit;border-bottom:1.5px dotted var(--gold);-webkit-tap-highlight-color:transparent}
 .gl:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
+.row .when{display:block;font-size:13.5px;color:var(--class);font-family:var(--display);letter-spacing:.03em;margin-top:3px}
+.howto{margin:0;padding-left:1.3em;display:grid;gap:8px}
+.howto li::marker{color:var(--gold);font-family:var(--display);font-weight:700}
 /* stage detail tabs */
 .seg{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--bar-h) + 3px);z-index:12;padding-block:8px;background:linear-gradient(var(--bg) 70%,transparent)}
 .seg .seg-in{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
@@ -581,6 +584,16 @@ const STAGES = [
     5,
     "Buy a small **bag** from a general goods vendor as soon as you have spare silver. Bag space runs out fast. Fill every bag slot with the biggest bags you can afford.",
     "d18"
+   ],
+   [
+    1,
+    "Read **Warrior basics** in Look up once (5 minutes): Rage and stances.",
+    "d19"
+   ],
+   [
+    3,
+    "Read **Professions and consumables** in Look up, and check **Professions step by step** for your first crafts.",
+    "d20"
    ]
   ],
   "gear": [
@@ -746,6 +759,11 @@ const STAGES = [
     16,
     "Do the **Deadmines** once if you can find a group: it counts towards your first dungeon **Legacy point** (Kargoz).",
     "d27"
+   ],
+   [
+    10,
+    "Read **Stats explained** in Look up once: from now on you will be choosing between items.",
+    "d28"
    ]
   ],
   "gear": [
@@ -1173,6 +1191,11 @@ const STAGES = [
     48,
     "Route: Stranglethorn 40-41, Swamp of Sorrows 41, Tanaris and Dustwallow 41-43, Feralas 43-44, Southern Stranglethorn 44-45, Swamp of Sorrows 45-46, Tanaris 46-48, **Zul’Farrak 48**, The Hinterlands 48-49, **Maraudon 49-50**.",
     "d15"
+   ],
+   [
+    40,
+    "Re-read **Dungeons and raids** (the Protection part) before your first tank run.",
+    "d16"
    ]
   ],
   "gear": [
@@ -1431,6 +1454,20 @@ const REF = [
   "b": [
    [
     "h",
+    "How to use this app"
+   ],
+   [
+    "ol",
+    [
+     "**Every level up:** on the Now screen tap **+**, then do and tick everything in **Do next**. It already includes your talent point, trainer and tasks.",
+     "**New stage** (10, 20, 30 and so on): open the stage once and skim its **Gear** and **Fight** tabs.",
+     "**Look up** only when you need it. Each page says when to read it, and Do next reminds you at the right level.",
+     "Tap any dotted word for its meaning.",
+     "About once a week, ask Claude whether a patch changed the build."
+    ]
+   ],
+   [
+    "h",
     "Create your character"
    ],
    [
@@ -1567,7 +1604,9 @@ const REF = [
     "note",
     "Your full controller layout, addons and settings are in **First login setup**."
    ]
-  ]
+  ],
+  "when": "Once, before launch",
+  "whenShort": "Tonight"
  },
  {
   "id": "setup",
@@ -1967,7 +2006,9 @@ const REF = [
      "Later, at 60: tick DBM Raids (Vanilla), and the Details Vanguard plugin when you start tanking."
     ]
    ]
-  ]
+  ],
+  "when": "Once, at your first login",
+  "whenShort": "First login"
  },
  {
   "id": "basics",
@@ -2079,7 +2120,9 @@ const REF = [
      ]
     ]
    ]
-  ]
+  ],
+  "when": "Once, in the first hour. Re-read if Rage feels hard",
+  "whenShort": "First hour"
  },
  {
   "id": "glossary",
@@ -2093,7 +2136,9 @@ const REF = [
    [
     "glossary"
    ]
-  ]
+  ],
+  "when": "Whenever a word is unclear, or tap any dotted word",
+  "whenShort": "Any time"
  },
  {
   "id": "stats",
@@ -2174,7 +2219,9 @@ const REF = [
      "Heroic Strike and Cleave really cost more than shown, because the swing they replace would have given you Rage."
     ]
    ]
-  ]
+  ],
+  "when": "Once at level 10, when gear choices start",
+  "whenShort": "Level 10"
  },
  {
   "id": "kit",
@@ -2508,7 +2555,9 @@ const REF = [
      "At 60, Alchemy and Herbalism are the classic gold makers if you change professions."
     ]
    ]
-  ]
+  ],
+  "when": "At level 3 (professions) and level 10 (consumables), then each new stage",
+  "whenShort": "Levels 3 and 10"
  },
  {
   "id": "upgrades",
@@ -2555,7 +2604,9 @@ const REF = [
      "Bags full? Mail spare items to your bank alt, if you made one."
     ]
    ]
-  ]
+  ],
+  "when": "Every time a quest offers rewards you are unsure about",
+  "whenShort": "Each reward"
  },
  {
   "id": "profs",
@@ -2856,7 +2907,9 @@ const REF = [
      ]
     ]
    ]
-  ]
+  ],
+  "when": "Whenever you are in a city with materials to craft",
+  "whenShort": "In cities"
  },
  {
   "id": "habits",
@@ -2949,7 +3002,9 @@ const REF = [
      "Watch the healer’s mana and wait for them between pulls."
     ]
    ]
-  ]
+  ],
+  "when": "Once before your first dungeon, at about 13",
+  "whenShort": "Level 13"
  },
  {
   "id": "groups",
@@ -3038,7 +3093,9 @@ const REF = [
    [
     "dungeons"
    ]
-  ]
+  ],
+  "when": "Before your first dungeon, and again at 40 when you start tanking",
+  "whenShort": "Levels 13 and 40"
  },
  {
   "id": "sources",
@@ -3178,7 +3235,9 @@ const REF = [
     "p",
     "Compiled 3 November 2026, the day before launch. Recheck the guides after the first tuning passes."
    ]
-  ]
+  ],
+  "when": "Never needed. Only if you want to check a claim",
+  "whenShort": "Optional"
  }
 ];
 
@@ -3285,6 +3344,13 @@ function nowScreen(){
   const su=REF.find(r=>r.id==='setup'), sp=su?progress(su):null;
   return '<section class="screen enter">'+
    '<div class="hero"><svg class="crest" viewBox="0 0 74 84" aria-hidden="true"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe39a"/><stop offset=".5" stop-color="#d9a63e"/><stop offset="1" stop-color="#7a5414"/></linearGradient><linearGradient id="cr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b3271a"/><stop offset="1" stop-color="#4a0b05"/></linearGradient></defs><path d="M37 3 L69 13 V40 C69 60 55 74 37 81 C19 74 5 60 5 40 V13 Z" fill="url(#cr)" stroke="url(#cg)" stroke-width="3.5"/><path d="M37 10 L62 18 V40 C62 56 51 67 37 73 C23 67 12 56 12 40 V18 Z" fill="none" stroke="#e2b350" stroke-opacity=".45" stroke-width="1.2"/><g stroke="url(#cg)" stroke-width="3.6" stroke-linecap="round"><path d="M22 22 L52 58"/><path d="M52 22 L22 58"/></g><g fill="url(#cg)"><path d="M17 17 l9 3 -3 3z"/><path d="M57 17 l-9 3 3 3z"/></g><g class="gust" fill="none" stroke="#9fe0f0" stroke-width="2" stroke-linecap="round" opacity=".9"><path d="M18 44 c6 -4 12 4 18 0 s10 -5 14 -1"/><path d="M24 51 c5 -3 9 3 14 0 s8 -3 11 0"/></g></svg><div class="eyebrow">Windshaper Skyborne · Fury · Horde</div><h1>'+esc(st.t)+'</h1><p class="muted" style="margin:0">'+fmt(st.goal)+'</p></div>'+
+   (!store.get('sfw2.howto.hide',false)?'<div class="card" id="howto"><h3>How to use this app</h3><ol class="howto">'+
+     '<li><strong>Every level up:</strong> tap <strong>+</strong> below, then do and tick everything in <strong>Do next</strong>. It already includes your talent, trainer and tasks.</li>'+
+     '<li><strong>New stage</strong> (10, 20, 30...): open it once and skim its <strong>Gear</strong> and <strong>Fight</strong> tabs.</li>'+
+     '<li><strong>Look up</strong> only when you need it. Each page there says when to read it, and Do next reminds you at the right level.</li>'+
+     '<li>Tap any <span class="gl" style="pointer-events:none">dotted word</span> for its meaning.</li>'+
+     '<li>About once a week, ask Claude whether a patch changed the build.</li></ol>'+
+     '<button type="button" class="btn ghost" id="howtoHide">Got it, hide this</button></div>':'')+
    (sp&&sp.done<sp.total?'<div class="card"><div style="display:flex;align-items:baseline;gap:8px"><h3>First login setup</h3><span class="muted" style="margin-left:auto;font-size:14px">'+sp.done+'/'+sp.total+' done</span></div><p class="muted" style="margin:0 0 12px">Addons, settings, layout and RestedXP in one pass, about 20 minutes.</p><button type="button" class="btn primary" data-go="setup">Open setup</button></div>':'')+
    '<div class="card"><div class="levelcard"><button type="button" class="step" id="lvDown" aria-label="Level down">−</button>'+
      '<div class="levelnum"><output id="lvOut">'+level+'</output><span>your level</span></div>'+
@@ -3337,7 +3403,7 @@ function lookupScreen(){
   return '<section class="screen enter">'+
    '<label class="search" for="q"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg><input id="q" type="search" placeholder="Search abilities, dungeons, quests…" value="'+esc(lastQuery)+'" autocomplete="off"></label>'+
    '<div id="res">'+results(lastQuery)+'</div>'+
-   '<div class="label">Reference</div><ul class="list">'+REF.map(r=>'<li><button type="button" class="row" data-go="'+r.id+'"><span class="n">Ref</span><span><span class="t">'+esc(r.t)+'</span><span class="s">'+esc(r.s)+'</span></span><span class="chev">›</span></button></li>').join('')+'</ul>'+
+   '<div class="label">Reference</div><ul class="list">'+REF.map(r=>'<li><button type="button" class="row" data-go="'+r.id+'"><span class="n">Ref</span><span><span class="t">'+esc(r.t)+'</span><span class="s">'+esc(r.s)+'</span>'+(r.when?'<span class="when">When: '+esc(r.when)+'</span>':'')+'</span><span class="chev">›</span></button></li>').join('')+'</ul>'+
   '</section>';
 }
 function progressScreen(){
@@ -3382,7 +3448,7 @@ function stageScreen(st){
    '<div class="stage-nav">'+(prev?'<button type="button" data-go="'+prev.id+'"><small>← Previous</small><span>'+esc(prev.t)+'</span></button>':'<span></span>')+
      (next?'<button type="button" data-go="'+next.id+'"><small>Next →</small><span>'+esc(next.t)+'</span></button>':'<span></span>')+'</div>';
 }
-function refScreen(r){ return '<section class="panel enter">'+'<p class="muted">'+esc(r.s)+'</p>'+refBlocks(r,r.b)+'</section>'; }
+function refScreen(r){ return '<section class="panel enter">'+'<p class="muted">'+esc(r.s)+'</p>'+(r.when?'<div class="note"><strong>When to read this:</strong> '+esc(r.when)+'.</div>':'')+refBlocks(r,r.b)+'</section>'; }
 
 /* ===== router ===== */
 const TABS=['now','stages','lookup','progress'];
@@ -3414,6 +3480,7 @@ function wire(st){
     const owner=ALL.find(c=>keysOf(c).includes(k)); if(owner){ const p=progress(owner); if(inp.checked && p.done===p.total) toast(owner.t+' complete'); }
     if(!st && (location.hash.slice(1)||'now')==='now' && inp.checked){ const li=inp.closest('li'); if(li){ li.style.transition='opacity .25s ease, transform .25s ease'; li.style.opacity='0'; li.style.transform='translateX(14px)'; } setTimeout(refresh,300); }
   });
+  if($('howtoHide')) $('howtoHide').onclick=()=>{ store.set('sfw2.howto.hide',true); const h=$('howto'); if(h) h.remove(); toast('Kept in Before you play'); };
   if($('lvDown')){ $('lvDown').onclick=()=>{ setLevel(level-1); refresh(); }; $('lvUp').onclick=()=>{ setLevel(level+1); refresh(); }; }
   if($('q')){ const q=$('q'); q.oninput=()=>{ lastQuery=q.value; store.set('sfw2.q',lastQuery); $('res').innerHTML=results(lastQuery); $('res').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go,b.dataset.seg)); }; }
   if($('resetBtn')) $('resetBtn').onclick=()=>openSheet('<h2 id="sheetTitle">Reset all progress?</h2><p style="margin:0">This clears every tick on this device. Your level stays.</p><div class="btn-row"><button type="button" class="btn ghost" id="rsNo">Keep it</button><button type="button" class="btn danger" id="rsYes">Reset</button></div>',
