@@ -222,13 +222,12 @@ details .tbl{border:0;border-radius:0;background:transparent;box-shadow:none}
 .sheet.show{transform:none}
 .sheet .grab{width:44px;height:5px;border-radius:3px;background:var(--gold-lo);margin:0 auto 10px}
 .sheet{max-height:min(86vh,calc(100dvh - 40px));display:flex;flex-direction:column}
-.sheet .sh-in{max-width:640px;width:100%;margin:0 auto;display:grid;gap:14px;align-content:start;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;min-height:0;padding-right:6px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent}
+.sheet .sh-in{max-width:640px;width:100%;margin:0 auto;display:grid;gap:14px;align-content:start;overflow-y:auto;overscroll-behavior:contain;min-height:0;flex:1 1 auto;padding-right:6px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent;transform:translateZ(0)}
 .sheet .sh-in::-webkit-scrollbar{width:6px}
 .sheet .sh-in::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold-hi),var(--gold-lo));border-radius:3px}
-.sheet .sh-in::-webkit-scrollbar-track{background:transparent}
-.sheet .sh-in > .btn-row:last-child,.sheet .sh-in > .btn:last-child{position:sticky;bottom:0;padding-top:16px;margin-top:-2px;
-  background:linear-gradient(to bottom,transparent,var(--surface) 14px)}
-.sheet .more{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(88px + env(safe-area-inset-bottom,0px));pointer-events:none;
+.sheet .sh-foot{max-width:640px;width:100%;margin:0 auto;flex:none;padding-top:12px;border-top:1px solid var(--line)}
+.sheet .sh-foot:empty{display:none}
+.sheet .more{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(92px + env(safe-area-inset-bottom,0px));pointer-events:none;
   font-family:var(--display);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hi);text-shadow:0 1px 2px #000;
   padding:4px 12px;border-radius:999px;background:rgba(0,0,0,.55);border:1px solid var(--gold-lo);opacity:0;transition:opacity .2s}
 .sheet .more.on{opacity:1}
@@ -3314,8 +3313,11 @@ function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('sho
 function openSheet(html, after){
   $('sheetBody').innerHTML=html; $('scrim').hidden=false; $('sheet').hidden=false;
   requestAnimationFrame(()=>{ $('scrim').classList.add('show'); $('sheet').classList.add('show'); });
+  const box=$('sheetBody'); let foot=$('sheet').querySelector('.sh-foot');
+  if(!foot){ foot=document.createElement('div'); foot.className='sh-foot'; $('sheet').appendChild(foot); }
+  foot.innerHTML=''; const last=box.lastElementChild; if(last&&(last.classList.contains('btn-row')||last.classList.contains('btn'))) foot.appendChild(last);
   after && after();
-  const box=$('sheetBody'); box.scrollTop=0;
+  box.scrollTop=0;
   let more=$('sheet').querySelector('.more'); if(!more){ more=document.createElement('div'); more.className='more'; more.textContent='Scroll for more ▾'; $('sheet').appendChild(more); }
   const upd=()=>more.classList.toggle('on', box.scrollHeight-box.clientHeight-box.scrollTop>40);
   box.onscroll=upd; requestAnimationFrame(upd);
@@ -3573,7 +3575,8 @@ document.addEventListener('click',e=>{ const g=e.target.closest('.gl'); if(!g) r
 /* no pinch or double-tap zoom */
 ['gesturestart','gesturechange','gestureend'].forEach(t=>document.addEventListener(t,e=>e.preventDefault(),{passive:false}));
 document.addEventListener('touchmove',e=>{ if(e.touches&&e.touches.length>1) e.preventDefault(); },{passive:false});
-let _lastTap=0; document.addEventListener('touchend',e=>{ const n=Date.now(); if(n-_lastTap<300 && !e.target.closest('input,textarea')) e.preventDefault(); _lastTap=n; },{passive:false});
+let _lastTap=0,_tx=0,_ty=0; document.addEventListener('touchstart',e=>{ const t=e.touches[0]; _tx=t.clientX; _ty=t.clientY; },{passive:true});
+document.addEventListener('touchend',e=>{ const t=e.changedTouches[0]; if(Math.abs(t.clientX-_tx)>8||Math.abs(t.clientY-_ty)>8){ _lastTap=0; return; } const n=Date.now(); if(n-_lastTap<300 && !e.target.closest('input,textarea,label,button')) e.preventDefault(); _lastTap=n; },{passive:false});
 route();
 if(_resume){ const sv=store.get('sfw2.y',null); if(sv&&sv.id===_resume) requestAnimationFrame(()=>window.scrollTo(0,sv.y)); }
 
