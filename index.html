@@ -3450,6 +3450,40 @@ function stageScreen(st){
 }
 function refScreen(r){ return '<section class="panel enter">'+'<p class="muted">'+esc(r.s)+'</p>'+(r.when?'<div class="note"><strong>When to read this:</strong> '+esc(r.when)+'.</div>':'')+refBlocks(r,r.b)+'</section>'; }
 
+
+/* ===== pop-ups: what to know after a tick or a level up ===== */
+const FOLLOW=[
+ [/The Skybreaker Bulwark/,'Defensive Stance unlocked','Put **Defensive Stance**, **Taunt** and **Sunder Armor** on your bars (stances go on LT + RT). You still fight in **Battle Stance** for now.'],
+ [/^Trainer: Dual Wield/,'Two weapons from now','Equip **two one-handers**, ideally a fast one in your off-hand. Spend this level’s point on **Furious Precision**. Expect misses at first. Put **Victory Rush** on RT + D-pad.'],
+ [/Reckless Swings/,'New button: Reckless Swings','Put **Reckless Swings** on your LT bar. Press it when Rage is low and you have health to spare.'],
+ [/The Islander/,'Berserker Stance unlocked','Fight in **Berserker Stance** from now. Put **Berserker Rage** and **Intercept** on your bars, and read the **Fight** tab for Levels 30 to 39: your rotation changes.'],
+ [/^Trainer: Whirlwind/,'Whirlwind','Put **Whirlwind** on RT + face buttons. Use it **on cooldown**, even against one enemy. It needs Berserker Stance.'],
+ [/^Trainer: Pummel/,'Interrupt','Put **Pummel** on RT + D-pad. Use it on enemy spellcasts, especially heals.'],
+ [/^Talent: Bloodthirst/,'Big day: level 40','Rotation changes: **Bloodthirst and Whirlwind on cooldown**. Read the **Fight** tab for Levels 40 to 49. Also due now: plate armour, riding and your Protection spec.'],
+ [/Apprentice Riding/,'Mount up','Put your mount on a spare button (the unbound D-pad works) and ride everywhere you are not fighting.'],
+ [/Turn on \*\*dual spec|Turn on dual spec/,'Protection spec ready','Keep a one-hander and shield in your bags. Re-read **Dungeons and raids** in Look up before your first tank run.'],
+ [/Scarlet Monastery: not in/,'Did Ravager drop?','If **Ravager** dropped from Herod, Kargoz says respec **Arms** for a while: it cleaves dungeons hard. If not, carry on as Fury.'],
+ [/Maraudon/,'Thrash Blade','If you got **Thrash Blade**, put it in your **main hand** if its DPS is higher. Its extra-attack chance is excellent for Fury.'],
+ [/Legacy point/,'Spend your Legacy point','Press **Y**. Take **Thrill of Adventure** if you play a lot, or **Well Rested** if you play in short sessions (Wowhead).'],
+ [/Professions: \*\*Journeyman|Professions: Journeyman/,'Professions','Train each profession’s new rank **before** you hit its cap, or crafts at the cap are wasted. Routes are in **Professions step by step**.'],
+ [/Onyxia attunement/,'Long chain','The Onyxia chain needs groups for elite quests and several dungeons. Add the steps to your list as you go, and bring fire resistance gear.']
+];
+function followFor(txt){ const f=FOLLOW.find(x=>x[0].test(txt)); return f?{t:f[1],b:f[2]}:null; }
+function showFollow(inp){ if(!inp.checked) return; const t=inp.closest('label').querySelector('.txt'); if(!t) return;
+  const f=followFor(t.textContent); if(!f) return;
+  setTimeout(()=>openSheet('<h2 id="sheetTitle">'+esc(f.t)+'</h2><p style="margin:0">'+fmt(f.b)+'</p><button type="button" class="btn primary" id="fuOk">Got it</button>',()=>{ $('fuOk').onclick=closeSheet; }),350); }
+function levelUpSheet(l){
+  if(store.get('sfw2.lvpop.off',false)) return;
+  const st=stageFor(l); const items=levelItems(st).filter(i=>i.lv===l); const dg=DUNGEONS.filter(d=>d[1]===l);
+  const newStage=st.range[0]===l&&l>1;
+  if(!items.length&&!dg.length&&!newStage) return;
+  openSheet('<h2 id="sheetTitle">Level '+l+'</h2>'+
+    (newStage?'<div class="note"><strong>New stage: '+esc(st.t)+'.</strong> Open it once and skim its <strong>Gear</strong> and <strong>Fight</strong> tabs.</div>':'')+
+    (items.length?'<ul class="plain" style="margin:0;padding-left:1.2em;display:grid;gap:6px">'+items.map(i=>'<li>'+fmt(i.text)+'</li>').join('')+'</ul>':'')+
+    dg.map(d=>'<p class="dgline">Dungeon now possible: <strong>'+esc(d[0])+'</strong>. RestedXP decides when you go.</p>').join('')+
+    '<div class="btn-row">'+(newStage?'<button type="button" class="btn ghost" id="luStage">Open stage</button>':'<button type="button" class="btn ghost" id="luOff">Stop these pop-ups</button>')+'<button type="button" class="btn primary" id="luOk">Got it</button></div>',
+    ()=>{ $('luOk').onclick=closeSheet; if($('luStage')) $('luStage').onclick=()=>{ closeSheet(); go(st.id); }; if($('luOff')) $('luOff').onclick=()=>{ store.set('sfw2.lvpop.off',true); closeSheet(); toast('Level pop-ups off'); }; });
+}
 /* ===== router ===== */
 const TABS=['now','stages','lookup','progress'];
 const TITLES={now:'Now',stages:'Stages',lookup:'Look up',progress:'Progress'};
@@ -3478,10 +3512,11 @@ function wire(st){
     const k=inp.dataset.k; if(inp.checked) ticks[k]=1; else delete ticks[k]; store.set('sfw2.ticks',ticks);
     inp.closest('label').classList.toggle('on',inp.checked);
     const owner=ALL.find(c=>keysOf(c).includes(k)); if(owner){ const p=progress(owner); if(inp.checked && p.done===p.total) toast(owner.t+' complete'); }
+    showFollow(inp);
     if(!st && (location.hash.slice(1)||'now')==='now' && inp.checked){ const li=inp.closest('li'); if(li){ li.style.transition='opacity .25s ease, transform .25s ease'; li.style.opacity='0'; li.style.transform='translateX(14px)'; } setTimeout(refresh,300); }
   });
   if($('howtoHide')) $('howtoHide').onclick=()=>{ store.set('sfw2.howto.hide',true); const h=$('howto'); if(h) h.remove(); toast('Kept in Before you play'); };
-  if($('lvDown')){ $('lvDown').onclick=()=>{ setLevel(level-1); refresh(); }; $('lvUp').onclick=()=>{ setLevel(level+1); refresh(); }; }
+  if($('lvDown')){ $('lvDown').onclick=()=>{ setLevel(level-1); refresh(); }; $('lvUp').onclick=()=>{ const o=level; setLevel(level+1); refresh(); if(level>o) levelUpSheet(level); }; }
   if($('q')){ const q=$('q'); q.oninput=()=>{ lastQuery=q.value; store.set('sfw2.q',lastQuery); $('res').innerHTML=results(lastQuery); $('res').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go,b.dataset.seg)); }; }
   if($('resetBtn')) $('resetBtn').onclick=()=>openSheet('<h2 id="sheetTitle">Reset all progress?</h2><p style="margin:0">This clears every tick on this device. Your level stays.</p><div class="btn-row"><button type="button" class="btn ghost" id="rsNo">Keep it</button><button type="button" class="btn danger" id="rsYes">Reset</button></div>',
      ()=>{ $('rsNo').onclick=closeSheet; $('rsYes').onclick=()=>{ ticks={}; store.set('sfw2.ticks',ticks); closeSheet(); route(); toast('Progress reset'); }; });
@@ -3503,6 +3538,7 @@ function wirePanel(st){
     const k=inp.dataset.k; if(inp.checked) ticks[k]=1; else delete ticks[k]; store.set('sfw2.ticks',ticks);
     inp.closest('label').classList.toggle('on',inp.checked);
     const p=progress(st); if(inp.checked && p.done===p.total) toast(st.t+' complete');
+    showFollow(inp);
   });
   $('panel').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go, b.dataset.seg));
 }
