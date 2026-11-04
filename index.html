@@ -265,48 +265,47 @@ let level = store.get('sfw2.level',1);
 /* ===== shared data: these feed every stage automatically ===== */
 // [from, to, talent, what it does]
 const TALENTS = [
- [10,14,'Cruelty 5/5','+5% crit'],
- [15,19,'Unbridled Wrath 5/5','Chance for extra Rage on every hit'],
- [20,22,'Furious Precision 3/3','+10% off-hand hit. Take it the moment you dual wield'],
- [23,23,'Piercing Howl','Slows enemies around you, for escapes'],
- [24,24,'Lingering Rage 1/5','Rage drains later after a fight'],
- [25,29,'Enrage 5/5','Bonus damage after you take damage'],
- [30,30,'Death Wish','Your big damage cooldown'],
- [31,35,'Dual Wield Specialization 5/5','+25% off-hand damage and more off-hand Rage'],
- [36,38,'Flurry 3/3','Faster swings after a crit'],
- [39,39,'Blood Craze 1/3','Self-healing, and the 30th Fury point Bloodthirst needs'],
- [40,40,'Bloodthirst','Your main attack from here on'],
- [41,42,'Blood Craze 3/3','More self-healing, unlocks Gore Drinker'],
- [43,44,'Gore Drinker 2/2','Your Rage cooldowns make your next swings heal you'],
- [45,46,'Improved Berserker Rage 2/2','More Rage, breaks slows'],
- [47,47,'Raging Blows','Cheaper Whirlwind and Cleave'],
- [48,49,'Deflection 2/5 (Arms)','Parry, opens the Arms tree'],
- [50,52,'Improved Rend 3/3 (Arms)','Path to the Arms talents below'],
- [53,55,'Improved Tactical Mastery 3/3 (Arms)','Keep 25 Rage when you swap stance'],
- [56,57,'Deflection to 4/5','Spare points (Improved Tactical Mastery is now 3 ranks)'],
- [58,58,'Anger Management (Arms)','Slow passive Rage'],
- [59,60,'Deep Wounds 2/3 (Arms)','Bleed on crits']
+ [10,14,"Cruelty 5/5","+5% crit"],
+ [15,19,"Unbridled Wrath 5/5","Chance for extra Rage when you hit"],
+ [20,22,"Furious Precision 3/3","+10% off-hand hit. Take it the moment you dual wield"],
+ [23,27,"Enrage 5/5","10% more damage for 12 sec after you get hit"],
+ [28,28,"Reckless Swings","New: your next 4 swings give 5 extra Rage each. 15 sec cooldown"],
+ [29,29,"Blood Craze 1/3","Self-healing, and opens the next row"],
+ [30,30,"Death Wish","Your big damage cooldown"],
+ [31,32,"Improved Berserker Rage 2/2","Berserker Rage gives 10 Rage and breaks slows"],
+ [33,34,"Blood Craze 3/3","More self-healing, unlocks Gore Drinker"],
+ [35,36,"Improved Whirlwind 2/2","Whirlwind every 8 sec and 30% harder on the closest enemy"],
+ [37,39,"Flurry 3/3","30% faster swings after a crit"],
+ [40,40,"Bloodthirst","Your main attack from here on"],
+ [41,42,"Gore Drinker 2/2","Your Rage cooldowns make your next swings heal you"],
+ [43,47,"Dual Wield Specialization 5/5","+25% off-hand damage and 50% more off-hand Rage"],
+ [48,49,"Deflection 2/5 (Arms)","Parry, and opens the Arms tree"],
+ [50,52,"Improved Rend 3/3 (Arms)","Stronger Rend"],
+ [53,55,"Improved Tactical Mastery 3/3 (Arms)","Keep 25 Rage when you swap stance"],
+ [56,57,"Improved Overpower 2/2 (Arms)","+50% crit chance on Overpower"],
+ [58,58,"Anger Management (Arms)","Slow passive Rage"],
+ [59,60,"Deep Wounds 2/3 (Arms)","Bleed on crits"]
 ];
 // [level, ability, note]
 const TRAIN = [
- [1,'Battle Shout','Keep it up always. New ranks at 12, 22, 32, 42, 52'],
- [4,'Charge, Rend','Rend ranks at 10, 20, 30, then stop training it (Icy Veins). Retrain later only if you tank and use it'],
- [6,'Thunder Clap','Slows a group of enemies. Fury can skip ranks 3 to 6 (Wowhead), but train them from 40 if you tank: Protection uses it on every pack'],
- [8,'Hamstring','Slows one enemy'],
- [10,'Defensive Stance quest: Taunt, Sunder Armor','Sunder ranks at 22, 34, 46, 58'],
- [12,'Overpower, Shield Bash','Overpower lights up after an enemy dodges'],
- [14,'Demoralizing Shout, Tactical Mastery','Demo Shout ranks at 24, 34, 44, 54'],
- [16,'Shield Block',''],
- [18,'Disarm',''],
- [20,'Dual Wield, Victory Rush, Retaliation, Cleave','Cleave ranks at 30, 40, 50, 60'],
- [22,'Intimidating Shout','Fears enemies around you'],
- [26,'Challenging Shout',''],
- [28,'Shield Wall','Big damage reduction'],
- [30,'Berserker Stance quest: Berserker Rage, Intercept, Slam','Slam is not worth training for Fury (Wowhead). Mocking Blow: rank 1 is enough'],
- [36,'Whirlwind','Needs Berserker Stance'],
- [38,'Pummel','Interrupt in Berserker Stance'],
- [40,'Plate armour, Bloodthirst (talent), riding','Bloodthirst ranks at 48, 54, 60'],
- [50,'Recklessness','30 minute cooldown, huge damage']
+ [1,"Battle Shout","Keep it up always. New ranks at 12, 22, 32, 42, 52"],
+ [4,"Charge, Rend","Train every rank of Rend: all three guides now list it as a must-train"],
+ [6,"Thunder Clap","Slows a group of enemies. Fury can skip ranks 3 to 6 (Wowhead), but train them from 40 if you tank: Protection uses it on every pack"],
+ [8,"Hamstring","Slows one enemy"],
+ [10,"Defensive Stance quest: Taunt, Sunder Armor","Sunder ranks at 22, 34, 46, 58"],
+ [12,"Overpower, Shield Bash","Overpower lights up after an enemy dodges"],
+ [14,"Demoralizing Shout, Tactical Mastery","Demo Shout ranks at 24, 34, 44, 54"],
+ [16,"Shield Block",""],
+ [18,"Disarm",""],
+ [20,"Dual Wield, Victory Rush, Retaliation, Cleave","Cleave ranks at 30, 40, 50, 60"],
+ [22,"Intimidating Shout","Fears enemies around you"],
+ [26,"Challenging Shout",""],
+ [28,"Shield Wall","Big damage reduction"],
+ [30,"Berserker Stance quest: Berserker Rage, Intercept, Slam","Slam is not worth training for Fury (Wowhead). Mocking Blow: rank 1 is enough"],
+ [36,"Whirlwind","Needs Berserker Stance. With Improved Whirlwind it is ready every 8 sec"],
+ [38,"Pummel","Interrupt in Berserker Stance"],
+ [40,"Plate armour, Bloodthirst (talent), riding","Bloodthirst ranks at 48, 54, 60"],
+ [50,"Recklessness","30 minute cooldown, huge damage"]
 ];
 // [name, min, max, zone, why go]
 const DUNGEONS = [
@@ -436,7 +435,7 @@ const STAGES = [
    ]
   ],
   "gear": [
-   "Use the best weapon you have. A two-hander is fine until 20.",
+   "**One-hander and shield until 20** (Kargoz): the shield gives you Shield Bash to interrupt casters. Only use a two-hander if it is clearly better. Icy Veins is happy with either.",
    "Equip anything with Strength or Stamina. Mail if you find it.",
    "Rough Sharpening Stones on your weapon (Blacksmithing)."
   ],
@@ -580,7 +579,8 @@ const STAGES = [
      "Charge in.",
      "Demoralizing Shout on hard hitters.",
      "Overpower after a dodge.",
-     "Rend and Sunder only on enemies that live long.",
+     "Rend on anything that will live a while: early on it is your best damage for the Rage. Only 1 or 2 Sunders on normal enemies.",
+     "Shield Bash casters while you still use a shield.",
      "Heroic Strike with spare Rage.",
      "Finish low enemies with auto attacks, not Execute."
     ]
@@ -591,10 +591,11 @@ const STAGES = [
    ]
   ],
   "tips": [
-   "Fight green enemies about 3 levels below you where you can: fewer misses, dodges, parries and glancing blows (Kargoz).",
+   "Grind enemies about **2 levels below you**, not lower (Kargoz, 4 Nov). You get fewer misses, dodges and glancing blows.",
    "Use your thrown weapon to pull single enemies away from groups.",
    "Pick up a dungeon’s quests before you go in.",
-   "Check the dungeon’s level range below before joining a group."
+   "Check the dungeon’s level range below before joining a group.",
+   "Kargoz says dungeon quests give **double XP** in Forever and grinding is slightly nerfed, so pick up every dungeon quest you can."
   ]
  },
  {
@@ -670,6 +671,11 @@ const STAGES = [
     25,
     "Your first **Legacy point** arrives at level 25. Press **Y** to open Legacy and spend it (see **Professions and consumables**).",
     "d12"
+   ],
+   [
+    28,
+    "New talent **Reckless Swings**: press it when you need Rage, have health to spare and can keep hitting. Put it on your bars.",
+    "d13"
    ]
   ],
   "gear": [
@@ -685,6 +691,7 @@ const STAGES = [
     "ol",
     [
      "Charge in.",
+     "Reckless Swings when you are low on Rage (from 28).",
      "Demoralizing Shout on hard hitters.",
      "Victory Rush after a kill, once you are hurt.",
      "Overpower after a dodge.",
@@ -745,7 +752,7 @@ const STAGES = [
    ],
    [
     36,
-    "Train **Whirlwind**. It hits with both weapons.",
+    "Train **Whirlwind**. It hits with both weapons, and with Improved Whirlwind it is ready every 8 sec. Use it on cooldown, even on one enemy.",
     "d07"
    ],
    [
@@ -770,7 +777,7 @@ const STAGES = [
    ],
    [
     30,
-    "Stop training **Rend** after this rank. Fury does not need more.",
+    "Keep training every rank of **Rend**. Icy Veins, Wowhead and Kargoz all now treat it as a must-train.",
     "d12"
    ],
    [
@@ -791,9 +798,10 @@ const STAGES = [
     [
      "Charge in Battle Stance, swap to Berserker.",
      "Berserker Rage when your Rage is low.",
+     "Reckless Swings when Rage is low.",
      "Victory Rush when up.",
      "Death Wish on tough fights.",
-     "Whirlwind (from 36), especially on 2+ enemies.",
+     "Whirlwind on cooldown from 36, even on a single enemy.",
      "Overpower if the stance swap will not waste much Rage.",
      "Heroic Strike, or Cleave on 2+, with spare Rage."
     ]
@@ -802,7 +810,8 @@ const STAGES = [
   "tips": [
    "Death Wish has a 3 minute cooldown. Use it often, not only on \"perfect\" pulls. It gives +20% damage and Fear immunity, but you take 5% more damage.",
    "Keyboard users can make a mouseover interrupt: a macro with **/cast [@mouseover,harm,nodead][] Pummel** interrupts the enemy under your cursor without changing target (Icy Veins gives the Shield Bash version). On a controller this matters less, so it is optional.",
-   "You take more damage in Berserker Stance. Swap to Battle Stance if a fight goes badly."
+   "You take more damage in Berserker Stance. Swap to Battle Stance if a fight goes badly.",
+   "**Jump leeway** (Icy Veins): jumping gives your attacks a little extra reach for a moment. Jump to land Whirlwind or a hit on an enemy that is running away."
   ]
  },
  {
@@ -898,9 +907,9 @@ const STAGES = [
     [
      "Keep Battle Shout up.",
      "Charge in.",
-     "Bloodthirst on cooldown.",
+     "**Bloodthirst and Whirlwind on cooldown.** Icy Veins puts Whirlwind first, Wowhead puts Bloodthirst first. The real rule: never let either sit ready.",
      "Victory Rush when up.",
-     "Whirlwind if you still have Rage for the next Bloodthirst.",
+     "Bloodrage or Berserker Rage when Gore Drinker is not active, so its healing keeps ticking (Wowhead).",
      "Overpower after a dodge if the swap is cheap.",
      "Heroic Strike or Cleave only with lots of spare Rage."
     ]
@@ -1030,7 +1039,7 @@ const STAGES = [
   "do": [
    [
     60,
-    "Respec Fury to the raid build: **18 Arms / 33 Fury** (Icy Veins).",
+    "Respec Fury to the raid build: **18 Arms / 33 Fury** (Icy Veins). Recheck it first: it may have changed after launch tuning.",
     "d01"
    ],
    [
@@ -1451,7 +1460,7 @@ const REF = [
      [
       "LT + RT",
       "Battle, Defensive, Berserker Stance, Thunder Clap",
-      "Healing potion, bandage, food, Piercing Howl"
+      "Healing potion, bandage, food, Retaliation"
      ],
      [
       "Nothing",
@@ -1787,7 +1796,7 @@ const REF = [
    [
     "ul",
     [
-     "Levelling priority: weapon DPS, then Strength, Hit, crit, Stamina. Items with Strength and Agility are some of your best.",
+     "Levelling priority: weapon DPS, then **Strength and Agility**, then Hit when you find it, then Stamina. Kargoz says \"Agility is king\" for crit and Flurry; Icy Veins leans Strength for Bloodthirst. Items with both are your best.",
      "Level 60 priority (Icy Veins): weapon DPS, hit to 8%, expertise, crit, Strength.",
      "Dual wield auto attacks have an extra 19% miss chance. Special attacks like Bloodthirst do not.",
      "No penalty for wearing mail or leather in Forever, just less armour.",
@@ -2348,6 +2357,10 @@ const REF = [
      [
       "Method: mounts and riding",
       "https://www.method.gg/wow-forever/how-to-get-a-mount-in-wow-forever-cost-requirement-and-mount-options"
+     ],
+     [
+      "Kargoz: Warrior levelling video, 4 November (YouTube)",
+      "https://www.youtube.com/@Kargoz"
      ]
     ]
    ],
@@ -2357,7 +2370,7 @@ const REF = [
    ],
    [
     "p",
-    "Icy Veins, Wowhead and Kargoz differ slightly. Where two of the three agree, that choice is used: Unbridled Wrath at 15 and Enrage at 25. The 3 November patch cut Flurry and Improved Tactical Mastery to 3 ranks, so the spare points are placed using my own reasoning. If a talent is greyed out in game, take the next one on the list."
+    "Rebuilt on 4 November after the final pre-launch patch, from Icy Veins (updated 3 November), Wowhead (updated 4 November) and Kargoz’s 4 November levelling video. Most of the build is the same in all three. Where only two agree, that choice is used: **Dual Wield Specialization** (Icy Veins and Wowhead) and **Blood Craze plus Gore Drinker** (Wowhead and Kargoz). The order up to level 42 matches Kargoz’s on-screen build exactly. All three skip Piercing Howl. The Arms points follow Icy Veins and Wowhead (Improved Rend and Improved Overpower). If a talent is greyed out in game, take the next one on the list."
    ],
    [
     "p",
