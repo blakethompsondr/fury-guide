@@ -3402,6 +3402,7 @@ function route(soft){
   else { $('abTitle').textContent=TITLES[tab]; html = tab==='stages'?stagesScreen(): tab==='lookup'?lookupScreen(): tab==='progress'?progressScreen(): nowScreen(); backTo=tab; }
   if(soft) html=html.replace(/class="(screen|panel) enter"/g,'class="$1"');
   const y=window.scrollY; $('app').innerHTML=html; window.scrollTo(0, soft?y:0); wire(st);
+  store.set('sfw2.last', id);
 }
 function refresh(){ route(true); }
 function wire(st){
@@ -3440,13 +3441,21 @@ function wirePanel(st){
 }
 $('backBtn').onclick=()=>{ if(history.length>1) history.back(); else go(backTo); };
 document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>go(b.dataset.tab));
-window.addEventListener('hashchange',route);
+window.addEventListener('hashchange',()=>route());
+/* resume where you left off */
+let _saveT=0; const saveY=()=>{ try{ store.set('sfw2.y',{id:location.hash.slice(1)||'now',y:Math.round(window.scrollY)}); }catch(e){} };
+window.addEventListener('scroll',()=>{ clearTimeout(_saveT); _saveT=setTimeout(saveY,250); },{passive:true});
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden') saveY(); });
+window.addEventListener('pagehide',saveY);
+const _resume=(()=>{ if(location.hash) return null; const last=store.get('sfw2.last',''); if(!last||last==='now') return null;
+  history.replaceState(null,'','#'+last); if(STAGES.some(s=>s.id===last)) seg=store.get('sfw2.seg.'+last,0); return last; })();
 window.addEventListener('scroll',()=>$('appbar').classList.toggle('scrolled',window.scrollY>4),{passive:true});
 document.addEventListener('click',e=>{ const g=e.target.closest('.gl'); if(!g) return; e.preventDefault(); e.stopPropagation();
   const it=GLOSSARY[+g.dataset.g]; if(!it) return;
   openSheet('<h2 id="sheetTitle">'+esc(it[0])+'</h2><p style="margin:0">'+esc(it[2])+'</p><div class="btn-row"><button type="button" class="btn ghost" id="glAll">Full glossary</button><button type="button" class="btn primary" id="glOk">Got it</button></div>',
     ()=>{ $('glOk').onclick=closeSheet; $('glAll').onclick=()=>{ closeSheet(); go('glossary'); }; }); }, true);
 route();
+if(_resume){ const sv=store.get('sfw2.y',null); if(sv&&sv.id===_resume) requestAnimationFrame(()=>window.scrollTo(0,sv.y)); }
 
 if('serviceWorker' in navigator){ window.addEventListener('load',()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}); }); }
 </script>
