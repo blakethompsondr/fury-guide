@@ -155,6 +155,12 @@ strong{color:var(--gold)}
 .checks label.on .txt{color:var(--muted)}
 .checks label.on .txt::after{content:" Complete";font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--done);margin-left:6px}
 
+.lvgroup{display:grid;gap:8px;padding-top:6px}
+.lvh{font-family:var(--display);font-size:15px;letter-spacing:.08em;color:var(--class);margin:6px 0 0;display:flex;align-items:center;gap:10px}
+.lvh::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--gold-lo),transparent)}
+.lvh span{color:var(--gold);font-size:12px;letter-spacing:.06em}
+.lvgroup.here .lvh{color:var(--gold-hi)}
+.dgline{margin:0;font-size:15.5px;color:var(--muted);padding-left:4px}
 /* stage detail tabs */
 .seg{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--bar-h) + 3px);z-index:12;padding-block:8px;background:linear-gradient(var(--bg) 70%,transparent)}
 .seg .seg-in{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
@@ -307,6 +313,39 @@ const TRAIN = [
  [40,"Plate armour, Bloodthirst (talent), riding","Bloodthirst ranks at 48, 54, 60"],
  [50,"Recklessness","30 minute cooldown, huge damage"]
 ];
+// What to buy at the trainer at each level. Rank levels from Icy Veins and Wowhead, the rest follow Classic and match Wowhead's level 60 ranks.
+const TRAIN_LV = {
+ "1": "Battle Shout. Buy it with the silver from your first kills",
+ "4": "Charge and Rend",
+ "6": "Thunder Clap",
+ "8": "Hamstring, Heroic Strike rank 2",
+ "10": "Bloodrage, Rend rank 2. Your class quest gives Taunt and Sunder Armor",
+ "12": "Overpower, Shield Bash, Battle Shout rank 2",
+ "14": "Demoralizing Shout, Tactical Mastery. Skip Revenge until you tank at 40",
+ "16": "Shield Block, Mocking Blow (rank 1 is all you need), Heroic Strike rank 3",
+ "18": "Disarm, Thunder Clap rank 2",
+ "20": "Dual Wield, Victory Rush, Retaliation, Cleave, Rend rank 3",
+ "22": "Intimidating Shout, Battle Shout rank 3, Sunder Armor rank 2",
+ "24": "Execute, Demoralizing Shout rank 2, Heroic Strike rank 4",
+ "26": "Challenging Shout, Charge rank 2. Skip Mocking Blow rank 2",
+ "28": "Shield Wall, Overpower rank 2. Skip Thunder Clap rank 3 for now",
+ "30": "Berserker Rage, Intercept, Rend rank 4, Cleave rank 2. Berserker Stance comes from your class quest. Skip Slam",
+ "32": "Battle Shout rank 4, Execute rank 2, Hamstring rank 2, Shield Bash rank 2, Heroic Strike rank 5",
+ "34": "Demoralizing Shout rank 3, Sunder Armor rank 3",
+ "36": "Whirlwind",
+ "38": "Pummel. Skip Thunder Clap rank 4 until 40",
+ "40": "Plate armour, Rend rank 5, Cleave rank 3, Execute rank 3, Heroic Strike rank 6. For your Protection spec: Thunder Clap ranks 3 and 4, and Revenge ranks 1 to 3",
+ "42": "Battle Shout rank 5, Intercept rank 2",
+ "44": "Overpower rank 3, Demoralizing Shout rank 4, Revenge rank 4",
+ "46": "Charge rank 3, Sunder Armor rank 4",
+ "48": "Bloodthirst rank 2, Shield Slam rank 2, Execute rank 4, Heroic Strike rank 7, Thunder Clap rank 5",
+ "50": "Recklessness, Rend rank 6, Cleave rank 4",
+ "52": "Battle Shout rank 6, Intercept rank 3, Shield Bash rank 3",
+ "54": "Bloodthirst rank 3, Shield Slam rank 3, Demoralizing Shout rank 5, Hamstring rank 3, Revenge rank 5",
+ "56": "Execute rank 5, Heroic Strike rank 8",
+ "58": "Sunder Armor rank 5, Thunder Clap rank 6, Pummel rank 2",
+ "60": "Battle Shout rank 7, Bloodthirst rank 4, Shield Slam rank 4, Rend rank 7, Cleave rank 5, Heroic Strike rank 9, Overpower rank 4, Revenge rank 6. Skip Mortal Strike"
+};
 // [name, min, max, zone, why go]
 const DUNGEONS = [
  ['Ragefire Chasm',13,18,'Orgrimmar','Hidden Enemies quest chain for Hammer of Orgrimmar'],
@@ -481,11 +520,6 @@ const STAGES = [
    ],
    [
     10,
-    "Spend your first talent point: **Cruelty**.",
-    "d02"
-   ],
-   [
-    10,
     "Take a skyship from Valanaar’s dock and head to **Orgrimmar**. Set your Hearthstone there.",
     "d03"
    ],
@@ -563,6 +597,11 @@ const STAGES = [
     16,
     "Learn to **split pull**: throw dynamite at a pack, then use your thrown weapon on the one you want so the others reset (Kargoz).",
     "d18"
+   ],
+   [
+    10,
+    "Professions: **Journeyman** training (skill 75 to 150) needs level 10. Visit each profession trainer once you hit 50 skill. Classic rule, so check the trainer.",
+    "d19"
    ]
   ],
   "gear": [
@@ -676,6 +715,11 @@ const STAGES = [
     28,
     "New talent **Reckless Swings**: press it when you need Rage, have health to spare and can keep hitting. Put it on your bars.",
     "d13"
+   ],
+   [
+    20,
+    "Professions: **Expert** training (up to 225) needs level 20 and 125 skill. Classic rule, so check the trainer.",
+    "d14"
    ]
   ],
   "gear": [
@@ -784,6 +828,11 @@ const STAGES = [
     30,
     "Until Whirlwind at 36, use **Thunder Clap** on cooldown when fighting groups.",
     "d13"
+   ],
+   [
+    35,
+    "Professions: **Artisan** training (up to 300) needs level 35 and 200 skill, from a special trainer. Classic rule, so check in game.",
+    "d14"
    ]
   ],
   "gear": [
@@ -2419,8 +2468,15 @@ function refBlocks(ch, bl){
     if(k==='links') return '<ul>'+b[1].map(l=>'<li><a href="'+esc(l[1])+'" target="_blank" rel="noopener">'+esc(l[0])+'</a></li>').join('')+'</ul>';
     return ''; }).join('');
 }
+const TAL_LV=(()=>{ const m={}, have={}; TALENTS.forEach(([a,z,name,what])=>{ const mm=name.match(/^(.*?) (\d+)\/(\d+)(.*)$/); for(let l=a;l<=z;l++){ if(mm){ have[mm[1]]=(have[mm[1]]||0)+1; m[l]={t:mm[1]+' '+have[mm[1]]+'/'+mm[3]+mm[4], w:what}; } else m[l]={t:name, w:what}; } }); return m; })();
+function levelItems(st){ const out=[];
+  for(let l=st.range[0]; l<=st.range[1]; l++){
+    if(TAL_LV[l]) out.push({lv:l,kind:'tal',key:st.id+'#tal'+l,text:'**Talent:** '+TAL_LV[l].t+'. '+TAL_LV[l].w+'.'});
+    if(TRAIN_LV[l]) out.push({lv:l,kind:'trn',key:st.id+'#trn'+l,text:'**Trainer:** '+TRAIN_LV[l]+'.'}); }
+  st.do.forEach((d,i)=>out.push({lv:d[0],kind:'do',key:st.id+'#'+d[2],text:d[1],i}));
+  const ord={tal:0,trn:1,do:2}; return out.sort((x,y)=>x.lv-y.lv||ord[x.kind]-ord[y.kind]||(x.i||0)-(y.i||0)); }
 function keysOf(ch){
-  if(ch.do) return ch.do.map(d=>ch.id+'#'+d[2]);
+  if(ch.do) return levelItems(ch).map(i=>i.key);
   const k=[]; ch.b.forEach(b=>{ if(b[0]==='check') b[2].forEach(x=>k.push(ch.id+'#'+x[1])); }); return k;
 }
 function progress(ch){ const k=keysOf(ch); const d=k.filter(x=>ticks[x]).length; return {done:d,total:k.length,pct:k.length?Math.round(d/k.length*100):0}; }
@@ -2463,8 +2519,8 @@ $('lvlChip').onclick=levelSheet;
 function nowScreen(){
   const st=stageFor(level);
   const tal=TALENTS.find(t=>level>=t[0]&&level<=t[1]);
-  const open=st.do.map((d,i)=>({d,i})).filter(o=>!ticks[st.id+'#'+o.d[2]]).sort((x,y)=>x.d[0]-y.d[0]||x.i-y.i);
-  const upNext=open.filter(o=>o.d[0]<=level+2).slice(0,4);
+  const open=levelItems(st).filter(o=>!ticks[o.key]);
+  const upNext=open.filter(o=>o.kind==='do'?o.lv<=level+2:o.lv<=level).slice(0,5);
   const later=[...STAGES.flatMap(s=>s.do)].filter(d=>d[0]>level).sort((x,y)=>x[0]-y[0])[0];
   const dg=DUNGEONS.filter(d=>level>=d[1]&&level<=d[2]);
   const p=progress(st);
@@ -2479,7 +2535,7 @@ function nowScreen(){
      '<div class="kv"><span class="k">Coming up</span><span class="v">'+(later?'Lv '+later[0]+': '+esc(plain(later[1]).split('. ')[0]):'Raids open 9 December.')+'</span></div>'+
    '</div>'+
    '<div class="card"><div style="display:flex;align-items:baseline;gap:8px"><h3>Do next</h3><span class="muted" style="margin-left:auto;font-size:14px">'+p.done+'/'+p.total+' this stage</span></div>'+
-     (upNext.length?'<ul class="checks">'+upNext.map(o=>checkItem(st.id+'#'+o.d[2], o.d[1], o.d[0])).join('')+'</ul>':
+     (upNext.length?'<ul class="checks">'+upNext.map(o=>checkItem(o.key, o.text, o.lv)).join('')+'</ul>':
        '<p class="muted" style="margin:0">'+(open.length?'Nothing due at your level. Keep questing.':'Stage complete. Level up to unlock the next one.')+'</p>')+
      '<button type="button" class="btn primary" data-go="'+st.id+'">Open the full stage</button>'+
    '</div>'+
@@ -2538,11 +2594,18 @@ function progressScreen(){
    '<p class="foot">Progress is saved in this browser on this device.</p>'+
   '</section>';
 }
+function byLevel(st){
+  const items=levelItems(st), lvls=[...new Set(items.map(i=>i.lv).concat(DUNGEONS.filter(d=>d[1]>=st.range[0]&&d[1]<=st.range[1]).map(d=>d[1])))].sort((a,b)=>a-b);
+  return lvls.map(l=>{ const its=items.filter(i=>i.lv===l), dg=DUNGEONS.filter(d=>d[1]===l);
+    return '<div class="lvgroup'+(l===level?' here':'')+'"><h4 class="lvh">Level '+l+(l===level?' <span>· you are here</span>':'')+'</h4>'+
+      (its.length?'<ul class="checks">'+its.map(i=>checkItem(i.key,i.text)).join('')+'</ul>':'')+
+      dg.map(d=>'<p class="dgline">Dungeon now in range: <strong>'+esc(d[0])+'</strong> ('+rangeLabel(d[1],d[2])+')'+(d[4]?'. '+esc(d[4]):'')+'</p>').join('')+'</div>'; }).join('');
+}
 function stagePanels(st){
   const [a,z]=st.range;
   const tal=TALENTS.filter(t=>t[1]>=a&&t[0]<=z), tr=TRAIN.filter(t=>t[0]>=a&&t[0]<=z), dg=DUNGEONS.filter(d=>d[2]>=a&&d[1]<=z);
   return [
-   '<p>'+fmt(st.goal)+'</p><ul class="checks">'+st.do.map((d,i)=>({d,i})).sort((x,y)=>x.d[0]-y.d[0]||x.i-y.i).map(o=>checkItem(st.id+'#'+o.d[2], o.d[1], o.d[0])).join('')+'</ul>'+
+   '<p>'+fmt(st.goal)+'</p><p class="muted" style="margin:0">Level by level: your talent point, what to buy at the trainer, and everything else to do. Tick as you go.</p>'+byLevel(st)+
      '<h3>Where to quest</h3><ul>'+st.zones.map(x=>'<li>'+fmt(x)+'</li>').join('')+'</ul><p class="muted">RestedXP picks the exact quests.</p>'+
      (dg.length?'<h3>Dungeons in range</h3>'+table(['Levels','Dungeon','Why go'], dg.map(d=>[rangeLabel(d[1],d[2]), d[0]+' · '+d[3], d[4]||'Gear and XP']), i=>level>=dg[i][1]&&level<=dg[i][2]):''),
    (tal.length?'<h3>Talent points</h3>'+table(['Level','Talent','What it does'], tal.map(t=>[rangeLabel(t[0],t[1]), t[2], t[3]]), i=>level>=tal[i][0]&&level<=tal[i][1]):'<div class="note">No talent points yet. They start at **10**.</div>'.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>'))+
