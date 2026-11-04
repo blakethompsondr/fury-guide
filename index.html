@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<title>Skyborne Fury Warrior</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Fury Guide">
+<meta name="theme-color" content="#0d0b09">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cinzel+Decorative:wght@700&family=Alegreya:wght@400;500;700&display=swap">
+<style>
+/* Theme: an original fantasy quest-log look. Light = parchment and ink, dark = night stone, leather and gold leaf. Layout unchanged: sticky top bar, action-bar style tabs, one screen at a time. */
+:root{
+  --bg:#d9c9a3; --bg2:#c9b688; --surface:#f1e6c8; --raised:#e3d3a8; --ink:#2b1d0e; --muted:#6b5535; --line:#a88b55;
+  --gold:#8a6414; --gold-hi:#b8892a; --gold-lo:#5e420a; --brass:#7a1f12; --brass-ink:#f6e3a8;
+  --wind:#245f73; --class:#8a5a24; --done:#3d7a2a; --done-bg:#dcd9a4; --warn:#8e1d10; --warn-bg:#ecc8a8;
+  --d-grey:#7a7468; --d-yellow:#9c7c00; --d-orange:#b8560a; --d-red:#a8200e; --tip:#f6edd2; --tip-line:#a88b55; --xp1:#5b2d8a; --xp2:#8b52c9; --rage:#a3170d;
+  --scrim:rgba(30,18,6,.5); --shadow:0 2px 0 rgba(255,255,255,.35) inset, 0 6px 16px rgba(60,36,10,.18);
+  --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --display:"Cinzel", "Trajan Pro", Georgia, serif; --deco:"Cinzel Decorative","Cinzel",Georgia,serif;
+  --body:"Alegreya", Georgia, "Times New Roman", serif;
+  --bar-h:58px; --tab-h:72px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0d0b09; --bg2:#1a140e; --surface:#1d1712; --raised:#2a2119; --ink:#f0e2c0; --muted:#b09c78; --line:#4a3a26;
+  --gold:#e2b350; --gold-hi:#ffe39a; --gold-lo:#7a5414; --brass:#8e1b10; --brass-ink:#ffe7a6;
+  --wind:#7cc6dd; --class:#c69b6d; --done:#7fd35c; --done-bg:#1f2a14; --warn:#ff9b7d; --warn-bg:#3a140d;
+  --d-grey:#8f8f8f; --d-yellow:#f2d000; --d-orange:#ff8a1f; --d-red:#ff3b2b; --tip:#0c0f1e; --tip-line:#6e6a7a; --xp1:#4a1f78; --xp2:#9b5de5; --rage:#c4210f;
+  --scrim:rgba(0,0,0,.65); --shadow:0 1px 0 rgba(255,225,160,.06) inset, 0 8px 22px rgba(0,0,0,.55); --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0d0b09; --bg2:#1a140e; --surface:#1d1712; --raised:#2a2119; --ink:#f0e2c0; --muted:#b09c78; --line:#4a3a26;
+  --gold:#e2b350; --gold-hi:#ffe39a; --gold-lo:#7a5414; --brass:#8e1b10; --brass-ink:#ffe7a6;
+  --wind:#7cc6dd; --class:#c69b6d; --done:#7fd35c; --done-bg:#1f2a14; --warn:#ff9b7d; --warn-bg:#3a140d;
+  --d-grey:#8f8f8f; --d-yellow:#f2d000; --d-orange:#ff8a1f; --d-red:#ff3b2b; --tip:#0c0f1e; --tip-line:#6e6a7a; --xp1:#4a1f78; --xp2:#9b5de5; --rage:#c4210f;
+  --scrim:rgba(0,0,0,.65); --shadow:0 1px 0 rgba(255,225,160,.06) inset, 0 8px 22px rgba(0,0,0,.55); --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); color-scheme:dark }
+
+[hidden]{display:none!important}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%}
+body{background:var(--noise), radial-gradient(120% 70% at 50% 0%, var(--bg2), var(--bg) 70%) fixed, var(--bg);color:var(--ink);font-family:var(--body);font-size:17.5px;line-height:1.5;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 calc(var(--tab-h) + 28px + env(safe-area-inset-bottom,0px));overscroll-behavior-y:contain}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--bg)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;box-shadow:inset 0 0 120px rgba(0,0,0,.35)}
+.wrap{max-width:640px;margin:0 auto;position:relative;z-index:1}
+h1,h2,h3{font-family:var(--display);font-weight:700;text-wrap:balance;margin:0;line-height:1.15;letter-spacing:.02em}
+a{color:var(--wind)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px;border-radius:6px}
+.muted{color:var(--muted)}
+strong{color:var(--gold)}
+
+/* gold-leaf frame used by cards, rows, tables */
+.frame,.card,.row,.checks label,.tbl,details,.result,.search,.stage-nav button,.sheet{
+  border:2px solid transparent;
+  background:var(--noise) padding-box, linear-gradient(var(--surface),var(--surface)) padding-box,
+    linear-gradient(160deg,var(--gold-hi),var(--gold-lo) 35%,var(--gold) 60%,var(--gold-lo)) border-box;
+  box-shadow:var(--shadow)}
+
+/* top app bar */
+.appbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;height:var(--bar-h);display:flex;align-items:center;gap:8px;
+  background:var(--noise), linear-gradient(var(--bg2),var(--bg));
+  margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px))) calc(-1 * max(16px,env(safe-area-inset-right,0px)));
+  padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+.appbar::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:3px;background:linear-gradient(90deg,transparent,var(--gold-lo) 10%,var(--gold-hi) 50%,var(--gold-lo) 90%,transparent)}
+.appbar .ab-in{max-width:640px;margin:0 auto;width:100%;display:flex;align-items:center;gap:8px;min-width:0}
+.icon-btn{width:44px;height:44px;border-radius:50%;border:2px solid var(--gold-lo);background:radial-gradient(circle at 50% 35%,var(--raised),var(--bg));display:grid;place-items:center;cursor:pointer;flex:none;color:var(--gold)}
+.icon-btn:active{transform:scale(.95)}
+.icon-btn svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.ab-title{font-family:var(--display);font-size:20px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;color:var(--gold);text-shadow:0 1px 0 rgba(0,0,0,.4)}
+.lvl-chip{flex:none;width:46px;height:46px;border-radius:50%;padding:0;cursor:pointer;display:grid;place-items:center;align-content:center;gap:0;
+  border:2px solid var(--gold-hi);background:radial-gradient(circle at 50% 30%,#3a2a12,#120c06);color:#ffe39a;
+  box-shadow:0 0 0 2px var(--gold-lo),0 0 12px rgba(226,179,80,.35);font-family:var(--display);font-weight:800;font-size:17px;line-height:1}
+.lvl-chip small{font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:#d9b66a;font-weight:700;font-family:var(--display)}
+
+/* action-bar tabs */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:15;
+  background:var(--noise), linear-gradient(#2a2016,#0d0a07);border-top:2px solid var(--gold-lo);box-shadow:0 -1px 0 var(--gold-hi) inset, 0 -8px 20px rgba(0,0,0,.4);
+  padding:8px max(8px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+.tabbar .tb-in{max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.tabbar button{border:0;background:transparent;padding:0;display:grid;justify-items:center;gap:4px;cursor:pointer;color:#c9b27f;font-family:var(--display);font-size:11.5px;font-weight:700;letter-spacing:.04em;min-height:56px}
+.tabbar .slot{width:44px;height:44px;border-radius:7px;display:grid;place-items:center;
+  border:2px solid #6b5326;background:radial-gradient(circle at 50% 30%,#3b2f22,#15100b);box-shadow:inset 0 0 0 1px #000, inset 0 -6px 10px rgba(0,0,0,.5)}
+.tabbar svg{width:24px;height:24px;stroke:#d8c08a;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tabbar button[aria-current="page"]{color:#ffe39a}
+.tabbar button[aria-current="page"] .slot{border-color:#ffd56b;box-shadow:0 0 0 1px #000,0 0 14px rgba(255,205,90,.55), inset 0 0 12px rgba(255,205,90,.35)}
+.tabbar button[aria-current="page"] svg{stroke:#ffe8a8}
+.tabbar button:active .slot{transform:scale(.93)}
+.tabbar .pip{display:none}
+
+/* screens and cards */
+.screen{display:grid;gap:16px;padding-block:18px 8px}
+.card{border-radius:10px;padding:16px;display:grid;gap:12px;position:relative}
+.card h3,.panel h3{font-size:18px;color:var(--gold)}
+.card h3::after,.panel h3::after{content:"";display:block;height:1px;margin-top:8px;background:linear-gradient(90deg,var(--gold),transparent)}
+.eyebrow{font-family:var(--display);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--class);font-weight:700}
+.label{font-family:var(--display);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;display:flex;align-items:center;gap:10px}
+.label::before,.label::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold-lo))}
+.label::after{background:linear-gradient(90deg,var(--gold-lo),transparent)}
+.hero{display:grid;gap:6px;padding-top:6px;justify-items:center;text-align:center}
+.hero .crest{width:74px;height:84px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.45))}
+.hero h1{font-family:var(--deco);font-size:clamp(28px,8.4vw,38px);background:linear-gradient(180deg,var(--gold-hi),var(--gold) 55%,var(--gold-lo));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 rgba(0,0,0,.35))}
+.hero p{max-width:34ch}
+
+.levelcard{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px}
+.step{width:52px;height:52px;border-radius:50%;border:2px solid var(--gold-lo);background:radial-gradient(circle at 50% 30%,var(--raised),var(--bg));font-size:26px;cursor:pointer;display:grid;place-items:center;color:var(--gold)}
+.step:active{transform:scale(.94)}
+.levelnum{text-align:center}
+.levelnum output{display:block;font-family:var(--deco);font-size:58px;line-height:1;font-variant-numeric:tabular-nums;color:var(--gold);text-shadow:0 0 18px rgba(226,179,80,.25)}
+.levelnum span{font-family:var(--display);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.kv{display:grid;grid-template-columns:6.6em 1fr;gap:10px;align-items:baseline}
+.kv .k{font-family:var(--display);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--class);font-weight:700}
+.kv .v{min-width:0}
+
+/* red panel buttons */
+.btn{border-radius:6px;padding:13px 16px;font-family:var(--display);font-weight:700;letter-spacing:.06em;cursor:pointer;text-align:center;min-height:48px;font-size:15.5px}
+.btn.primary{color:#ffe39a;text-shadow:0 1px 1px #000;border:2px solid #d9a63e;background:linear-gradient(180deg,#b3271a,#7a140b 55%,#5a0d06);box-shadow:inset 0 1px 0 rgba(255,200,150,.35),0 3px 8px rgba(0,0,0,.35)}
+.btn.primary:active{background:linear-gradient(180deg,#8f1d12,#5a0d06)}
+.btn.ghost{color:var(--gold);border:2px solid var(--gold-lo);background:linear-gradient(180deg,var(--raised),var(--surface))}
+.btn.danger{background:var(--warn-bg);color:var(--warn);border:2px solid var(--warn)}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+
+/* quest log rows */
+.list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.row{width:100%;text-align:left;display:grid;grid-template-columns:3.7em 1fr auto;gap:12px;align-items:center;border-radius:8px;padding:14px;cursor:pointer}
+.row:active{filter:brightness(1.08)}
+.row.cur{box-shadow:var(--shadow),0 0 0 1px var(--gold-hi),0 0 16px rgba(226,179,80,.3)}
+.row .n{font-family:var(--display);font-weight:800;font-size:16px;color:var(--gold);font-variant-numeric:tabular-nums;line-height:1.1;text-shadow:0 1px 0 rgba(0,0,0,.35)}
+.row.d-grey .n{color:var(--d-grey)}.row.d-yellow .n{color:var(--d-yellow)}.row.d-orange .n{color:var(--d-orange)}.row.d-red .n{color:var(--d-red)}
+.row .t{font-weight:700;display:block;font-family:var(--display);font-size:15.5px;letter-spacing:.02em}
+.row .s{color:var(--muted);font-size:15px;display:block}
+.row .chev{color:var(--gold);font-size:24px}
+/* XP-bar progress */
+.row>span:nth-child(2){display:block;min-width:0}
+.bar{display:block;height:10px;border-radius:2px;margin-top:8px;overflow:hidden;border:1px solid #000;background:#120a1c;box-shadow:inset 0 1px 3px rgba(0,0,0,.6);position:relative}
+.bar::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 calc(5% - 1px),rgba(0,0,0,.55) calc(5% - 1px) 5%);pointer-events:none}
+.bar i{display:block;height:100%;background:linear-gradient(180deg,var(--xp2),var(--xp1));box-shadow:inset 0 1px 0 rgba(255,255,255,.3);transition:width .35s ease}
+
+/* quest objectives */
+.panel ul.checks,.screen ul.checks{padding-left:0}
+.checks{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.checks label{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;border-radius:8px;padding:13px 12px;cursor:pointer;min-height:52px}
+.checks input{appearance:none;width:24px;height:24px;margin:0;border:2px solid var(--gold-lo);border-radius:4px;display:grid;place-items:center;cursor:pointer;background:radial-gradient(circle at 50% 30%,var(--raised),var(--bg));box-shadow:inset 0 0 0 1px rgba(0,0,0,.5);transition:border-color .15s}
+.checks input::after{content:"";width:7px;height:13px;border:solid var(--gold-hi);border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px) scale(0);transition:transform .15s;filter:drop-shadow(0 0 3px rgba(255,210,100,.7))}
+.checks input:checked{border-color:var(--gold-hi)}
+.checks input:checked::after{transform:rotate(45deg) translate(-1px,-1px) scale(1)}
+.checks .lv{display:inline-block;font-family:var(--display);font-size:12.5px;font-weight:800;color:var(--class);margin-right:6px;font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.checks label.on{filter:saturate(.6) brightness(.92)}
+.checks label.on .txt{color:var(--muted)}
+.checks label.on .txt::after{content:" Complete";font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--done);margin-left:6px}
+
+/* stage detail tabs */
+.seg{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--bar-h) + 3px);z-index:12;padding-block:8px;background:linear-gradient(var(--bg) 70%,transparent)}
+.seg .seg-in{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.seg button{border:2px solid var(--gold-lo);border-radius:8px 8px 3px 3px;padding:9px 4px;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.04em;cursor:pointer;min-height:44px;
+  color:#e7c98a;background:linear-gradient(180deg,#5a1209,#2e0905);text-shadow:0 1px 1px #000}
+.seg button[aria-selected="true"]{color:#ffe39a;border-color:#ffd56b;background:linear-gradient(180deg,#b3271a,#6e1209);box-shadow:0 0 10px rgba(255,200,90,.35)}
+.swipe-hint{font-size:13px;color:var(--muted);text-align:center;font-style:italic}
+.panel{display:grid;gap:16px;padding-block:8px}
+.panel h3{margin-top:4px}
+.panel p{margin:0;max-width:65ch}
+.panel ul,.panel ol,.screen ul.plain,.screen ol.plain{margin:0;padding-left:1.3em;display:grid;gap:6px}
+.panel ul li::marker{color:var(--gold)} .panel ol li::marker{color:var(--gold);font-family:var(--display);font-weight:700}
+/* tooltip-style notes */
+.note{background:var(--tip);border:1px solid var(--tip-line);border-radius:6px;padding:12px 14px;font-size:16.5px;box-shadow:0 0 0 1px #000,0 6px 16px rgba(0,0,0,.3)}
+.note strong{color:var(--gold)}
+.warn{background:var(--warn-bg);border:1px solid var(--warn);border-radius:6px;padding:12px 14px;font-size:16.5px;box-shadow:inset 3px 0 0 var(--rage)}
+.warn strong{color:var(--warn)}
+.tbl{overflow-x:auto;border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:15.5px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:rgba(0,0,0,.18)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--class)}
+tr.here td{background:rgba(127,211,92,.12)}
+details{border-radius:8px;padding:0 14px}
+summary{cursor:pointer;padding-block:13px;font-family:var(--display);font-weight:700;color:var(--gold)}
+details[open]{padding-bottom:12px}
+details .tbl{border:0;border-radius:0;background:transparent;box-shadow:none}
+.stage-nav{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.stage-nav button{border-radius:8px;padding:12px;cursor:pointer;text-align:left;min-width:0}
+.stage-nav button:last-child{text-align:right}
+.stage-nav small{display:block;font-family:var(--display);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--class);font-weight:700}
+.stage-nav span{display:block;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--display);color:var(--gold)}
+
+/* search */
+.search{display:flex;align-items:center;gap:8px;border-radius:8px;padding:0 12px;min-height:52px}
+.search svg{width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:2;flex:none}
+.search input{border:0;background:transparent;font:inherit;color:inherit;flex:1;min-width:0;padding:12px 0;outline:none}
+.result{width:100%;text-align:left;border-radius:8px;padding:12px 14px;cursor:pointer;display:grid;gap:2px}
+.result small{font-family:var(--display);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--class);font-weight:700}
+.result mark{background:rgba(226,179,80,.3);color:inherit;border-radius:2px}
+
+/* progress ring */
+.ring{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+.ring svg{width:96px;height:96px;filter:drop-shadow(0 0 8px rgba(155,93,229,.35))}
+.ring .big{font-family:var(--deco);font-size:32px;color:var(--gold)}
+
+/* sheet + toast */
+.scrim{position:fixed;inset:0;background:var(--scrim);z-index:30;opacity:0;transition:opacity .2s}
+.scrim.show{opacity:1}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:31;border-radius:14px 14px 0 0;border-bottom:0;
+  padding:10px max(16px,env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  transform:translateY(100%);transition:transform .22s ease}
+.sheet.show{transform:none}
+.sheet .grab{width:44px;height:5px;border-radius:3px;background:var(--gold-lo);margin:0 auto 10px}
+.sheet .sh-in{max-width:640px;margin:0 auto;display:grid;gap:14px}
+.sheet h2,.sheet h3{color:var(--gold)}
+.quick{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.quick button{border:2px solid var(--gold-lo);background:radial-gradient(circle at 50% 30%,var(--raised),var(--bg));border-radius:6px;padding:10px 0;font-family:var(--display);font-weight:800;cursor:pointer;font-variant-numeric:tabular-nums;color:var(--gold)}
+.quick button.on{border-color:#ffd56b;color:#ffe39a;background:linear-gradient(180deg,#b3271a,#6e1209);box-shadow:0 0 10px rgba(255,200,90,.4)}
+/* "quest complete" banner toast */
+.toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + var(--bar-h) + 26px);transform:translate(-50%,-8px) scale(.96);opacity:0;z-index:40;pointer-events:none;
+  font-family:var(--deco);font-size:19px;font-weight:700;color:#ffd75e;text-align:center;white-space:nowrap;max-width:calc(100vw - 32px);overflow:hidden;text-overflow:ellipsis;
+  text-shadow:0 0 2px #000,0 2px 4px #000,0 0 18px rgba(255,190,60,.55);padding:10px 34px;
+  background:radial-gradient(60% 100% at 50% 50%,rgba(0,0,0,.72),rgba(0,0,0,0));transition:opacity .25s,transform .25s}
+.toast.show{opacity:1;transform:translate(-50%,0) scale(1)}
+.foot{color:var(--muted);font-size:14px;font-style:italic}
+@media (prefers-reduced-motion:no-preference){ .enter{animation:enter .25s ease-out} @keyframes enter{from{transform:translateY(8px);opacity:.4}to{transform:none;opacity:1}}
+  .slide-l{animation:sl .18s ease-out} .slide-r{animation:sr .18s ease-out}
+  @keyframes sl{from{transform:translateX(24px)}to{transform:none}} @keyframes sr{from{transform:translateX(-24px)}to{transform:none}}
+  .hero .crest .gust{animation:gust 6s ease-in-out infinite} @keyframes gust{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}} }
+@media (prefers-reduced-motion:reduce){ .sheet,.scrim,.toast,.bar i{transition:none} }
+</style>
+</head>
+<body>
+
+
+<header class="appbar" id="appbar">
+  <div class="ab-in">
+    <button type="button" class="icon-btn" id="backBtn" aria-label="Back" hidden><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="ab-title" id="abTitle">Now</div>
+    <button type="button" class="lvl-chip" id="lvlChip" aria-label="Change your level"><small>Lv</small><span id="lvlChipNum">1</span></button>
+  </div>
+</header>
+<div class="wrap"><main id="app"></main></div>
+
+<nav class="tabbar" aria-label="Main">
+  <div class="tb-in">
+    <button type="button" data-tab="now" id="tab-now"><span class="slot"><svg viewBox="0 0 24 24"><path d="M14.5 3.5L20.5 3.5 20.5 9.5 9 21 3 15z"/><path d="M6 12l6 6M4 20l2.5-2.5"/></svg></span>Now<span class="pip"></span></button>
+    <button type="button" data-tab="stages" id="tab-stages"><span class="slot"><svg viewBox="0 0 24 24"><path d="M7 4h11a2 2 0 012 2v0a2 2 0 01-2 2H17v10a2 2 0 01-2 2H6a2 2 0 01-2-2v0a2 2 0 012-2h1V6a2 2 0 00-2-2"/><path d="M10 9h5M10 12.5h5"/></svg></span>Stages<span class="pip"></span></button>
+    <button type="button" data-tab="lookup" id="tab-lookup"><span class="slot"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/><path d="M11 7.5v7M7.5 11h7" opacity=".55"/></svg></span>Look up<span class="pip"></span></button>
+    <button type="button" data-tab="progress" id="tab-progress"><span class="slot"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span>Progress<span class="pip"></span></button>
+  </div>
+</nav>
+
+<div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden><div class="grab"></div><div class="sh-in" id="sheetBody"></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem(k); return v===null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+};
+let ticks = store.get('sfw2.ticks',{});
+let level = store.get('sfw2.level',1);
+
+/* ===== shared data: these feed every stage automatically ===== */
+// [from, to, talent, what it does]
+const TALENTS = [
+ [10,14,'Cruelty 5/5','+5% crit'],
+ [15,19,'Unbridled Wrath 5/5','Chance for extra Rage on every hit'],
+ [20,22,'Furious Precision 3/3','+10% off-hand hit. Take it the moment you dual wield'],
+ [23,23,'Piercing Howl','Slows enemies around you, for escapes'],
+ [24,24,'Lingering Rage 1/5','Rage drains later after a fight'],
+ [25,29,'Enrage 5/5','Bonus damage after you take damage'],
+ [30,30,'Death Wish','Your big damage cooldown'],
+ [31,35,'Dual Wield Specialization 5/5','+25% off-hand damage and more off-hand Rage'],
+ [36,38,'Flurry 3/3','Faster swings after a crit'],
+ [39,39,'Blood Craze 1/3','Self-healing, and the 30th Fury point Bloodthirst needs'],
+ [40,40,'Bloodthirst','Your main attack from here on'],
+ [41,42,'Blood Craze 3/3','More self-healing, unlocks Gore Drinker'],
+ [43,44,'Gore Drinker 2/2','Your Rage cooldowns make your next swings heal you'],
+ [45,46,'Improved Berserker Rage 2/2','More Rage, breaks slows'],
+ [47,47,'Raging Blows','Cheaper Whirlwind and Cleave'],
+ [48,49,'Deflection 2/5 (Arms)','Parry, opens the Arms tree'],
+ [50,52,'Improved Rend 3/3 (Arms)','Path to the Arms talents below'],
+ [53,55,'Improved Tactical Mastery 3/3 (Arms)','Keep 25 Rage when you swap stance'],
+ [56,57,'Deflection to 4/5','Spare points (Improved Tactical Mastery is now 3 ranks)'],
+ [58,58,'Anger Management (Arms)','Slow passive Rage'],
+ [59,60,'Deep Wounds 2/3 (Arms)','Bleed on crits']
+];
+// [level, ability, note]
+const TRAIN = [
+ [1,'Battle Shout','Keep it up always. New ranks at 12, 22, 32, 42, 52'],
+ [4,'Charge, Rend','Rend ranks at 10, 20, 30, then stop training it (Icy Veins). Retrain later only if you tank and use it'],
+ [6,'Thunder Clap','Slows a group of enemies. Fury can skip ranks 3 to 6 (Wowhead), but train them from 40 if you tank: Protection uses it on every pack'],
+ [8,'Hamstring','Slows one enemy'],
+ [10,'Defensive Stance quest: Taunt, Sunder Armor','Sunder ranks at 22, 34, 46, 58'],
+ [12,'Overpower, Shield Bash','Overpower lights up after an enemy dodges'],
+ [14,'Demoralizing Shout, Tactical Mastery','Demo Shout ranks at 24, 34, 44, 54'],
+ [16,'Shield Block',''],
+ [18,'Disarm',''],
+ [20,'Dual Wield, Victory Rush, Retaliation, Cleave','Cleave ranks at 30, 40, 50, 60'],
+ [22,'Intimidating Shout','Fears enemies around you'],
+ [26,'Challenging Shout',''],
+ [28,'Shield Wall','Big damage reduction'],
+ [30,'Berserker Stance quest: Berserker Rage, Intercept, Slam','Slam is not worth training for Fury (Wowhead). Mocking Blow: rank 1 is enough'],
+ [36,'Whirlwind','Needs Berserker Stance'],
+ [38,'Pummel','Interrupt in Berserker Stance'],
+ [40,'Plate armour, Bloodthirst (talent), riding','Bloodthirst ranks at 48, 54, 60'],
+ [50,'Recklessness','30 minute cooldown, huge damage']
+];
+// [name, min, max, zone, why go]
+const DUNGEONS = [
+ ['Ragefire Chasm',13,18,'Orgrimmar','Hidden Enemies quest chain for Hammer of Orgrimmar'],
+ ['Ruins of Lordaeron (new)',15,20,'Tirisfal Glades','New Forever dungeon, quests need level 15'],
+ ['Wailing Caverns',17,24,'The Barrens','Leaders of the Fang quest for Wingblade'],
+ ['Shadowfang Keep',20,26,'Silverpine Forest','Good weapon drops'],
+ ['Blackfathom Deeps',22,28,'Ashenvale','Baron Aquanis quest for Outlaw Sabre'],
+ ['Excavation Site: Wetlands (new)',24,29,'Wetlands','New Forever dungeon'],
+ ['City of Dalaran (new)',28,33,'Alterac Mountains','New Forever dungeon'],
+ ['Razorfen Kraul',29,38,'The Barrens','Pronged Reaver, and Roogug for your Brutal Hauberk'],
+ ['Gnomeregan',29,38,'Dun Morogh (far for Horde)','Optional'],
+ ['Scarlet Monastery: Graveyard',30,38,'Tirisfal Glades','Start of the Monastery wings'],
+ ['Scarlet Monastery: Library',33,41,'Tirisfal Glades','Sword of Omen quest chain'],
+ ['The Drowned City (new)',35,40,'Stranglethorn Vale','New Forever dungeon'],
+ ['Scarlet Monastery: Armory',36,44,'Tirisfal Glades','Herod drops Ravager'],
+ ['Uldaman',36,45,'Badlands',''],
+ ['Razorfen Downs',37,46,'The Barrens',''],
+ ['Scarlet Monastery: Cathedral',38,46,'Tirisfal Glades',''],
+ ["Zul'Farrak",40,47,'Tanaris','Several strong swords'],
+ ["Krol'Dok Stronghold (new)",40,45,'Riverglades','New Forever dungeon'],
+ ['Maraudon',45,51,'Desolace','Corruption of Earth and Seed quest for Thrash Blade'],
+ ['Alcaz Island Prison (new)',48,53,'Dustwallow Marsh','New Forever dungeon'],
+ ['Sunken Temple',50,55,'Swamp of Sorrows',''],
+ ['Blackrock Depths',52,60,'Blackrock Mountain','Huge dungeon, lots of pre-raid gear'],
+ ['Blackmaw Hold (new)',55,60,'Azshara','New Forever dungeon'],
+ ['Lower Blackrock Spire',57,60,'Blackrock Mountain',''],
+ ['Dire Maul: East',58,60,'Feralas',''],
+ ["Shaper's Terrace (new)",58,60,"Un'Goro Crater",'New Forever dungeon'],
+ ['Stratholme (both sides)',58,60,'Eastern Plaguelands','Pre-raid gear'],
+ ['Scholomance',58,60,'Western Plaguelands','Pre-raid gear'],
+ ['Upper Blackrock Spire',60,60,'Blackrock Mountain','Pre-raid gear'],
+ ['Dire Maul: West and North',60,60,'Feralas','Pre-raid gear']
+];
+
+/* ===== stages ===== */
+const STAGES = [
+{id:'stage-1', range:[1,9], t:'Levels 1 to 9', s:'Zephras Isle, your first abilities',
+ goal:'Learn the basics on Zephras Isle, set up your professions, and reach 10.',
+ zones:['Zephras Isle (Skyborne starting zone)'],
+ do:[
+  [1,'Kill your first enemies, sell the loot to a vendor, and buy **Battle Shout**.'],
+  [1,'Do the **First login setup** checklist: addons, settings, layout and RestedXP.'],
+  [2,'Run through the small tornadoes for **Blessing of Zephras**: 40% speed until you attack.'],
+  [2,'Pick up **Windstones** as you go. They are free health and mana, island only.'],
+  [3,'Learn **First Aid**, **Mining** and **Blacksmithing** from the profession trainers.'],
+  [4,'Train **Charge** and **Rend**. Opener from now on: Charge, Rend, auto attack.'],
+  [5,'Set your Hearthstone at the innkeeper in **Shen’dar Village** and train there (the Thendal trainer stops at 6).'],
+  [6,'Group up with other players for the cave bears: they are packed and respawn fast.'],
+  [6,'Mine every ore node you see. Make Rough Sharpening Stones once you can and use them.'],
+  [9,'Log out in an inn so you build rested XP.'],
+  [1,'Grind the first mobs straight to **level 4** before questing hard (Kargoz). They die fast and the loot pays for training.'],
+  [3,'Learn **Cooking** too. It is the only way to build a **campfire** (Flint and Tinder plus Simple Wood), and cooked food gives bonus XP.'],
+  [1,'In the login queue: do the character-screen part of **First login setup** (addons, Gamepad UI, system settings).'],
+  [1,'Once in game, finish **First login setup** before taking any quest.'],
+  [5,'Make your first camp item at skill 20 from the **Camping 101** quest for each profession: Blacksmithing **Sharpening Wheel** (Strength), Mining **Lodestone** (attack power), First Aid **First Aid Kit** (Stamina).']
+ ],
+ gear:[
+  'Use the best weapon you have. A two-hander is fine until 20.',
+  'Equip anything with Strength or Stamina. Mail if you find it.',
+  'Rough Sharpening Stones on your weapon (Blacksmithing).'
+ ],
+ rotation:[['ol',['Charge in.','Rend if it will live a while.','Auto attack.','Heroic Strike only with spare Rage.']]],
+ tips:['Grind a few early mobs before questing hard: they die fast and pay for training.','**Launch night caveat:** the island will be packed. If you are standing around waiting for enemies to spawn, stop grinding and follow the quests. Never stand still.','Build the habit now: **finish nearly dead enemies with auto attacks** and keep your Rage for the next fight.','Group up with anyone doing the same quest. Kills count for the whole group.','A good first session on a busy launch night is level 5 to 8. Do not judge your pace by Day 1.','Train every 2 levels: new ranks are big upgrades.']
+},
+{id:'stage-10', range:[10,19], t:'Levels 10 to 19', s:'Defensive Stance, first talents, first dungeons',
+ goal:'Do your class quest, leave the island, and run your first dungeons for weapons.',
+ zones:['Finish Zephras Isle','The Barrens (10+)','Silverpine Forest (15+)'],
+ do:[
+  [10,'**Class quest: The Skybreaker Bulwark.** Speak to Seena Skybreaker on Zephras Isle and recover the Bulwark from Zaal Stormshield at the Shrine of Akir. Rewards Defensive Stance and the Stormforged Protector.'],
+  [10,'Spend your first talent point: **Cruelty**.'],
+  [10,'Take a skyship from Valanaar’s dock and head to **Orgrimmar**. Set your Hearthstone there.'],
+  [10,'In Orgrimmar, visit the weapon masters in the Valley of Honor and learn **Thrown** (around 10 silver). Buy a throwing weapon.'],
+  [10,'Pick up **Skinning** too if you want early gold (Icy Veins tip). Drop it later.'],
+  [12,'Train **Overpower** and use it every time it lights up.'],
+  [13,'Run **Ragefire Chasm** in Orgrimmar. Do the **Hidden Enemies** quests for Hammer of Orgrimmar.'],
+  [14,'Train **Demoralizing Shout** and use it on anything that hits hard.'],
+  [15,'Pick up the **Ruins of Lordaeron** quests (level 15 needed).'],
+  [17,'Run **Wailing Caverns** in The Barrens. Do **Leaders of the Fang** for Wingblade.'],
+  [18,'Keep Mining and Blacksmithing roughly in step with your level.'],
+  [10,'Buy a **Cutlass** from a weapon vendor if the class quest weapon is not better (Kargoz).'],
+  [10,'Visit **Durotar Supply and Logistics** just outside the west gate of the Crossroads. Do the first **Shipping Label** quest (2,000 reputation and 50 Merchant’s Favor). Fill any **Waylaid Crates** you loot and hand them in.'],
+  [10,'Start using **Elixir of Minor Agility** when you can afford it.'],
+  [12,'Practise **Hamstring kiting** on a tough enemy: Hamstring, step back, throw your thrown weapon, repeat.'],
+  [10,'**Sell spare copper ore and bars** on the Auction House in launch week. Everyone is levelling Blacksmithing and Engineering, so prices are at their highest. Keep what your own Blacksmithing needs.'],
+  [12,'Find a guild: your realm’s Discord will have a recruitment channel. A levelling guild now makes dungeon groups easy and leads into raiding.'],
+  [16,'Learn to **split pull**: throw dynamite at a pack, then use your thrown weapon on the one you want so the others reset (Kargoz).']
+ ],
+ gear:[
+  'Weapon first. Look for **Thun’grim’s Axe** (Forged Steel quest, The Barrens) and **Hammer of Orgrimmar**.',
+  'Before using a new weapon type, check you have the skill. Horde weapon trainers: Orgrimmar (axes, daggers, fist, thrown), Undercity (swords, polearms, daggers), Thunder Bluff (maces).',
+  'Wear mail. Strength and Stamina first, Agility is a bonus.',
+  'Keep sharpening stones applied.',
+  'Kargoz’s Horde list for 1 to 20: **Cutlass** (vendor), **Thun’grim’s** class quest weapon, **Hammer of Orgrimmar** (Ragefire Chasm, Hidden Enemies), **Chanting Blade** (Jergosh, Ragefire Chasm), **Harpy Skinner** (Serena Bloodfeather quest, The Barrens), **Goblin Screwdriver** or **Tail Spike** if you see them.'
+ ],
+ rotation:[['ol',['Charge in.','Demoralizing Shout on hard hitters.','Overpower after a dodge.','Rend and Sunder only on enemies that live long.','Heroic Strike with spare Rage.','Finish low enemies with auto attacks, not Execute.']],
+   ['p','**Demoralizing Shout** can cut melee damage you take by roughly 15 to 25% against physical enemies (Kargoz). Use it early on anything dangerous.']],
+ tips:['Fight green enemies about 3 levels below you where you can: fewer misses, dodges, parries and glancing blows (Kargoz).','Use your thrown weapon to pull single enemies away from groups.','Pick up a dungeon’s quests before you go in.','Check the dungeon’s level range below before joining a group.']
+},
+{id:'stage-20', range:[20,29], t:'Levels 20 to 29', s:'Dual wielding, armour quest, more dungeons',
+ goal:'Switch to two weapons, finish your armour quest chain and build up to Death Wish.',
+ zones:['The Barrens / Stonetalon Mountains (20+)','Ashenvale (25+)'],
+ do:[
+  [20,'Train **Dual Wield** and **Victory Rush**. Equip two one-handers right away.'],
+  [20,'**Class quest: Speak with Ruga.** Go to Ruga Ragetotem at Camp Taurajo. Bring 5 Twitching Antenna from silithid in the Field of Giants within 15 minutes. Reward: **Ruga’s Bulwark** shield.'],
+  [20,'Start the **Brutal Hauberk** chain with Thun’grim Firegaze in The Barrens. Collect as you go: 15 Smoky Iron Ingot (Windshear kobolds, Stonetalon), 10 Powdered Azurite (Hillsbrad miners), 10 Iron Bar (buy or smelt), 1 Vial of Phlogiston (Roogug in Razorfen Kraul).'],
+  [20,'Decide whether to buy the full RestedXP guide. The free part ends here.'],
+  [20,'Run **Shadowfang Keep** (20 to 26).'],
+  [22,'Run **Blackfathom Deeps** (22 to 28). Do the **Baron Aquanis** quest for Outlaw Sabre.'],
+  [22,'Train **Intimidating Shout**: your panic button.'],
+  [28,'Train **Shield Wall**.'],
+  [29,'Run **Razorfen Kraul** (29 to 38) to finish the Brutal Hauberk and get **Pronged Reaver**.'],
+  [20,'Move up to **Elixir of Lesser Agility**.'],
+  [20,'Keep handing in crates and **Craftsman’s Writs** at Durotar Supply and Logistics. Writs are what give reputation (once per writ per day).'],
+  [25,'Your first **Legacy point** arrives at level 25. Press **Y** to open Legacy and spend it (see **Professions and consumables**).']
+ ],
+ gear:[
+  'Two weapons now. Ideally a slower main hand and a fast off-hand.',
+  'Key weapons: **Wingblade**, **Outlaw Sabre**, **Pronged Reaver**, plus Shadowfang Keep and Blackfathom Deeps drops.',
+  'You will need **One-Handed Swords** from the Undercity weapon trainer for most of these.',
+  'Brutal Hauberk is your armour upgrade. Optional Brutal pieces: gauntlets (Sen’jin Village), helm (Thunder Bluff), legguards (Undercity).',
+  'Sharpening stones on **both** weapons.',
+  'More of Kargoz’s 20 to 30 picks: **Cruel Barb** (Deadmines), **Butcher’s Cleaver** (Shadowfang Keep), **Meteor Shard** (Shadowfang Keep), **Bite of Serra’kis** (Blackfathom Deeps), **Toxic Revenger** and **Electrocutioner Leg** (Gnomeregan), **Thornspike** (Razorfen Kraul), and **Serrated Raptor Claw**, a new Forever dagger with Agility and attack power.'
+ ],
+ rotation:[['ol',['Charge in.','Demoralizing Shout on hard hitters.','Victory Rush after a kill, once you are hurt.','Overpower after a dodge.','Thunder Clap on groups.','Heroic Strike, or Cleave on 2+ enemies, with spare Rage.']]],
+ tips:['Missing a lot is normal early in dual wielding. Furious Precision fixes most of it.','Add good tanks and healers to your friends list.']
+},
+{id:'stage-30', range:[30,39], t:'Levels 30 to 39', s:'Berserker Stance, Death Wish, Scarlet Monastery',
+ goal:'Unlock Berserker Stance, then gear up in Scarlet Monastery.',
+ zones:['Thousand Needles (30+)','Wetlands / Arathi Highlands','Stranglethorn Vale, Desolace, Alterac Mountains, Dustwallow Marsh'],
+ do:[
+  [30,'Take **Death Wish**.'],
+  [30,'**Class quest: The Islander.** Your trainer sends you to Klannoc Macleod on Fray Island, The Barrens. Win the arena fights ending with Big Will. Reward: **Berserker Stance**. Do it straight away.'],
+  [30,'Optional: **The Windwatcher** chain for a Whirlwind two-hander. The last fight is a level 40 elite, so bring help or leave it for later.'],
+  [30,'Fight in **Berserker Stance** from now on, unless you need to survive.'],
+  [30,'Run the **Scarlet Monastery** wings in order: Graveyard, Library (Sword of Omen chain), Armory, Cathedral.'],
+  [33,'Optional new dungeons: **City of Dalaran**, **The Drowned City**.'],
+  [36,'Train **Whirlwind**. It hits with both weapons.'],
+  [36,'If **Ravager** drops from Herod (Armory), consider a short Arms respec for dungeon cleaving.'],
+  [38,'Train **Pummel**, your Berserker Stance interrupt.'],
+  [39,'Save **120 gold** for riding at 40.'],
+  [30,'**Berserker Rage trick** (Icy Veins): press it when your Rage is under 10, such as on the way into a pull, so none of its Rage is wasted.'],
+  [30,'Stop training **Rend** after this rank. Fury does not need more.'],
+  [30,'Until Whirlwind at 36, use **Thunder Clap** on cooldown when fighting groups.']
+ ],
+ gear:[
+  'Key weapons: **Sword of Omen**, Scarlet Monastery drops, **Ravager** (optional Arms detour).',
+  'Look for items with both Strength and Agility: among your best options.',
+  'Still mail until 40.',
+  'More of Kargoz’s 30 to 40 picks: **Torturing Poker** (Interrogator Vishas, Scarlet Monastery), the sword from the Razorfen Downs quest **Bring the Light**, **Coldrage Dagger** (Amnennar, Razorfen Downs), **Blade of the Basilisk** (world drop, check the Auction House).'
+ ],
+ rotation:[['ol',['Charge in Battle Stance, swap to Berserker.','Berserker Rage when your Rage is low.','Victory Rush when up.','Death Wish on tough fights.','Whirlwind (from 36), especially on 2+ enemies.','Overpower if the stance swap will not waste much Rage.','Heroic Strike, or Cleave on 2+, with spare Rage.']]],
+ tips:['Death Wish has a 3 minute cooldown. Use it often, not only on "perfect" pulls. It gives +20% damage and Fear immunity, but you take 5% more damage.','Keyboard users can make a mouseover interrupt: a macro with **/cast [@mouseover,harm,nodead][] Pummel** interrupts the enemy under your cursor without changing target (Icy Veins gives the Shield Bash version). On a controller this matters less, so it is optional.','You take more damage in Berserker Stance. Swap to Battle Stance if a fight goes badly.']
+},
+{id:'stage-40', range:[40,49], t:'Levels 40 to 49', s:'Bloodthirst, plate, mount, dual spec',
+ goal:'Your biggest milestone: Bloodthirst, plate armour, your mount and dual spec all arrive at 40.',
+ zones:['Tanaris, Feralas, The Hinterlands','Badlands, Swamp of Sorrows, Searing Gorge, Azshara'],
+ do:[
+  [40,'Take **Bloodthirst**. It is your main attack now.'],
+  [40,'Train **Plate** armour at your class trainer.'],
+  [40,'Learn **Apprentice Riding** (100 gold) and buy a mount (20 gold). The Windshaper trainer, Genn Fairweather, is on Zephras Isle.'],
+  [40,'Turn on **dual spec**. Build **Protection** as spec 2 (Icy Veins Protection talents). Keep a one-hander and shield in your bags.'],
+  [40,'Run **Zul’Farrak** (40 to 47) for swords.'],
+  [42,'Use Gore Drinker’s healing: do not fire all your Rage cooldowns at once, as it only holds 3 stacks.'],
+  [45,'Run **Maraudon** (45 to 51). Do **Corruption of Earth and Seed** for **Thrash Blade**. Top priority.'],
+  [45,'Start looking for a raiding guild.'],
+  [40,'Build the **Protection** spec in this priority (Icy Veins levelling build): Shield Specialization 5/5, Improved Revenge 3/3, Master of Defense 2/2, Last Stand, Defiance, Vanguard, Focused Rage 3/3, Concussion Blow, **Shield Slam**. Use the Icy Veins talent calculator to place the leftover points.'],
+  [40,'From now on, train every rank of **Thunder Clap**, **Revenge** and **Shield Slam** for your tank spec.'],
+  [40,'Once Bloodthirst is in, use **Sunder Armor** only on elites and bosses.'],
+  [40,'Move up to **Elixir of Greater Agility**, and use **Scroll of Strength** when you have them.'],
+  [40,'Blacksmithing around 200: in Classic this opened the **Weaponsmith / Armorsmith** quests. Warcraft Tavern could not confirm it for Forever yet, so check in game.']
+ ],
+ gear:[
+  'Swap to plate pieces as they come, but do not wear worse plate over better mail.',
+  'Key weapons: **Zul’Farrak swords**, **Thrash Blade**.',
+  'Start noting items with Hit.',
+  'Kargoz’s 40 to 60 Horde picks: **Jhordy’s Misplaced Screwdriver** (Gadgetzan reputation vendor), **Gahz’rilla Fang** and **The Hand of Antu’sul** (Zul’Farrak), **Zorbin’s Mega-Slicer** (Zapped Giants quest, Feralas), **Axe of the Ebon Drake** (Set Them Ablaze! quest), **Belgarom’s Hammer**, **Sang’thraze the Deflector / Jang’thraze the Protector** (Zul’Farrak), **Claw of Celebras** (Maraudon), **Thrash Blade** (top priority), **Lifeforce Dirk**.',
+  'For tanking, keep a good one-hander and the best **shield** you find. Shield upgrades add a lot of armour, and Block Value makes Shield Slam hit harder.'
+ ],
+ rotation:[['ol',['Keep Battle Shout up.','Charge in.','Bloodthirst on cooldown.','Victory Rush when up.','Whirlwind if you still have Rage for the next Bloodthirst.','Overpower after a dodge if the swap is cheap.','Heroic Strike or Cleave only with lots of spare Rage.']],
+   ['h','Protection (spec 2), Icy Veins'],
+   ['ol',['Battle Shout up, Bloodrage between pulls.','Charge (Vanguard lets you do it in Defensive Stance).','Demoralizing Shout early.','**Shield Slam**, but Revenge first if Rage is low.','**Revenge** whenever it lights up.','**Shield Block** against melee enemies (not casters).','Thunder Clap on cooldown on packs. It hits only 4, so watch the rest.','Sunder up to 5 times on bosses, Rend only if it will live.','Heroic Strike, or Cleave on 2+, only with lots of spare Rage.']],
+   ['p','Tab between enemies with Shield Slam and Revenge to spread threat. Taunt anything that runs to your healer.']],
+ tips:['Bloodthirst also gives 10% movement speed for 10 seconds, handy between pulls (Kargoz).','Tank a few dungeons as Protection: you will find groups much faster.','Keep enough Rage for an interrupt in dungeons.']
+},
+{id:'stage-50', range:[50,59], t:'Levels 50 to 59', s:'Recklessness, hit gear, guild',
+ goal:'Gear toward the hit cap, join a guild, and arrive at 60 ready to raid.',
+ zones:["Un'Goro Crater, Felwood, Burning Steppes","Western and Eastern Plaguelands, Winterspring, Silithus"],
+ do:[
+  [50,'Train **Recklessness**. Pair it with Death Wish on bosses.'],
+  [50,'Run **Sunken Temple** (50 to 55).'],
+  [52,'Run **Blackrock Depths** (52 to 60). It is huge: expect several runs.'],
+  [55,'Run **Blackmaw Hold** and **Lower Blackrock Spire** when in range.'],
+  [55,'Be in a guild that raids. Check raid times fit your evenings.'],
+  [58,'Start **Stratholme**, **Scholomance** and **Dire Maul: East**.'],
+  [59,'Start saving for Journeyman Riding at 60 (1,000 gold plus 200 for the mount).'],
+  [50,'Move up to **Elixir of the Mongoose**, your best Agility elixir.'],
+  [52,'Pick up **Songflower Serenade** in Felwood when you pass through: a strong buff for tough fights.'],
+  [55,'Start the **Onyxia attunement** for the **Drakefire Amulet**. The Horde chain starts in the Badlands and runs through Lower and Upper Blackrock Spire, Desolace, Western Plaguelands and Dustwallow Marsh. Bring friends for the elite quests.']
+ ],
+ gear:['Hit gear starts appearing. Work toward **8% hit**.','Keep upgrading both weapons.','Faction-neutral late picks from Kargoz’s list: **Linken’s Sword of Mastery** (It’s Dangerous to Go Alone, Un’Goro Crater), **Lord General’s Sword** (General Angerforge, Blackrock Depths), **Dal’Rend’s** pair (Rend Blackhand, Upper Blackrock Spire).','Collect some **fire resistance** gear for Onyxia.'],
+ rotation:[['p','Same as 40 to 49, plus Recklessness and Death Wish together on bosses.']],
+ tips:['Bank Rage before every boss pull.']
+},
+{id:'stage-60', range:[60,60], t:'Level 60', s:'Raid build, pre-raid gear, raids from 9 December',
+ goal:'Switch to the raid build, gear up, and be ready for raids on 9 December.',
+ zones:['Dungeons and the 60 zones'],
+ do:[
+  [60,'Respec Fury to the raid build: **18 Arms / 33 Fury** (Icy Veins).'],
+  [60,'Run pre-raid dungeons: Upper Blackrock Spire, Stratholme, Scholomance, Dire Maul.'],
+  [60,'Copy the Phase 1 best-in-slot list from Wowhead once published, and tick items off.'],
+  [60,'Reach **8% hit**, then expertise (boss dodge cut by 6.5%), then crit.'],
+  [60,'Decide on swapping Blacksmithing for Engineering, based on the guides then.'],
+  [60,'Stock raid consumables: flasks, elixirs, food, potions, stones.'],
+  [60,'Install Discord and join your guild’s voice channel.'],
+  [60,'Upload logs to Warcraft Logs from your first raid and compare with top Fury Warriors.'],
+  [60,'Have the **Drakefire Amulet** in your bags (it does not need to be worn) before Onyxia.'],
+  [60,'For tanking at 60 (Icy Veins): **expertise** (6.5% removes dodges), **hit to 8%** with a shield, Agility, Strength, Stamina. Survival: Stamina, armour, Agility, dodge and parry, then Defense (440 for crit immunity on bosses).']
+ ],
+ gear:['Priority: weapon DPS, hit to 8%, expertise, crit, Strength.','Attack from behind bosses so they cannot parry you.','Spirit and Intellect do nothing for you.'],
+ rotation:[['ol',['Keep Battle Shout up.','Execute when the boss is low.','Bloodthirst on cooldown.','Whirlwind on cooldown.','Overpower after a dodge, then swap back.','Heroic Strike or Cleave only if the next Bloodthirst and Whirlwind are still affordable.']],
+   ['h','Cooldowns'],['ul',['**Death Wish + Recklessness** together on bosses.','**Berserker Rage** for Rage, and to ignore Fear.','**Bloodrage** before pulls.','**Retaliation / Shield Wall** if a boss turns on you.']]],
+ tips:['**Raids at launch (9 December, level 60, weekly reset):** Barrow Deeps (10 players, 8 bosses, entrances in Mount Hyjal, Winterspring and Blackmaw Hold), Hyjal Summit (20 players, 13 bosses), Onyxia’s Lair (40 players, needs the Drakefire Amulet). Each full clear also earns a Legacy point.','Enrage is optional in raids. If it rarely triggers, Icy Veins suggests Improved Execute 2/2, Improved Berserker Rage 2/2 and 1 point in Spearing Strike instead.','Fury is weaker on long single-target fights where you take little damage, and strongest when there are several enemies.']
+}
+];
+
+/* ===== reference chapters ===== */
+const REF = [
+{id:'before', t:'Before you play', s:'Character creation and setup on launch night', b:[
+  ['h','Create your character'],
+  ['ol',['Pick **Horde**.','Pick **Skyborne** and check the variant says **Windshaper** (High Order is Alliance).','Pick **Warrior**.']],
+  ['table',['Racial','What it does'],[
+    ['Wind Blessed','Passive. 2% haste, always on. The reason you picked this race.'],
+    ['Skysight','Active. Short speed boost. At an elemental convergence it gives a 1 hour Charged buff that doubles it.'],
+    ['Walk on Air','Active, 90 sec. A fast glide for gaps and rivers.'],
+    ['Elemental Insight','Passive. 5% more damage to Elementals.']
+  ]],
+  ['h','Launch night'],
+  ['ul',['Expect a login queue, crowded starting areas and maybe a server restart. That is normal.','Use the queue for the character-screen part of **First login setup**.','Turn on the **Battle.net Authenticator** if it is not on. Launch weeks bring account theft: never click links in whispers or emails about free mounts or suspensions.','EU realms have weekly maintenance on **Wednesday mornings**.']],
+  ['warn','**GeForce Now hours:** Performance has a **100 hour monthly cap**, and queues and the character screen count. Levelling to 60 usually takes well over 100 hours of play. Check your hours in the GeForce Now app, and check the price of extra hours now.'],
+  ['h','How RestedXP and this app work together'],
+  ['table',['RestedXP tells you','This app tells you'],[
+    ['Where to go next, with an arrow','Your talent point at each level'],
+    ['Which quests to take, do and hand in, in order','What to train, and which ranks to skip'],
+    ['When to set your Hearthstone, train or fly','Which weapons to chase and where they come from'],
+    ['Which quests to skip','How to fight, Rage, cooldowns, Protection at 40'],
+    ['','Professions, consumables, camping, Legacy, raids']
+  ]],
+  ['ul',['Follow RestedXP for the route. Open this app each time you level up.','If a RestedXP step does not tick off, use the right stick as a mouse and click it to skip.','The free part ends around level 20. Decide then whether to buy the full guide.','If RestedXP gives talent advice that differs from this app, follow this app.']],
+  ['h','Set up GeForce Now and the controller'],
+  ['check','setup',[
+    'GeForce Now on Performance tier (needed for addons and 6 hour sessions).',
+    'UK server, Fire Stick on 5GHz Wi-Fi.',
+    'Gamepad mode on in WoW options, bars laid out in Edit Mode.',
+    'RestedXP ticked in the in-game Addons menu, then type /rxp.',
+    'Fire TV phone app for typing logins. Bluetooth keyboard for chat if you have one.',
+    'Discord on your phone.'
+  ]],
+  ['warn','**New spells do not go on your bars by themselves.** Check your spellbook after every trainer visit.'],
+  ['note','Your full controller layout, addons and settings are in **First login setup**.']
+]},
+{id:'setup', t:'First login setup', s:'Addons, settings, layout and RestedXP in one pass', b:[
+  ['p','Do this once, in order, the first time you log in. It takes about 20 minutes. Start on the character screen, then finish in game before you take a single quest.'],
+  ['h','1. Addons (character screen)'],
+  ['p','Menu, then **AddOns**. Use the search box, tick these, then press **Okay**.'],
+  ['check','addons',[
+    '**RestedXP Guides**',
+    '**Details!: Damage Meter** and **Details!: Tiny Threat** (nothing else from Details yet)',
+    '**DBM Core**: Main Core, Options GUI, Status Bar Timers',
+    '**DBM Mod**: Dungeons (Forever) and Dungeons (Vanilla). **DBM Media**: Voicepack VEM',
+    '**Auctionator**',
+    '**Baganator** (only one bag addon)',
+    '**Leatrix Maps** and **Leatrix Plus**',
+    '**Platynator**',
+    '**DungeonJournal** (trial, see step 6)',
+    '**BugGrabber** and **BugSack**',
+    'Make sure **Scrap**, **Questie**, **Ellesmere UI** and **ConsolePort** are unticked',
+    'If anything says **Out of date**, tick **Load out of date AddOns**'
+  ]],
+  ['h','2. Gamepad UI (character screen)'],
+  ['check','pad1',[
+    'Menu, Options, System, **Gamepad**: tick **Enable Gamepad UI**'
+  ]],
+  ['h','3. System settings'],
+  ['check','sys',[
+    'Graphics: **Max Foreground FPS 60**, Target FPS 60, vertical sync off',
+    'Graphics: quality around **7**, render scale **100%**, Resample Sharpness **0.4**',
+    'Graphics, top of the list: tick **Use UI Scale** and drag it to the **maximum**',
+    'Network: **Optimize network for speed** on, if you see it',
+    'Accessibility: **large cursor** and bigger minimum name size',
+    'Audio: Ambience down a little, Dialog up',
+    'TV remote: picture mode **Game**'
+  ]],
+  ['h','4. Log in, then in-game options'],
+  ['p','Esc or Menu, then **Options**. If the screen still looks like the mouse layout, type **/reload**.'],
+  ['check','game',[
+    'Gamepad: **Back Pedal** and **Stick Run** to about **0.3**',
+    'Gamepad: go through every option once, set targeting to nearest enemy if offered',
+    'Gameplay: **Auto Loot** on',
+    'Gameplay: enemy nameplates on, floating combat text on',
+    'Chat: select the General tab, **Font Size** up'
+  ]],
+  ['h','5. Action bars (Gamepad UI)'],
+  ['p','With no trigger held, A jumps, B cancels, X interacts and Y opens the menu, and they cannot be changed. Bind from the spellbook: highlight an ability, press **X**, then the button you want. To remove one, use the right stick as a mouse and drag it off.'],
+  ['table',['Hold','Face buttons','D-pad'],[
+    ['RT','Bloodthirst, Whirlwind, Execute, Heroic Strike / Cleave','Charge / Intercept, Overpower, Victory Rush, Pummel'],
+    ['LT','Death Wish, Recklessness, Berserker Rage, Bloodrage','Battle Shout, Demoralizing Shout, Hamstring, Intimidating Shout'],
+    ['LT + RT','Battle, Defensive, Berserker Stance, Thunder Clap','Healing potion, bandage, food, Piercing Howl'],
+    ['Nothing','Fixed by the game','Throw, mount, Hearthstone, Shield Block']
+  ]],
+  ['p','At level 1 you only have a few of these. Put each new ability in its slot as you train it, so your hands learn one layout. This is my suggestion, not a guide’s.'],
+  ['check','bars',['Battle Shout and Heroic Strike bound now','Remember: check the spellbook after every trainer visit']],
+  ['h','6. Addon settings'],
+  ['check','addcfg',[
+    '**/rxp**: pick the levelling guide for Skyborne, scale the guide window up so you can read it from the sofa, turn the waypoint arrow on, and keep its auto accept and hand-in on',
+    '**/rxp** settings: if it lets you choose dungeons, tick the ones in your stage plan (Ragefire Chasm, Wailing Caverns, Shadowfang Keep and onwards)',
+    '**/ltp** (Leatrix Plus): auto repair on, sell junk on. Leave its quest options **off**, RestedXP does that',
+    '**/platy**: nameplate size and text up until you can read them from the sofa',
+    '**/dbm**: choose **VEM** as the voice pack',
+    'Details: move its window above the chat box, threat showing',
+    'DungeonJournal: open it and check for Ruins of Lordaeron or Krol’Dok Stronghold. Not there? Untick it'
+  ]],
+  ['h','7. Edit Mode layout'],
+  ['p','Game menu, **Edit Mode**. Choose **New Layout**, name it **TV**, and turn on **Snap**. The Gamepad UI draws its own action bars, so leave those alone.'],
+  ['table',['Part','Where','Size'],[
+    ['Player frame','Just left of and below your character','150 to 175%'],
+    ['Target frame','Same spot on the right','150 to 175%'],
+    ['Target cast bar','Under the target frame','As big as it goes'],
+    ['Party frames','Left side, middle','150%'],
+    ['Minimap','Top right','About 125%'],
+    ['Buffs and debuffs','Under the minimap','About 125%'],
+    ['RestedXP window','Right side, middle','Set in /rxp'],
+    ['Chat','Bottom left','Small, bigger font'],
+    ['Bag bar, micro menu, stance bar','Hidden','Use the menu wheel instead'],
+    ['Quest tracker','Collapsed','RestedXP tells you what to do']
+  ]],
+  ['check','edit',['New layout called **TV** saved','Frames moved and resized as above','Played 20 minutes, then enlarged whatever you squinted at']],
+  ['h','If something breaks'],
+  ['ul',['Type **/reload** first.','BugSack’s minimap icon shows which addon caused an error.','If the controller UI misbehaves, untick **Baganator** and **Platynator** first.','Later, at 60: tick DBM Raids (Vanilla), and the Details Vanguard plugin when you start tanking.']]
+]},
+{id:'basics', t:'Warrior basics', s:'Rage, stances and the words you will see', b:[
+  ['p','Warriors run on **Rage**. It starts at zero, builds when you hit and get hit, and drains after combat.'],
+  ['ul',['Hitting harder does **not** give more Rage. More swings, more hits and crits do.','Crits give double Rage.','Start every fight with Rage banked. Charge, Bloodrage and Berserker Rage help.','Heroic Strike and Cleave replace your next swing, so that swing gives no Rage. Use them only with spare Rage.','Finish nearly-dead enemies with auto attacks to save Rage for the next one.']],
+  ['table',['Stance','Learned','Use it for'],[['Battle','Level 1','Levelling up to 30, Charge, Overpower, Rend, Thunder Clap'],['Defensive','Quest at 10','Tanking'],['Berserker','Quest at 30','Your main Fury stance: more crit, more damage taken. Whirlwind, Pummel, Intercept']]],
+  ['p','Swapping stance throws away Rage. Tactical Mastery keeps 10, or 25 with the talent.'],
+  ['details','Glossary',['Term','Meaning'],[
+    ['DPS','Damage per second, or a damage-dealing role'],['Tank / healer','Tank holds enemy attention, healer keeps people alive'],
+    ['Threat / aggro','How much an enemy wants to hit you. The tank should have most'],['Pull','Starting a fight'],
+    ['Cleave','Hitting several enemies at once'],['Cooldown','Wait before an ability can be used again'],
+    ['Proc','An effect that triggers by chance'],['Hit cap','Point where more hit stops helping'],
+    ['BiS','Best in slot'],['Respec','Resetting talents at the trainer for gold'],
+    ['Dual spec','Two saved talent setups, from 40'],['Elite','A tougher enemy, often for groups'],
+    ['Rested XP','Bonus XP you build by logging out in an inn or city']
+  ]]
+]},
+{id:'stats', t:'Stats explained', s:'What to look for on items, and why', b:[
+  ['table',['Stat','Damage','Rage'],[
+    ['Weapon DPS','Most important','No'],['Hit','Fewer misses','Yes'],['Expertise','Fewer dodges','Yes'],
+    ['Haste (racial)','More swings','Yes'],['Crit','Bigger hits, triggers Flurry','Double per crit'],
+    ['Strength','1 = 2 attack power, scales Bloodthirst','No'],['Agility','20 = 1% crit at 60','Via crit'],['Stamina','Survival','No']
+  ]],
+  ['ul',['Levelling priority: weapon DPS, then Strength, Hit, crit, Stamina. Items with Strength and Agility are some of your best.','Level 60 priority (Icy Veins): weapon DPS, hit to 8%, expertise, crit, Strength.','Dual wield auto attacks have an extra 19% miss chance. Special attacks like Bloodthirst do not.','No penalty for wearing mail or leather in Forever, just less armour.','Spirit and Intellect do nothing for your damage.','Best-in-slot lists are empty until launch: about 80% of level 60 items are hidden.']],
+  ['h','Weapon skill and glancing blows'],
+  ['ul',['Each weapon type has its own skill. A great weapon still misses a lot if its skill is far behind your level (Icy Veins).','After learning a new weapon type, level it on easy, low-level enemies before using it on hard ones.','Glancing blows are auto attacks that do less damage. They get worse against higher-level enemies, one reason Kargoz says to fight enemies below your level.','Heroic Strike and Cleave really cost more than shown, because the swing they replace would have given you Rage.']]
+]},
+{id:'kit', t:'Professions and consumables', s:'What to make, carry and spend points on', b:[
+  ['table',['Profession','Why'],[
+    ['First Aid','Always keep it maxed. Bandages, and healing potions in Forever'],
+    ['Mining','Free ore for Blacksmithing, spare sells for gold'],
+    ['Blacksmithing','Sharpening stones and weightstones, crafted gear, a Strength camp buff'],
+    ['Skinning (optional)','Easy early gold, drop it later'],
+    ['Cooking','Food for the 5% XP Well Fed buff, and needed for camps'],
+    ['Engineering','Possible swap at 60 for bombs and gadgets']
+  ]],
+  ['p','Blacksmithing crafts to look for: chain shirts at 80 skill, chain leggings at 95, chain helms at 125.'],
+  ['h','Always carry'],
+  ['check','cons',['Sharpening stones or weightstones on both weapons.','Healing potions for your level.','Bandages.','XP food. Longjaw Mud Snapper is cheap and adds attack power.','Agility elixirs when affordable.','Bombs or dynamite to split pulls.']],
+  ['details','Levelling enchants worth buying',['Slot','Enchant'],[['Weapon','Recovery'],['Cloak','Lesser Agility'],['Chest','Lesser Stats'],['Legs, hands','Forceful Medium Armor Kit'],['Boots','Minor Speed']]],
+  ['h','Gold plan'],
+  ['table',['When','Cost'],[['1 to 60','About 207 gold total for class training'],['40','120 gold: Apprentice Riding + mount'],['60','1,200 gold: Journeyman Riding + mount']]],
+  ['p','Honored with your **home faction** takes 10% off riding and your race’s mounts. The Bartering Legacy perk takes 5% per rank off vendor prices and mounts, but not riding skill (Method).'],
+  ['h','Consumables by level (Kargoz)'],
+  ['table',['Level','Agility elixir','Also'],[['10+','Minor Agility','Rough stones, bandages'],['20+','Lesser Agility','Dynamite for split pulls'],['40+','Greater Agility','Scrolls of Strength'],['50+','Elixir of the Mongoose','Songflower Serenade (Felwood)']]],
+  ['p','If you only keep one buff up, make it **sharpening stones or weightstones on both weapons**. In Forever they stack with other weapon buffs. **SAF-T** items give you some bombs and gadgets without Engineering.'],
+  ['h','How camping works (Warcraft Tavern)'],
+  ['ol',['Craft a campfire with Cooking (Flint and Tinder plus wood). Place it from your bags.','Each player in the group places **one** camp item next to it (1 hour cooldown per player).','Type **/sit** and stay within range for **1 minute** to get the buffs.','The fire lasts 10 minutes. Basic holds 3 items, Journeyman 5 (Star Wood), Expert 10 (Thick Logs, skill 220).']],
+  ['table',['Camp item','Profession','Buff'],[
+    ['Sharpening Wheel','Blacksmithing','Strength, like Strength of Earth Totem. Kargoz quotes +6 to +34'],
+    ['Lodestone','Mining','Attack power, like Blessing of Might'],
+    ['First Aid Kit','First Aid','Stamina'],
+    ['Camp Chair','Skinning','Crit'],
+    ['Fish Bowl','Fishing','All main stats, like Blessing of Kings'],
+    ['Camp Tent','Leatherworking','Rested XP worth 5% of a level, once an hour'],
+    ['Greenhouse','Herbalism (140)','No buff: grow herbs from seeds'],
+    ['Rock Garden','Mining (140)','No buff: slowly grows a mining node'],
+    ['Reagent / Repair Bot','Engineering','Vendor, and repairs at tier 2']
+  ]],
+  ['p','Camp buffs do not stack with the real class buffs they copy. Cozy Sleeping Bag (quest chain) and XP food stack with them.'],
+  ['h','Legacy (Warcraft Tavern)'],
+  ['ul',['Earned across your whole account, spent per character. Press **Y**.','Launch cap: **16 points**. Points come from levelling each class to 25, 45 and 60; crafting skills to 150, 225 and 300; dungeon groups; full raid clears; PvP ranks; and more.','Your Warrior earns points at 25, 45 and 60, and Blacksmithing at 150, 225 and 300.']],
+  ['table',['Perk','Tree','What it does'],[
+    ['Well Rested','Adventure','Rested XP builds 4% faster and caps 4% higher, per rank'],
+    ['Thrill of Adventure','Adventure','1% health back per kill, per rank, outside dungeons'],
+    ['Frequent Flier','Adventure','1 point: flights 50% cheaper and 20% faster'],
+    ['Talented','Adventure','Talent points start at 9, down to 5 at 5 ranks. Mostly helps alts'],
+    ['Working Overtime','Professions','4% more chance of a skill-up per rank'],
+    ['Bartering','Professions','5% off vendor prices per rank'],
+    ['Diplomat','Resourcefulness','2% more reputation per rank']
+  ]],
+  ['p','My reading, not a guide’s: with only a few points while levelling, Frequent Flier and Well Rested give the most. Working Overtime helps if Blacksmithing is slow.'],
+  ['h','Merchant’s Favor and reputation'],
+  ['ul',['Horde camp: **Durotar Supply and Logistics**, outside the Crossroads west gate.','Fill **Waylaid Crates** (loot or Auction House) with the listed materials, then hand them in for Merchant’s Favor, a per-character currency.','**Craftsman’s Writs** give the reputation (75 to 200 each, once per writ per day).','Honored unlocks the best recipes, including Thorium weapons and Superior Strength gloves. The numbers come from the beta and may change.']],
+  ['h','Making gold'],
+  ['ul',['Vendor Skinning leather early to pay for training (Icy Veins).','Sell spare ore and bars from Mining, and crafted Bind-on-Equip items.','Do not buy small, short-lived upgrades on the Auction House while levelling.','At 60, Alchemy and Herbalism are the classic gold makers if you change professions.']]
+]},
+{id:'groups', t:'Dungeons and raids', s:'How to be the Warrior people invite back', b:[
+  ['check','dng',['All the dungeon’s quests picked up first.','Your level is inside the dungeon’s range.','Stones applied, potions and bandages packed, gear repaired.','Rage banked before the first pull.']],
+  ['h','As Fury'],['ul',['Let the tank hit first. Whirlwind pulls everything near you.','Stand behind enemies.','Interrupt casters with Pummel.','Watch Death Wish: you take more damage.']],
+  ['h','As Protection'],['ol',['Pull with your thrown weapon or Charge, then Defensive Stance.','Shield Slam and Revenge whenever ready.','Sunder and Thunder Clap to hold several enemies.','Tab between targets so each has some threat on you.','Keep Rage for Shield Block and Shield Bash.','Wait for your healer’s mana before big pulls.']],
+  ['h','Protection stats at 60 (Icy Veins)'],['ul',['Expertise first: 6.5% removes boss dodges, up to 14% also removes parries from the front.','Hit to 8% with a weapon and shield.','Then Agility, Strength, Stamina. For survival: Stamina, armour, Agility, avoidance, Defense.','Crit auto attacks give double Rage. Blocks, dodges and parries give 5 Rage each with your talents.']],
+  ['h','Voice chat'],['p','Raids use Discord. Game sound comes from the TV, so the simplest setup is Discord on your phone with earbuds. You rarely need to talk; a cheap headset with a mic covers it if you want to.'],
+  ['note','Raids open **9 December 2026**. About 12% of beta players were Warriors, so preparation is how you stand out.'],
+  ['h','All dungeons by level'],
+  ['dungeons']
+]},
+{id:'sources', t:'Sources', s:'Where every recommendation came from', b:[
+  ['links',[
+    ['Icy Veins: Fury Warrior guide','https://www.icy-veins.com/wow-forever/fury-warrior-melee-dps-pve-guide'],
+    ['Icy Veins: Fury Warrior levelling','https://www.icy-veins.com/wow-forever/fury-warrior-leveling'],
+    ['Icy Veins: Warrior class quests','https://www.icy-veins.com/wow-forever/warrior-class-quests'],
+    ['Icy Veins: Fury talents','https://www.icy-veins.com/wow-forever/fury-warrior-melee-dps-pve-spec-builds-talents'],
+    ['Icy Veins: Fury stats','https://www.icy-veins.com/wow-forever/fury-warrior-melee-dps-pve-stat-priority'],
+    ['Icy Veins: Protection Warrior','https://www.icy-veins.com/wow-forever/protection-warrior-tank-pve-guide'],
+    ['Icy Veins: racial tier list','https://www.icy-veins.com/wow-forever/racial-tier-list'],
+    ['Wowhead: Fury overview','https://www.wowhead.com/forever/guide/classes/warrior/fury/overview-pve-dps'],
+    ['Wowhead: Fury levelling','https://www.wowhead.com/forever/guide/classes/warrior/fury/dps-leveling-tips'],
+    ['Wowhead: enchants and consumables','https://www.wowhead.com/forever/guide/classes/warrior/fury/enchants-consumables-pve-dps'],
+    ['Kargoz: 1-60 Fury levelling','https://mobalytics.gg/wow-forever/classes/1-60-fury-warrior-leveling-guide'],
+    ['Warcraft Tavern: dungeon levels','https://www.warcrafttavern.com/forever/guides/dungeons/'],
+    ['Warcraft Tavern: riding','https://www.warcrafttavern.com/forever/guides/riding/'],
+    ['Warcraft Tavern: weapon trainers','https://www.warcrafttavern.com/forever/guides/weapon-trainers/'],
+    ['Warcraft Tavern: Warrior levelling','https://www.warcrafttavern.com/forever/guides/warrior-leveling/'],
+    ['Warcraft Tavern: Zephras Isle','https://www.warcrafttavern.com/forever/guides/zephras-isle-walkthrough/'],
+    ['ForeverChanges: patch notes','https://foreverchanges.pro/patch-notes'],
+    ['Icy Veins: Protection levelling','https://www.icy-veins.com/wow-forever/protection-warrior-leveling'],
+    ['Icy Veins: Protection stats','https://www.icy-veins.com/wow-forever/protection-warrior-tank-pve-stat-priority'],
+    ['Warcraft Tavern: camping','https://www.warcrafttavern.com/forever/guides/camping/'],
+    ['Warcraft Tavern: camp items and buffs','https://www.warcrafttavern.com/forever/guides/camping-objects-buffs/'],
+    ['Warcraft Tavern: Legacy','https://www.warcrafttavern.com/forever/guides/legacy/'],
+    ['Warcraft Tavern: Blacksmithing','https://www.warcrafttavern.com/forever/guides/blacksmithing/'],
+    ['Warcraft Tavern: raids','https://www.warcrafttavern.com/forever/guides/raids/'],
+    ['Blizzard: raid overview','https://worldofwarcraft.blizzard.com/news/24303009'],
+    ['WoW-Professions: Merchant’s Favor','https://www.wow-professions.com/forever/merchants-favor-durotar-supply-azeroth-commerce'],
+    ['Method: mounts and riding','https://www.method.gg/wow-forever/how-to-get-a-mount-in-wow-forever-cost-requirement-and-mount-options']
+  ]],
+  ['h','How the talent order was chosen'],
+  ['p','Icy Veins, Wowhead and Kargoz differ slightly. Where two of the three agree, that choice is used: Unbridled Wrath at 15 and Enrage at 25. The 3 November patch cut Flurry and Improved Tactical Mastery to 3 ranks, so the spare points are placed using my own reasoning. If a talent is greyed out in game, take the next one on the list.'],
+  ['p','Zones from 35 onwards come from Warcraft Tavern’s zone list, because Icy Veins has not published them yet. RestedXP will route you through them.'],
+  ['p','Compiled 3 November 2026, the day before launch. Recheck the guides after the first tuning passes.']
+]}
+];
+
+const ALL = [...STAGES.map(s=>({...s,kind:'stage'})), ...REF.map(r=>({...r,kind:'ref'}))];
+
+/* ===== helpers ===== */
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = s => esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+const plain = s => String(s).replace(/\*\*/g,'');
+const $ = id => document.getElementById(id);
+const stageFor = l => STAGES.find(s=>l>=s.range[0]&&l<=s.range[1]) || STAGES[0];
+const rangeLabel = (a,z) => a===z ? String(a) : a+'-'+z;
+const SEGS = ['Do','Train','Gear','Fight'];
+let seg = 0, lastQuery = store.get('sfw2.q','');
+
+function table(head, rows, hl){
+  return '<div class="tbl"><table><thead><tr>'+head.map(h=>'<th>'+esc(h)+'</th>').join('')+'</tr></thead><tbody>'+
+   rows.map((r,i)=>'<tr'+(hl&&hl(i)?' class="here"':'')+'>'+r.map(c=>'<td>'+fmt(c)+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
+}
+function checkItem(id, txt, lv){
+  const on=!!ticks[id];
+  return '<li><label class="'+(on?'on':'')+'"><input type="checkbox" id="c-'+esc(id)+'" data-k="'+esc(id)+'"'+(on?' checked':'')+' aria-label="Mark done">'+
+    '<span>'+(lv!==undefined?'<span class="lv">Lv '+lv+'</span>':'')+'<span class="txt">'+fmt(txt)+'</span></span></label></li>';
+}
+function refBlocks(ch, bl){
+  return bl.map(b=>{ const k=b[0];
+    if(k==='p') return '<p>'+fmt(b[1])+'</p>';
+    if(k==='h') return '<h3>'+fmt(b[1])+'</h3>';
+    if(k==='note') return '<div class="note">'+fmt(b[1])+'</div>';
+    if(k==='warn') return '<div class="warn">'+fmt(b[1])+'</div>';
+    if(k==='ul') return '<ul>'+b[1].map(x=>'<li>'+fmt(x)+'</li>').join('')+'</ul>';
+    if(k==='ol') return '<ol>'+b[1].map(x=>'<li>'+fmt(x)+'</li>').join('')+'</ol>';
+    if(k==='table') return table(b[1],b[2]);
+    if(k==='details') return '<details><summary>'+esc(b[1])+'</summary>'+table(b[2],b[3])+'</details>';
+    if(k==='check') return '<ul class="checks">'+b[2].map((x,i)=>checkItem(ch.id+'.'+b[1]+'.'+i, x)).join('')+'</ul>';
+    if(k==='dungeons') return table(['Levels','Dungeon','Where'], DUNGEONS.map(d=>[rangeLabel(d[1],d[2]), d[0], d[3]]), i=>level>=DUNGEONS[i][1]&&level<=DUNGEONS[i][2]);
+    if(k==='links') return '<ul>'+b[1].map(l=>'<li><a href="'+esc(l[1])+'" target="_blank" rel="noopener">'+esc(l[0])+'</a></li>').join('')+'</ul>';
+    return ''; }).join('');
+}
+function keysOf(ch){
+  if(ch.do) return ch.do.map((_,i)=>ch.id+'.do.'+i);
+  const k=[]; ch.b.forEach(b=>{ if(b[0]==='check') b[2].forEach((_,i)=>k.push(ch.id+'.'+b[1]+'.'+i)); }); return k;
+}
+function progress(ch){ const k=keysOf(ch); const d=k.filter(x=>ticks[x]).length; return {done:d,total:k.length,pct:k.length?Math.round(d/k.length*100):0}; }
+
+/* ===== toast + sheet ===== */
+let toastT;
+function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),1600); }
+function openSheet(html, after){
+  $('sheetBody').innerHTML=html; $('scrim').hidden=false; $('sheet').hidden=false;
+  requestAnimationFrame(()=>{ $('scrim').classList.add('show'); $('sheet').classList.add('show'); });
+  after && after();
+  const f=$('sheet').querySelector('button'); f && f.focus();
+}
+function closeSheet(){ $('scrim').classList.remove('show'); $('sheet').classList.remove('show'); setTimeout(()=>{ $('scrim').hidden=true; $('sheet').hidden=true; },220); }
+$('scrim').onclick=closeSheet;
+document.addEventListener('keydown',e=>{ if(e.key==='Escape' && !$('sheet').hidden) closeSheet(); });
+
+function setLevel(v, quiet){
+  const old=level; level=Math.max(1,Math.min(60,v)); store.set('sfw2.level',level); $('lvlChipNum').textContent=level;
+  if(!quiet && stageFor(old).id!==stageFor(level).id) toast('New stage: '+stageFor(level).t);
+}
+function levelSheet(){
+  const marks=[1,10,20,30,40,50,60];
+  openSheet('<h2 id="sheetTitle">Your level</h2>'+
+    '<div class="levelcard"><button type="button" class="step" id="shDown" aria-label="Level down">−</button>'+
+    '<div class="levelnum"><output id="shOut">'+level+'</output><span id="shStage">'+esc(stageFor(level).t)+'</span></div>'+
+    '<button type="button" class="step" id="shUp" aria-label="Level up">+</button></div>'+
+    '<div class="label">Jump to</div><div class="quick">'+marks.map(m=>'<button type="button" data-l="'+m+'" class="'+(m===level?'on':'')+'">'+m+'</button>').join('')+'</div>'+
+    '<button type="button" class="btn primary" id="shDone">Done</button>', ()=>{
+      const upd=()=>{ $('shOut').textContent=level; $('shStage').textContent=stageFor(level).t; $('sheet').querySelectorAll('.quick button').forEach(b=>b.classList.toggle('on',+b.dataset.l===level)); };
+      $('shDown').onclick=()=>{ setLevel(level-1); upd(); };
+      $('shUp').onclick=()=>{ setLevel(level+1); upd(); };
+      $('sheet').querySelectorAll('.quick button').forEach(b=>b.onclick=()=>{ setLevel(+b.dataset.l); upd(); });
+      $('shDone').onclick=()=>{ closeSheet(); route(); };
+    });
+}
+$('lvlChip').onclick=levelSheet;
+
+/* ===== screens ===== */
+function nowScreen(){
+  const st=stageFor(level);
+  const tal=TALENTS.find(t=>level>=t[0]&&level<=t[1]);
+  const open=st.do.map((d,i)=>({d,i})).filter(o=>!ticks[st.id+'.do.'+o.i]).sort((x,y)=>x.d[0]-y.d[0]||x.i-y.i);
+  const upNext=open.filter(o=>o.d[0]<=level+2).slice(0,4);
+  const later=[...STAGES.flatMap(s=>s.do)].filter(d=>d[0]>level).sort((x,y)=>x[0]-y[0])[0];
+  const dg=DUNGEONS.filter(d=>level>=d[1]&&level<=d[2]);
+  const p=progress(st);
+  const su=REF.find(r=>r.id==='setup'), sp=su?progress(su):null;
+  return '<section class="screen enter">'+
+   '<div class="hero"><svg class="crest" viewBox="0 0 74 84" aria-hidden="true"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe39a"/><stop offset=".5" stop-color="#d9a63e"/><stop offset="1" stop-color="#7a5414"/></linearGradient><linearGradient id="cr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b3271a"/><stop offset="1" stop-color="#4a0b05"/></linearGradient></defs><path d="M37 3 L69 13 V40 C69 60 55 74 37 81 C19 74 5 60 5 40 V13 Z" fill="url(#cr)" stroke="url(#cg)" stroke-width="3.5"/><path d="M37 10 L62 18 V40 C62 56 51 67 37 73 C23 67 12 56 12 40 V18 Z" fill="none" stroke="#e2b350" stroke-opacity=".45" stroke-width="1.2"/><g stroke="url(#cg)" stroke-width="3.6" stroke-linecap="round"><path d="M22 22 L52 58"/><path d="M52 22 L22 58"/></g><g fill="url(#cg)"><path d="M17 17 l9 3 -3 3z"/><path d="M57 17 l-9 3 3 3z"/></g><g class="gust" fill="none" stroke="#9fe0f0" stroke-width="2" stroke-linecap="round" opacity=".9"><path d="M18 44 c6 -4 12 4 18 0 s10 -5 14 -1"/><path d="M24 51 c5 -3 9 3 14 0 s8 -3 11 0"/></g></svg><div class="eyebrow">Windshaper Skyborne · Fury · Horde</div><h1>'+esc(st.t)+'</h1><p class="muted" style="margin:0">'+fmt(st.goal)+'</p></div>'+
+   (sp&&sp.done<sp.total?'<div class="card"><div style="display:flex;align-items:baseline;gap:8px"><h3>First login setup</h3><span class="muted" style="margin-left:auto;font-size:14px">'+sp.done+'/'+sp.total+' done</span></div><p class="muted" style="margin:0 0 12px">Addons, settings, layout and RestedXP in one pass, about 20 minutes.</p><button type="button" class="btn primary" data-go="setup">Open setup</button></div>':'')+
+   '<div class="card"><div class="levelcard"><button type="button" class="step" id="lvDown" aria-label="Level down">−</button>'+
+     '<div class="levelnum"><output id="lvOut">'+level+'</output><span>your level</span></div>'+
+     '<button type="button" class="step" id="lvUp" aria-label="Level up">+</button></div>'+
+     '<div class="kv"><span class="k">Talent</span><span class="v">'+(tal?fmt(tal[2])+' <span class="muted">· '+esc(tal[3])+'</span>':'None yet. Points start at 10.')+'</span></div>'+
+     '<div class="kv"><span class="k">Coming up</span><span class="v">'+(later?'Lv '+later[0]+': '+esc(plain(later[1]).split('. ')[0]):'Raids open 9 December.')+'</span></div>'+
+   '</div>'+
+   '<div class="card"><div style="display:flex;align-items:baseline;gap:8px"><h3>Do next</h3><span class="muted" style="margin-left:auto;font-size:14px">'+p.done+'/'+p.total+' this stage</span></div>'+
+     (upNext.length?'<ul class="checks">'+upNext.map(o=>checkItem(st.id+'.do.'+o.i, o.d[1], o.d[0])).join('')+'</ul>':
+       '<p class="muted" style="margin:0">'+(open.length?'Nothing due at your level. Keep questing.':'Stage complete. Level up to unlock the next one.')+'</p>')+
+     '<button type="button" class="btn primary" data-go="'+st.id+'">Open the full stage</button>'+
+   '</div>'+
+   (dg.length?'<div class="card"><h3>Dungeons at your level</h3>'+table(['Levels','Dungeon'], dg.map(d=>[rangeLabel(d[1],d[2]), d[0]+(d[4]?' · <span class="muted">'+esc(d[4])+'</span>':'')]))+'</div>':'')+
+   '<div class="btn-row"><button type="button" class="btn ghost" data-go="before">Setup and racials</button><button type="button" class="btn ghost" data-go="basics">Warrior basics</button></div>'+
+  '</section>';
+}
+function stagesScreen(){
+  const cur=stageFor(level).id;
+  return '<section class="screen enter"><p class="muted" style="margin:0">Each stage holds everything for those levels: what to do, what to train, gear and how to fight.</p><ul class="list">'+
+   STAGES.map(s=>{ const p=progress(s); return '<li><button type="button" class="row'+(s.id===cur?' cur':'')+' '+(s.range[1]<level?'d-grey':s.id===cur?'d-yellow':s.range[0]<=level+10?'d-orange':'d-red')+'" data-go="'+s.id+'"><span class="n">'+rangeLabel(s.range[0],s.range[1])+'</span>'+
+     '<span><span class="t">'+esc(s.s)+'</span><span class="s">'+p.done+' of '+p.total+' done'+(s.id===cur?' · you are here':'')+'</span><span class="bar"><i style="width:'+p.pct+'%"></i></span></span><span class="chev">›</span></button></li>'; }).join('')+
+   '</ul></section>';
+}
+function buildIndex(){
+  const idx=[];
+  STAGES.forEach(s=>{ s.do.forEach(d=>idx.push({t:plain(d[1]),src:s.t,go:s.id,seg:0})); s.gear.forEach(g=>idx.push({t:plain(g),src:s.t+' · Gear',go:s.id,seg:2})); s.tips.forEach(g=>idx.push({t:plain(g),src:s.t+' · Tips',go:s.id,seg:3})); });
+  TALENTS.forEach(t=>idx.push({t:'Lv '+rangeLabel(t[0],t[1])+': '+t[2]+'. '+t[3],src:'Talent',go:stageFor(t[0]).id,seg:1}));
+  TRAIN.forEach(t=>idx.push({t:'Lv '+t[0]+': '+t[1]+(t[2]?'. '+t[2]:''),src:'Trainer',go:stageFor(t[0]).id,seg:1}));
+  DUNGEONS.forEach(d=>idx.push({t:d[0]+' (levels '+rangeLabel(d[1],d[2])+', '+d[3]+')'+(d[4]?'. '+d[4]:''),src:'Dungeon',go:stageFor(d[1]).id,seg:0}));
+  REF.forEach(r=>r.b.forEach(b=>{ const add=t=>idx.push({t:plain(t),src:r.t,go:r.id});
+    if(['p','h','note','warn'].includes(b[0])) add(b[1]);
+    if(['ul','ol'].includes(b[0])) b[1].forEach(add);
+    if(b[0]==='check') b[2].forEach(add);
+    if(b[0]==='table') b[2].forEach(row=>add(row.join(': ')));
+    if(b[0]==='details') b[3].forEach(row=>add(row.join(': ')));
+  }));
+  return idx;
+}
+const INDEX = buildIndex();
+function results(q){
+  q=q.trim().toLowerCase(); if(q.length<2) return '';
+  const words=q.split(/\s+/);
+  const hits=INDEX.filter(e=>words.every(w=>e.t.toLowerCase().includes(w))).slice(0,30);
+  if(!hits.length) return '<p class="muted" style="margin:0">Nothing found for “'+esc(q)+'”. Try a shorter word, like an ability or dungeon name.</p>';
+  const re=new RegExp('('+words.map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')+')','gi');
+  return '<div class="list">'+hits.map(h=>'<button type="button" class="result" data-go="'+h.go+'"'+(h.seg!==undefined?' data-seg="'+h.seg+'"':'')+'><small>'+esc(h.src)+'</small><span>'+esc(h.t).replace(re,'<mark>$1</mark>')+'</span></button>').join('')+'</div>';
+}
+function lookupScreen(){
+  return '<section class="screen enter">'+
+   '<label class="search" for="q"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg><input id="q" type="search" placeholder="Search abilities, dungeons, quests…" value="'+esc(lastQuery)+'" autocomplete="off"></label>'+
+   '<div id="res">'+results(lastQuery)+'</div>'+
+   '<div class="label">Reference</div><ul class="list">'+REF.map(r=>'<li><button type="button" class="row" data-go="'+r.id+'"><span class="n">Ref</span><span><span class="t">'+esc(r.t)+'</span><span class="s">'+esc(r.s)+'</span></span><span class="chev">›</span></button></li>').join('')+'</ul>'+
+  '</section>';
+}
+function progressScreen(){
+  const all=ALL.flatMap(keysOf); const done=all.filter(k=>ticks[k]).length; const pct=all.length?Math.round(done/all.length*100):0;
+  const C=2*Math.PI*40;
+  return '<section class="screen enter">'+
+   '<div class="card ring"><svg viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="40" fill="none" stroke="var(--raised)" stroke-width="10"/>'+
+     '<circle cx="48" cy="48" r="40" fill="none" stroke="var(--xp2)" stroke-width="10" stroke-linecap="round" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+(C*(1-pct/100)).toFixed(1)+'" transform="rotate(-90 48 48)"/></svg>'+
+     '<div><div class="big">'+pct+'%</div><div class="muted">'+done+' of '+all.length+' steps done · level '+level+'</div></div></div>'+
+   '<div class="label">By stage</div><ul class="list">'+ALL.filter(c=>keysOf(c).length).map(c=>{ const p=progress(c);
+     return '<li><button type="button" class="row" data-go="'+c.id+'"><span class="n">'+(c.kind==='stage'?rangeLabel(c.range[0],c.range[1]):'Ref')+'</span><span><span class="t">'+esc(c.t)+'</span><span class="bar"><i style="width:'+p.pct+'%"></i></span></span><span class="s">'+p.done+'/'+p.total+'</span></button></li>'; }).join('')+'</ul>'+
+   '<button type="button" class="btn danger" id="resetBtn">Reset all progress</button>'+
+   '<p class="foot">Progress is saved in this browser on this device.</p>'+
+  '</section>';
+}
+function stagePanels(st){
+  const [a,z]=st.range;
+  const tal=TALENTS.filter(t=>t[1]>=a&&t[0]<=z), tr=TRAIN.filter(t=>t[0]>=a&&t[0]<=z), dg=DUNGEONS.filter(d=>d[2]>=a&&d[1]<=z);
+  return [
+   '<p>'+fmt(st.goal)+'</p><ul class="checks">'+st.do.map((d,i)=>({d,i})).sort((x,y)=>x.d[0]-y.d[0]||x.i-y.i).map(o=>checkItem(st.id+'.do.'+o.i, o.d[1], o.d[0])).join('')+'</ul>'+
+     '<h3>Where to quest</h3><ul>'+st.zones.map(x=>'<li>'+fmt(x)+'</li>').join('')+'</ul><p class="muted">RestedXP picks the exact quests.</p>'+
+     (dg.length?'<h3>Dungeons in range</h3>'+table(['Levels','Dungeon','Why go'], dg.map(d=>[rangeLabel(d[1],d[2]), d[0]+' · '+d[3], d[4]||'Gear and XP']), i=>level>=dg[i][1]&&level<=dg[i][2]):''),
+   (tal.length?'<h3>Talent points</h3>'+table(['Level','Talent','What it does'], tal.map(t=>[rangeLabel(t[0],t[1]), t[2], t[3]]), i=>level>=tal[i][0]&&level<=tal[i][1]):'<div class="note">No talent points yet. They start at **10**.</div>'.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>'))+
+     (tr.length?'<h3>New at the trainer</h3>'+table(['Level','Ability','Note'], tr.map(t=>[String(t[0]), t[1], t[2]||'']), i=>level>=tr[i][0]):'')+
+     '<div class="warn"><strong>Visit your trainer every 2 levels</strong> and drag each new ability onto your bars yourself.</div>',
+   '<ul>'+st.gear.map(x=>'<li>'+fmt(x)+'</li>').join('')+'</ul><div class="note">Judge weapons by the <strong>DPS</strong> number first. Train the weapon skill before you use a new weapon type.</div>',
+   '<h3>Rotation for this stage</h3>'+refBlocks(st, st.rotation)+'<h3>Tips</h3><ul>'+st.tips.map(x=>'<li>'+fmt(x)+'</li>').join('')+'</ul>'
+  ];
+}
+function stageScreen(st){
+  const i=STAGES.indexOf(st), prev=STAGES[i-1], next=STAGES[i+1];
+  return '<div class="seg"><div class="seg-in" role="tablist" aria-label="Stage sections">'+SEGS.map((s,j)=>'<button type="button" role="tab" id="seg-'+j+'" aria-selected="'+(j===seg)+'" data-seg="'+j+'">'+s+'</button>').join('')+'</div></div>'+
+   '<section class="panel enter" id="panel" role="tabpanel" aria-labelledby="seg-'+seg+'">'+stagePanels(st)[seg]+'</section>'+
+   '<p class="swipe-hint">Swipe left or right to switch sections</p>'+
+   '<div class="stage-nav">'+(prev?'<button type="button" data-go="'+prev.id+'"><small>← Previous</small><span>'+esc(prev.t)+'</span></button>':'<span></span>')+
+     (next?'<button type="button" data-go="'+next.id+'"><small>Next →</small><span>'+esc(next.t)+'</span></button>':'<span></span>')+'</div>';
+}
+function refScreen(r){ return '<section class="panel enter">'+'<p class="muted">'+esc(r.s)+'</p>'+refBlocks(r,r.b)+'</section>'; }
+
+/* ===== router ===== */
+const TABS=['now','stages','lookup','progress'];
+const TITLES={now:'Now',stages:'Stages',lookup:'Look up',progress:'Progress'};
+let backTo='now';
+function go(id, segIdx){ if(segIdx!==undefined){ seg=+segIdx; } else if(STAGES.some(s=>s.id===id)) seg=store.get('sfw2.seg.'+id,0);
+  if(location.hash.slice(1)===id) route(); else location.hash=id; }
+function route(){
+  const id=location.hash.slice(1)||'now';
+  const st=STAGES.find(s=>s.id===id), rf=REF.find(r=>r.id===id);
+  const tab = TABS.includes(id) ? id : st ? 'stages' : rf ? 'lookup' : 'now';
+  TABS.forEach(t=>$('tab-'+t).toggleAttribute('aria-current',false)); $('tab-'+tab).setAttribute('aria-current','page');
+  $('backBtn').hidden = !(st||rf); $('lvlChipNum').textContent=level;
+  let html;
+  if(st){ $('abTitle').textContent=st.t; html=stageScreen(st); }
+  else if(rf){ $('abTitle').textContent=rf.t; html='<section class="screen">'+refScreen(rf)+'</section>'; }
+  else { $('abTitle').textContent=TITLES[tab]; html = tab==='stages'?stagesScreen(): tab==='lookup'?lookupScreen(): tab==='progress'?progressScreen(): nowScreen(); backTo=tab; }
+  $('app').innerHTML=html; window.scrollTo(0,0); wire(st);
+}
+function wire(st){
+  const app=$('app');
+  app.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go, b.dataset.seg));
+  app.querySelectorAll('input[data-k]').forEach(inp=>inp.onchange=()=>{
+    const k=inp.dataset.k; if(inp.checked) ticks[k]=1; else delete ticks[k]; store.set('sfw2.ticks',ticks);
+    inp.closest('label').classList.toggle('on',inp.checked);
+    const owner=ALL.find(c=>keysOf(c).includes(k)); if(owner){ const p=progress(owner); if(inp.checked && p.done===p.total) toast(owner.t+' complete'); }
+    if(!st && (location.hash.slice(1)||'now')==='now' && inp.checked) setTimeout(route,350);
+  });
+  if($('lvDown')){ $('lvDown').onclick=()=>{ setLevel(level-1); route(); }; $('lvUp').onclick=()=>{ setLevel(level+1); route(); }; }
+  if($('q')){ const q=$('q'); q.oninput=()=>{ lastQuery=q.value; store.set('sfw2.q',lastQuery); $('res').innerHTML=results(lastQuery); $('res').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go,b.dataset.seg)); }; }
+  if($('resetBtn')) $('resetBtn').onclick=()=>openSheet('<h2 id="sheetTitle">Reset all progress?</h2><p style="margin:0">This clears every tick on this device. Your level stays.</p><div class="btn-row"><button type="button" class="btn ghost" id="rsNo">Keep it</button><button type="button" class="btn danger" id="rsYes">Reset</button></div>',
+     ()=>{ $('rsNo').onclick=closeSheet; $('rsYes').onclick=()=>{ ticks={}; store.set('sfw2.ticks',ticks); closeSheet(); route(); toast('Progress reset'); }; });
+  if(st){
+    const setSeg=(n,dir)=>{ seg=(n+SEGS.length)%SEGS.length; store.set('sfw2.seg.'+st.id,seg);
+      app.querySelectorAll('.seg button').forEach((b,j)=>b.setAttribute('aria-selected',j===seg));
+      const p=$('panel'); p.className='panel '+(dir>0?'slide-l':'slide-r'); p.setAttribute('aria-labelledby','seg-'+seg); p.innerHTML=stagePanels(st)[seg];
+      window.scrollTo({top:0}); wirePanel(st); };
+    app.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{ const n=+b.dataset.seg; setSeg(n, n>seg?1:-1); });
+    let sx=0, sy=0, tracking=false;
+    const area=$('panel').parentElement;
+    area.addEventListener('touchstart',e=>{ if(e.target.closest('.tbl')) { tracking=false; return; } const t=e.touches[0]; sx=t.clientX; sy=t.clientY; tracking=true; },{passive:true});
+    area.addEventListener('touchend',e=>{ if(!tracking) return; tracking=false; const t=e.changedTouches[0]; const dx=t.clientX-sx, dy=t.clientY-sy;
+      if(Math.abs(dx)>60 && Math.abs(dx)>Math.abs(dy)*1.5){ if(dx<0 && seg<SEGS.length-1) setSeg(seg+1,1); else if(dx>0 && seg>0) setSeg(seg-1,-1); } },{passive:true});
+  }
+}
+function wirePanel(st){
+  $('panel').querySelectorAll('input[data-k]').forEach(inp=>inp.onchange=()=>{
+    const k=inp.dataset.k; if(inp.checked) ticks[k]=1; else delete ticks[k]; store.set('sfw2.ticks',ticks);
+    inp.closest('label').classList.toggle('on',inp.checked);
+    const p=progress(st); if(inp.checked && p.done===p.total) toast(st.t+' complete');
+  });
+  $('panel').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go, b.dataset.seg));
+}
+$('backBtn').onclick=()=>{ if(history.length>1) history.back(); else go(backTo); };
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>go(b.dataset.tab));
+window.addEventListener('hashchange',route);
+window.addEventListener('scroll',()=>$('appbar').classList.toggle('scrolled',window.scrollY>4),{passive:true});
+route();
+
+if('serviceWorker' in navigator){ window.addEventListener('load',()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}); }); }
+</script>
+</body>
+</html>
