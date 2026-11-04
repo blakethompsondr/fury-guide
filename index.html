@@ -603,6 +603,11 @@ const STAGES = [
     3,
     "Read **Professions and consumables** in Look up, and check **Professions step by step** for your first crafts.",
     "d20"
+   ],
+   [
+    9,
+    "**Profession check:** aim for **Mining about 50** (Copper on Zephras Isle) and **Blacksmithing about 50** (Rough then Coarse Grinding Stones). You need 50 in each to train Journeyman at 10.",
+    "d21"
    ]
   ],
   "gear": [
@@ -773,6 +778,11 @@ const STAGES = [
     10,
     "Read **Stats explained** in Look up once: from now on you will be choosing between items.",
     "d28"
+   ],
+   [
+    18,
+    "**Profession check:** aim for **Mining about 100** (Tin in Silverpine and the Barrens) and **Blacksmithing about 100** (Rough Bronze Leggings, then Patterned Bronze Bracers). **First Aid about 115** (Wool Bandages).",
+    "d29"
    ]
   ],
   "gear": [
@@ -918,6 +928,16 @@ const STAGES = [
     21,
     "In Wailing Caverns, **Lord Serpentis** can drop **Blueprint: Journeyman Campfire** (Cooking 140, holds 5 camp items). Loot it if you see it.",
     "d19"
+   ],
+   [
+    20,
+    "**Profession check:** Expert needs **125 skill** and level 20. Push **Blacksmithing to 125** (Heavy Grinding Stones, then Patterned Bronze Bracers) and **Mining to 125**, then train Expert in Orgrimmar. **First Aid 125**: buy the Expert book when you reach Dustwallow.",
+    "d20"
+   ],
+   [
+    29,
+    "**Profession check:** aim for **Mining about 150** (Iron and Gold: Thousand Needles, then Arathi) and **Blacksmithing about 150** (Bronze Shortswords, then Bronze Warhammers).",
+    "d21"
    ]
   ],
   "gear": [
@@ -1074,6 +1094,11 @@ const STAGES = [
     34,
     "Optional Scarlet Monastery quests (Warcraft Tavern): **Hearts of Zeal** from Master Apothecary Faranell in the Undercity (20 Hearts of Zeal from Scarlet mobs; needs **Going, Going, Guano!** from Razorfen Kraul done first). **Vorrel’s Revenge**: talk to Vorrel Sengutz on the rack in the Graveyard, then kill Nancy Vishas (level 33 elite) on the Misty Shore in Alterac Mountains and take her ring to Tarren Mill. Skip it if you have no group.",
     "d22"
+   ],
+   [
+    34,
+    "**Profession check:** Artisan needs **200 skill** and level 35. Aim for **Blacksmithing 200** (Green Iron Bracers, Golden Scale Bracers, then Steel or Mithril crafts) and **Mining 200**. **First Aid 225** for Triage needs Mageweave, which drops from about level 40, so that one can wait.",
+    "d23"
    ]
   ],
   "gear": [
@@ -1205,6 +1230,11 @@ const STAGES = [
     40,
     "Re-read **Dungeons and raids** (the Protection part) before your first tank run.",
     "d16"
+   ],
+   [
+    42,
+    "**Profession check:** aim for **Mining about 230** (Mithril and Truesilver: Tanaris and the Hinterlands are on your route) and **Blacksmithing about 215** (Mithril Plate Pants). Do **Triage** at Hammerfall for Artisan First Aid once you have 225.",
+    "d17"
    ]
   ],
   "gear": [
@@ -1332,6 +1362,11 @@ const STAGES = [
     56,
     "Route: Feralas 50, Stranglethorn and Blasted Lands 50-51, Searing Gorge and Burning Steppes 51-52, Azshara 52-53, Felwood 53-54, Un’Goro 54-55, Felwood and Winterspring 55-56, **Blackrock Depths 56-57**, the Plaguelands 57-59, Winterspring and Silithus 59-60. Sunken Temple, Dire Maul and Blackrock Spire are not in the route.",
     "d11"
+   ],
+   [
+    54,
+    "**Profession check:** aim for **Mining 245 to 275** (Thorium: Un’Goro and Felwood are on your route). Blacksmithing past 225 has no published route yet: ask Claude for the latest one.",
+    "d12"
    ]
   ],
   "gear": [
@@ -3379,7 +3414,8 @@ function nowScreen(){
      '<button type="button" class="btn primary" data-go="'+st.id+'">Open the full stage</button>'+
    '</div>'+
    (dg.length?'<div class="card"><h3>Dungeons at your level</h3>'+table(['Levels','Dungeon'], dg.map(d=>[rangeLabel(d[1],d[2]), d[0]+(d[4]?' · <span class="muted">'+esc(d[4])+'</span>':'')]))+'</div>':'')+
-   '<div class="btn-row"><button type="button" class="btn ghost" data-go="before">Setup and racials</button><button type="button" class="btn ghost" data-go="basics">Warrior basics</button></div>'+
+   '<button type="button" class="btn primary" data-go="upgrades">Quest reward? How to choose</button>'+
+   '<div class="btn-row"><button type="button" class="btn ghost" data-go="profs">Professions</button><button type="button" class="btn ghost" data-go="basics">Warrior basics</button></div>'+
   '</section>';
 }
 function stagesScreen(){
