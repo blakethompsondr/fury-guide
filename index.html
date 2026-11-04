@@ -221,7 +221,17 @@ details .tbl{border:0;border-radius:0;background:transparent;box-shadow:none}
   transform:translateY(100%);transition:transform .22s ease}
 .sheet.show{transform:none}
 .sheet .grab{width:44px;height:5px;border-radius:3px;background:var(--gold-lo);margin:0 auto 10px}
-.sheet .sh-in{max-width:640px;margin:0 auto;display:grid;gap:14px}
+.sheet{max-height:min(86vh,calc(100dvh - 40px));display:flex;flex-direction:column}
+.sheet .sh-in{max-width:640px;width:100%;margin:0 auto;display:grid;gap:14px;align-content:start;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;min-height:0;padding-right:6px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent}
+.sheet .sh-in::-webkit-scrollbar{width:6px}
+.sheet .sh-in::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold-hi),var(--gold-lo));border-radius:3px}
+.sheet .sh-in::-webkit-scrollbar-track{background:transparent}
+.sheet .sh-in > .btn-row:last-child,.sheet .sh-in > .btn:last-child{position:sticky;bottom:0;padding-top:16px;margin-top:-2px;
+  background:linear-gradient(to bottom,transparent,var(--surface) 14px)}
+.sheet .more{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(88px + env(safe-area-inset-bottom,0px));pointer-events:none;
+  font-family:var(--display);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hi);text-shadow:0 1px 2px #000;
+  padding:4px 12px;border-radius:999px;background:rgba(0,0,0,.55);border:1px solid var(--gold-lo);opacity:0;transition:opacity .2s}
+.sheet .more.on{opacity:1}
 .sheet h2,.sheet h3{color:var(--gold)}
 .quick{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
 .quick button{border:2px solid var(--gold-lo);background:radial-gradient(circle at 50% 30%,var(--raised),var(--bg));border-radius:6px;padding:10px 0;font-family:var(--display);font-weight:800;cursor:pointer;font-variant-numeric:tabular-nums;color:var(--gold)}
@@ -3305,7 +3315,10 @@ function openSheet(html, after){
   $('sheetBody').innerHTML=html; $('scrim').hidden=false; $('sheet').hidden=false;
   requestAnimationFrame(()=>{ $('scrim').classList.add('show'); $('sheet').classList.add('show'); });
   after && after();
-  const f=$('sheet').querySelector('button'); f && f.focus();
+  const box=$('sheetBody'); box.scrollTop=0;
+  let more=$('sheet').querySelector('.more'); if(!more){ more=document.createElement('div'); more.className='more'; more.textContent='Scroll for more ▾'; $('sheet').appendChild(more); }
+  const upd=()=>more.classList.toggle('on', box.scrollHeight-box.clientHeight-box.scrollTop>40);
+  box.onscroll=upd; requestAnimationFrame(upd);
 }
 function closeSheet(){ $('scrim').classList.remove('show'); $('sheet').classList.remove('show'); setTimeout(()=>{ $('scrim').hidden=true; $('sheet').hidden=true; },220); }
 $('scrim').onclick=closeSheet;
@@ -3516,7 +3529,7 @@ function wire(st){
     if(!st && (location.hash.slice(1)||'now')==='now' && inp.checked){ const li=inp.closest('li'); if(li){ li.style.transition='opacity .25s ease, transform .25s ease'; li.style.opacity='0'; li.style.transform='translateX(14px)'; } setTimeout(refresh,300); }
   });
   if($('howtoHide')) $('howtoHide').onclick=()=>{ store.set('sfw2.howto.hide',true); const h=$('howto'); if(h) h.remove(); toast('Kept in Before you play'); };
-  if($('lvDown')){ $('lvDown').onclick=()=>{ setLevel(level-1); refresh(); }; $('lvUp').onclick=()=>{ const o=level; setLevel(level+1); refresh(); if(level>o) levelUpSheet(level); }; }
+  if($('lvDown')){ $('lvDown').onclick=()=>{ setLevel(level-1); refresh(); }; $('lvUp').onclick=()=>{ const o=level; setLevel(level+1, !store.get('sfw2.lvpop.off',false)); refresh(); if(level>o) levelUpSheet(level); }; }
   if($('q')){ const q=$('q'); q.oninput=()=>{ lastQuery=q.value; store.set('sfw2.q',lastQuery); $('res').innerHTML=results(lastQuery); $('res').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go,b.dataset.seg)); }; }
   if($('resetBtn')) $('resetBtn').onclick=()=>openSheet('<h2 id="sheetTitle">Reset all progress?</h2><p style="margin:0">This clears every tick on this device. Your level stays.</p><div class="btn-row"><button type="button" class="btn ghost" id="rsNo">Keep it</button><button type="button" class="btn danger" id="rsYes">Reset</button></div>',
      ()=>{ $('rsNo').onclick=closeSheet; $('rsYes').onclick=()=>{ ticks={}; store.set('sfw2.ticks',ticks); closeSheet(); route(); toast('Progress reset'); }; });
