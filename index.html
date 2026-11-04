@@ -161,6 +161,8 @@ strong{color:var(--gold)}
 .lvh span{color:var(--gold);font-size:12px;letter-spacing:.06em}
 .lvgroup.here .lvh{color:var(--gold-hi)}
 .dgline{margin:0;font-size:15.5px;color:var(--muted);padding-left:4px}
+.gl{all:unset;display:inline;cursor:help;color:inherit;font:inherit;border-bottom:1.5px dotted var(--gold);-webkit-tap-highlight-color:transparent}
+.gl:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
 /* stage detail tabs */
 .seg{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--bar-h) + 3px);z-index:12;padding-block:8px;background:linear-gradient(var(--bg) 70%,transparent)}
 .seg .seg-in{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
@@ -346,6 +348,99 @@ const TRAIN_LV = {
  "58": "Sunder Armor rank 5, Thunder Clap rank 6, Pummel rank 2",
  "60": "Battle Shout rank 7, Bloodthirst rank 4, Shield Slam rank 4, Rend rank 7, Cleave rank 5, Heroic Strike rank 9, Overpower rank 4, Revenge rank 6. Skip Mortal Strike"
 };
+// Glossary: tap any of these words in the app to see the meaning. [title, words to match, meaning]
+const GLOSSARY = [["Rage","Rage","The resource your abilities cost. It builds when you hit and get hit, starts each fight at zero, and drains after combat."],
+ ["DPS","DPS","Damage per second. Also means a player whose job is dealing damage, like you as Fury."],
+ ["Weapon DPS","weapon DPS","The damage per second number on a weapon’s tooltip. The best single number for comparing weapons."],
+ ["Crit","crits|crit|critical strike|critical strikes","A critical strike: a hit that does double damage. Your crits also give extra Rage and trigger Flurry."],
+ ["Proc","proc|procs","An effect that triggers by chance, such as Enrage after you get hit."],
+ ["Threat","threat|aggro","How much an enemy wants to attack you. In a group the tank should have the most. If you take it, the enemy turns on you."],
+ ["Glancing blow","glancing blows|glancing blow|glancing","An auto attack that does less damage than normal. Much more common against enemies above your level."],
+ ["Kiting","kiting|kite","Slowing an enemy (with Hamstring) and attacking from range so it cannot reach you."],
+ ["Split pull","split pull|split pulling","Separating one enemy from a group so you only fight one at a time."],
+ ["Pull","pull|pulls|pulling","Starting a fight with an enemy or a group."],
+ ["Elite","elite|elites","A tougher enemy with a gold dragon around its portrait. Usually meant for groups."],
+ ["Off-hand","off-hand|offhand|main hand","When you hold two weapons, the main hand is your right and the off-hand your left. Off-hand hits do less damage."],
+ ["Dual wield","dual wield|dual wielding|dual-wield","Holding a one-handed weapon in each hand. Warriors learn it at level 20."],
+ ["Respec","respec|respeccing","Resetting your talent points at your class trainer, for gold, so you can spend them again."],
+ ["Dual spec","dual spec","Two saved talent setups you can swap between. Yours will be Fury and Protection."],
+ ["Cooldown","cooldown|cooldowns","The wait before you can use an ability again. Also used for big abilities with long waits, like Death Wish."],
+ ["Stance","stance|stances","A Warrior mode that changes which abilities you can use: Battle, Defensive and Berserker. Swapping costs Rage above what you can keep."],
+ ["Attunement","attunement","A quest chain you must finish before a raid lets you in. Onyxia needs one."],
+ ["Best in slot","best-in-slot|best in slot|BiS","The best item you can get for a gear slot."],
+ ["Auction House","Auction House","Where players buy and sell items to each other. There is one in Orgrimmar."],
+ ["Rested XP","rested XP|rested experience|rested","Bonus XP you build while logged out in an inn or city. Your XP bar turns blue while you have it."],
+ ["Tank","tank|tanking|tanks","The player who keeps enemies attacking them so the rest of the group is safe."],
+ ["Healer","healer|healers","The player who keeps the group alive with heals."],
+ ["Interrupt","interrupt|interrupts","Stopping an enemy’s spell while it is casting. Yours are Pummel and Shield Bash."],
+ ["Buff and debuff","buff|buffs|debuff|debuffs","A buff is a helpful effect on you. A debuff is a harmful one, usually on an enemy."],
+ ["AoE","AoE","Area of effect: an attack that hits several enemies at once."],
+ ["Mob","mob|mobs","Any enemy controlled by the game."],
+ ["Grinding","grind|grinding","Killing enemies for XP instead of doing quests."],
+ ["Hit","hit chance|hit cap","Hit is a stat that stops your attacks missing. The hit cap is the point where more stops helping."],
+ ["Expertise","expertise","A stat that stops enemies dodging and parrying your attacks."],
+ ["Dodge, parry, block","dodge|dodges|parry|parries|block|blocks","Ways an attack gets avoided. When an enemy dodges you, Overpower lights up."],
+ ["Armour","armour","Reduces the physical damage you take."],
+ ["Stamina","Stamina","Gives you more health."],
+ ["Agility","Agility","Gives crit chance, plus a little dodge and armour."],
+ ["Strength","Strength","Gives attack power, which makes all your hits, and Bloodthirst, hit harder."],
+ ["Attack power","attack power","Raises the damage of all your attacks."],
+ ["Haste","haste","Makes you swing faster. Your Skyborne racial gives 2%."],
+ ["Hearthstone","Hearthstone","An item that teleports you to the inn where you last set it. It has a long cooldown."],
+ ["Vendor","vendor|vendors","A shopkeeper in the game. Sell your grey junk to them."],
+ ["Legacy points","Legacy point|Legacy points|Legacy","Points earned across your account from achievements. They buy small permanent bonuses. Press Y."],
+ ["Merchant’s Favor","Merchant’s Favor|Merchant's Favor","A currency from handing in filled crates at Durotar Supply and Logistics. Spent on recipes."],
+ ["Waylaid Crate","Waylaid Crates|Waylaid Crate|crates|crate","A crate you loot, fill with the materials it asks for, then hand in for Merchant’s Favor."],
+ ["Craftsman’s Writ","Craftsman’s Writs|Craftsman’s Writ|writ","A delivery task at the supply camp that earns its reputation. Each writ counts once a day."],
+ ["Reputation","reputation","How much a faction likes you. The ranks are Neutral, Friendly, Honored, Revered and Exalted."],
+ ["Honored","Honored","The third reputation rank. Gives discounts and unlocks items."],
+ ["Ore node","ore node|ore nodes|node|nodes","A glowing rock in the world you can mine."],
+ ["Sharpening stones","sharpening stones|sharpening stone|weightstones|weightstone|stones","Items you rub on a weapon for extra damage for 30 minutes. Sharpening stones for blades, weightstones for blunt weapons. Made with Blacksmithing."],
+ ["Elixir and flask","elixir|elixirs|flask|flasks","Potions that boost a stat for an hour (elixirs) or longer (flasks)."],
+ ["Bandage","bandage|bandages","Heals you over a few seconds when you are not fighting. Made with First Aid."],
+ ["Well Fed","Well Fed|XP food","The buff from eating cooked food. In Forever it also gives 5% more XP from kills."],
+ ["Camp","campfire|campsite|camp items|camp item|camp","Forever’s resting system: place a campfire, add camp items next to it, and sit for a minute to get buffs."],
+ ["Windstone","Windstones|Windstone","An object on Zephras Isle that restores health and mana when you use it."],
+ ["Leeway","leeway","A small boost to your attack range for a moment after you jump."],
+ ["Auto attack","auto attacks|auto attack|white hit|swings|swing","Your normal weapon swings, which happen by themselves once you are fighting."],
+ ["Class quest","class quest","A Warrior-only quest chain. Yours at 10 and 30 unlock Defensive and Berserker Stance."],
+ ["Edit Mode","Edit Mode","The game’s built-in layout editor for moving and resizing parts of the screen."],
+ ["Macro","macro","A custom button that runs a game command."],
+ ["Mouseover","mouseover","Using an ability on whatever is under your cursor, without changing your target."],
+ ["Nameplate","nameplates|nameplate","The health bar floating above an enemy’s head."],
+ ["Addon","addons|addon","A free add-on that changes the game’s interface, like RestedXP."],
+ ["Raid","raids|raid","Group content for 10 to 40 players, with the best loot."],
+ ["Quest chain","quest chain|chain","A series of quests where each one unlocks the next."],
+ ["Charge","Charge","Rush to an enemy from range, stunning it briefly and giving you Rage. Only out of combat."],
+ ["Intercept","Intercept","Like Charge but usable mid-fight. Needs Berserker Stance."],
+ ["Rend","Rend","Makes the enemy bleed for damage over time."],
+ ["Heroic Strike","Heroic Strike","Makes your next swing hit harder for Rage. That swing gives no Rage, so only use it with Rage to spare."],
+ ["Cleave","Cleave","Like Heroic Strike but hits two enemies."],
+ ["Overpower","Overpower","A cheap, hard-hitting attack that lights up after an enemy dodges you. Needs Battle Stance."],
+ ["Execute","Execute","A finishing move for enemies under 20% health. Uses up all your Rage."],
+ ["Sunder Armor","Sunder Armor|Sunders|Sunder","Lowers the enemy’s armour so all hits do more damage. Stacks up to 5 times."],
+ ["Battle Shout","Battle Shout","Gives you and your group more attack power. Keep it up at all times."],
+ ["Demoralizing Shout","Demoralizing Shout|Demo Shout","Makes nearby enemies hit you softer."],
+ ["Victory Rush","Victory Rush","A free attack that heals you, usable for a short time after you kill something."],
+ ["Thunder Clap","Thunder Clap","Damages nearby enemies and slows their attacks."],
+ ["Hamstring","Hamstring","Slows an enemy’s movement so it cannot run away or chase you."],
+ ["Bloodrage","Bloodrage","Gives you Rage over a few seconds. Use it between fights."],
+ ["Berserker Rage","Berserker Rage","Gives Rage and makes you immune to Fear for a short time."],
+ ["Pummel","Pummel","Interrupts a spell. Needs Berserker Stance."],
+ ["Shield Bash","Shield Bash","Interrupts a spell. Needs a shield."],
+ ["Whirlwind","Whirlwind","Spin and hit up to 4 nearby enemies with both weapons. Needs Berserker Stance."],
+ ["Bloodthirst","Bloodthirst","Your main Fury attack from 40. Damage scales with attack power."],
+ ["Death Wish","Death Wish","Your big damage cooldown: 20% more damage for 30 seconds, but you take 5% more."],
+ ["Recklessness","Recklessness","A very strong crit cooldown with a 30 minute wait. Save it for bosses."],
+ ["Intimidating Shout","Intimidating Shout","Makes nearby enemies run away in fear. Your panic button."],
+ ["Retaliation","Retaliation","For a short time, hits back at every enemy that attacks you in melee."],
+ ["Shield Wall","Shield Wall","Cuts the damage you take for a short time. Needs a shield."],
+ ["Reckless Swings","Reckless Swings","A new talent: your next 4 swings each give 5 extra Rage."],
+ ["Gore Drinker","Gore Drinker","A talent: after Bloodrage, Berserker Rage, Death Wish or Bloodthirst, your next swings heal you."],
+ ["Flurry","Flurry","A talent: after a crit, your next 3 swings are 30% faster."],
+ ["Enrage","Enrage","A talent: after you get hit, you sometimes deal 10% more damage for 12 seconds."],
+ ["Unbridled Wrath","Unbridled Wrath","A talent: your hits sometimes give extra Rage."],
+ ["Furious Precision","Furious Precision","A talent: your off-hand weapon misses much less."]];
 // [name, min, max, zone, why go]
 const DUNGEONS = [
  ['Ragefire Chasm',13,18,'Orgrimmar','Hidden Enemies quest chain for Hammer of Orgrimmar'],
@@ -1788,6 +1883,20 @@ const REF = [
   ]
  },
  {
+  "id": "glossary",
+  "t": "Glossary",
+  "s": "Every game word in this guide, in plain English",
+  "b": [
+   [
+    "p",
+    "Tap any word with a dotted underline anywhere in the app to see what it means. Here is the full list."
+   ],
+   [
+    "glossary"
+   ]
+  ]
+ },
+ {
   "id": "stats",
   "t": "Stats explained",
   "s": "What to look for on items, and why",
@@ -2436,7 +2545,15 @@ const REF = [
 const ALL = [...STAGES.map(s=>({...s,kind:'stage'})), ...REF.map(r=>({...r,kind:'ref'}))];
 /* ===== helpers ===== */
 const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const fmt = s => esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+const GL_RX=(()=>{ const all=[]; GLOSSARY.forEach((g,gi)=>g[1].split('|').forEach(w=>all.push([w,gi]))); all.sort((a,b)=>b[0].length-a[0].length);
+  const q=w=>w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return all.map(([w,gi])=>({gi, rx:new RegExp("(^|[^A-Za-z’'-])("+q(w)+")(?![A-Za-z])", /^[A-Z]/.test(w)?'':'i')})); })();
+function gloss(html){ const used=new Set(); let n=0;
+  return html.split(/(<[^>]+>)/).map(part=>{ if(part.charAt(0)==='<'||n>=3) return part; const toks=[];
+    for(const {gi,rx} of GL_RX){ if(n>=3) break; if(used.has(gi)) continue; const m=part.match(rx); if(!m) continue;
+      const at=m.index+m[1].length; toks.push([m[2],gi]); part=part.slice(0,at)+'\u0001'+(toks.length-1)+'\u0002'+part.slice(at+m[2].length); used.add(gi); n++; }
+    return part.replace(/\u0001(\d+)\u0002/g,(_,k)=>'<button type="button" class="gl" data-g="'+toks[+k][1]+'">'+toks[+k][0]+'</button>'); }).join(''); }
+const fmt = s => gloss(esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>'));
 const plain = s => String(s).replace(/\*\*/g,'');
 const $ = id => document.getElementById(id);
 const stageFor = l => STAGES.find(s=>l>=s.range[0]&&l<=s.range[1]) || STAGES[0];
@@ -2463,6 +2580,7 @@ function refBlocks(ch, bl){
     if(k==='ol') return '<ol>'+b[1].map(x=>'<li>'+fmt(x)+'</li>').join('')+'</ol>';
     if(k==='table') return table(b[1],b[2]);
     if(k==='details') return '<details><summary>'+esc(b[1])+'</summary>'+table(b[2],b[3])+'</details>';
+    if(k==='glossary') return '<div class="tbl"><table><thead><tr><th>Word</th><th>Meaning</th></tr></thead><tbody>'+GLOSSARY.slice().sort((a,b)=>a[0].localeCompare(b[0])).map(g=>'<tr><td>'+esc(g[0])+'</td><td>'+esc(g[2])+'</td></tr>').join('')+'</tbody></table></div>';
     if(k==='check') return '<ul class="checks">'+b[2].map(x=>checkItem(ch.id+'#'+x[1], x[0])).join('')+'</ul>';
     if(k==='dungeons') return table(['Levels','Dungeon','Where'], DUNGEONS.map(d=>[rangeLabel(d[1],d[2]), d[0], d[3]]), i=>level>=DUNGEONS[i][1]&&level<=DUNGEONS[i][2]);
     if(k==='links') return '<ul>'+b[1].map(l=>'<li><a href="'+esc(l[1])+'" target="_blank" rel="noopener">'+esc(l[0])+'</a></li>').join('')+'</ul>';
@@ -2563,6 +2681,7 @@ function buildIndex(){
     if(b[0]==='table') b[2].forEach(row=>add(row.join(': ')));
     if(b[0]==='details') b[3].forEach(row=>add(row.join(': ')));
   }));
+  GLOSSARY.forEach(g=>idx.push({t:g[0]+': '+g[2],src:'Glossary',go:'glossary'}));
   return idx;
 }
 const INDEX = buildIndex();
@@ -2683,6 +2802,10 @@ $('backBtn').onclick=()=>{ if(history.length>1) history.back(); else go(backTo);
 document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>go(b.dataset.tab));
 window.addEventListener('hashchange',route);
 window.addEventListener('scroll',()=>$('appbar').classList.toggle('scrolled',window.scrollY>4),{passive:true});
+document.addEventListener('click',e=>{ const g=e.target.closest('.gl'); if(!g) return; e.preventDefault(); e.stopPropagation();
+  const it=GLOSSARY[+g.dataset.g]; if(!it) return;
+  openSheet('<h2 id="sheetTitle">'+esc(it[0])+'</h2><p style="margin:0">'+esc(it[2])+'</p><div class="btn-row"><button type="button" class="btn ghost" id="glAll">Full glossary</button><button type="button" class="btn primary" id="glOk">Got it</button></div>',
+    ()=>{ $('glOk').onclick=closeSheet; $('glAll').onclick=()=>{ closeSheet(); go('glossary'); }; }); }, true);
 route();
 
 if('serviceWorker' in navigator){ window.addEventListener('load',()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}); }); }
