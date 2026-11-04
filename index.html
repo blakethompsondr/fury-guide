@@ -3,7 +3,7 @@
 <head>
 <title>Skyborne Fury Warrior</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -42,7 +42,7 @@
 
 [hidden]{display:none!important}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{min-height:100%}
+html,body{min-height:100%;touch-action:manipulation;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{background:var(--noise) 0 0/48px 48px, radial-gradient(120% 900px at 50% 0%, var(--bg2), var(--bg) 70%), var(--bg);color:var(--ink);font-family:var(--body);font-size:17.5px;line-height:1.5;margin:0;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
   padding-block:env(safe-area-inset-top,0px) calc(var(--tab-h) + 28px + env(safe-area-inset-bottom,0px));overscroll-behavior-y:contain}
@@ -3557,6 +3557,10 @@ document.addEventListener('click',e=>{ const g=e.target.closest('.gl'); if(!g) r
   const it=GLOSSARY[+g.dataset.g]; if(!it) return;
   openSheet('<h2 id="sheetTitle">'+esc(it[0])+'</h2><p style="margin:0">'+esc(it[2])+'</p><div class="btn-row"><button type="button" class="btn ghost" id="glAll">Full glossary</button><button type="button" class="btn primary" id="glOk">Got it</button></div>',
     ()=>{ $('glOk').onclick=closeSheet; $('glAll').onclick=()=>{ closeSheet(); go('glossary'); }; }); }, true);
+/* no pinch or double-tap zoom */
+['gesturestart','gesturechange','gestureend'].forEach(t=>document.addEventListener(t,e=>e.preventDefault(),{passive:false}));
+document.addEventListener('touchmove',e=>{ if(e.touches&&e.touches.length>1) e.preventDefault(); },{passive:false});
+let _lastTap=0; document.addEventListener('touchend',e=>{ const n=Date.now(); if(n-_lastTap<300 && !e.target.closest('input,textarea')) e.preventDefault(); _lastTap=n; },{passive:false});
 route();
 if(_resume){ const sv=store.get('sfw2.y',null); if(sv&&sv.id===_resume) requestAnimationFrame(()=>window.scrollTo(0,sv.y)); }
 
