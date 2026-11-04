@@ -566,6 +566,16 @@ const STAGES = [
     5,
     "Make your first camp item at skill 20 from the **Camping 101** quest for each profession: Blacksmithing **Sharpening Wheel** (Strength), Mining **Lodestone** (attack power), First Aid **First Aid Kit** (Stamina).",
     "d15"
+   ],
+   [
+    3,
+    "Skyborne Mining: pick up **Harvesting Windstones** in Thendal Village and take **Mining for Dummies** as the reward. It teaches Mining. Buy a Mining Pick from a Mining Supplier.",
+    "d16"
+   ],
+   [
+    3,
+    "Cooking: buy **Flint and Tinder** and Simple Wood from a trade goods vendor so you can make a Basic Campfire Kit.",
+    "d17"
    ]
   ],
   "gear": [
@@ -695,8 +705,18 @@ const STAGES = [
    ],
    [
     10,
-    "Professions: **Journeyman** training (skill 75 to 150) needs level 10. Visit each profession trainer once you hit 50 skill. Classic rule, so check the trainer.",
+    "Professions: **Journeyman** rank (skill cap 150) needs **level 10** and 50 skill. Blacksmithing: Snarl in Orgrimmar. Mining: Makaru in Orgrimmar. First Aid and Cooking: any trainer. Learn it before you hit 75 or you stop gaining points.",
     "d19"
+   ],
+   [
+    12,
+    "Blacksmithing 35: learn the new **Copper Boots** plans (Gemmed, Glowing, Strange) from the trainer. Check which one has Strength or Agility.",
+    "d20"
+   ],
+   [
+    17,
+    "In Wailing Caverns, **Lord Serpentis** can drop **Blueprint: Journeyman Campfire** (Cooking 140, holds 5 camp items). Loot it if you see it.",
+    "d21"
    ]
   ],
   "gear": [
@@ -729,7 +749,8 @@ const STAGES = [
    "Use your thrown weapon to pull single enemies away from groups.",
    "Pick up a dungeon’s quests before you go in.",
    "Check the dungeon’s level range below before joining a group.",
-   "Kargoz says dungeon quests give **double XP** in Forever and grinding is slightly nerfed, so pick up every dungeon quest you can."
+   "Kargoz says dungeon quests give **double XP** in Forever and grinding is slightly nerfed, so pick up every dungeon quest you can.",
+   "Choosing between quest rewards? Open **Picking upgrades** in Look up."
   ]
  },
  {
@@ -813,8 +834,18 @@ const STAGES = [
    ],
    [
     20,
-    "Professions: **Expert** training (up to 225) needs level 20 and 125 skill. Classic rule, so check the trainer.",
+    "Professions: **Expert** rank (cap 225) needs **level 20** and 125 skill. Blacksmithing: Saru Steelfury in Orgrimmar (50 silver). Mining: your Orgrimmar trainer. First Aid and Cooking use books instead (see level 30).",
     "d14"
+   ],
+   [
+    20,
+    "Blacksmithing from 45 to 130: the **Veteran’s** mail set (Strength, Agility, Stamina). Belt at 45 and boots at 85 come from a vendor, gloves, helm and leggings drop. Craft any piece better than what you wear.",
+    "d15"
+   ],
+   [
+    22,
+    "In Shadowfang Keep, **Commander Springvale** can drop **Blueprint: Toxin Study** (First Aid 140): a camp item that also holds potions and anti-venom.",
+    "d16"
    ]
   ],
   "gear": [
@@ -926,8 +957,23 @@ const STAGES = [
    ],
    [
     35,
-    "Professions: **Artisan** training (up to 300) needs level 35 and 200 skill, from a special trainer. Classic rule, so check in game.",
+    "Professions: **Artisan** rank (cap 300) needs **level 35**. Blacksmithing (200 skill): Brikk Keencraft in Booty Bay. Mining (200 skill): your trainer. First Aid (225): the **Triage** quest from Doctor Gregory Victor at Hammerfall, Arathi Highlands. Cooking (225): **Clamlette Surprise**, start with Zamja in Orgrimmar and bring 12 Giant Egg, 10 Zesty Clam Meat and 20 Alterac Swiss to Gadgetzan.",
     "d14"
+   ],
+   [
+    30,
+    "First Aid at 125: buy **Expert First Aid: Under Wraps**, plus the Heavy Silk and Mageweave Bandage manuals, from **Balai Lok’Wein** in Dustwallow Marsh.",
+    "d15"
+   ],
+   [
+    30,
+    "Cooking at 125: buy the **Expert Cookbook** from **Wulan** at Shadowprey Village, Desolace.",
+    "d16"
+   ],
+   [
+    33,
+    "In Arathi Highlands, **Syndicate Mercenaries** drop **Manual: Greater Healing Potion** (First Aid 155). You will want these potions.",
+    "d17"
    ]
   ],
   "gear": [
@@ -1036,6 +1082,11 @@ const STAGES = [
     40,
     "Blacksmithing around 200: in Classic this opened the **Weaponsmith / Armorsmith** quests. Warcraft Tavern could not confirm it for Forever yet, so check in game.",
     "d13"
+   ],
+   [
+    40,
+    "Blacksmithing from 150 to 225: the **Officer’s** plate set (Strength, Agility, Stamina). Belt from the trainer at 150, gauntlets at 175, pauldrons at 210 and wristguards at 225 from a vendor. Great once you wear plate.",
+    "d14"
    ]
   ],
   "gear": [
@@ -2017,7 +2068,7 @@ const REF = [
    ],
    [
     "p",
-    "Blacksmithing crafts to look for: chain shirts at 80 skill, chain leggings at 95, chain helms at 125."
+    "Crafts worth making for yourself are listed level by level, and the full skill-up routes are in **Professions step by step**."
    ],
    [
     "h",
@@ -2307,6 +2358,336 @@ const REF = [
      "Sell spare ore and bars from Mining, and crafted Bind-on-Equip items.",
      "Do not buy small, short-lived upgrades on the Auction House while levelling.",
      "At 60, Alchemy and Herbalism are the classic gold makers if you change professions."
+    ]
+   ]
+  ]
+ },
+ {
+  "id": "upgrades",
+  "t": "Picking upgrades",
+  "s": "Quest rewards and drops: which one to take",
+  "b": [
+   [
+    "p",
+    "You will choose between items constantly. Work through these in order and stop at the first one that decides it."
+   ],
+   [
+    "ol",
+    [
+     "**Weapons: take the higher weapon DPS.** Both Icy Veins and Kargoz say a better weapon beats a few extra stats almost every time.",
+     "Two weapons with similar DPS: prefer a **fast off-hand** (more swings, more Rage) and a **slower main hand** (harder Whirlwind hits) (Icy Veins).",
+     "Check you have the **weapon skill** for its type before you rely on it. Level the skill on easy enemies first.",
+     "**Armour: add up Strength and Agility.** The piece with more of the two combined usually wins. Kargoz leans Agility, Icy Veins leans Strength, so treat them as roughly equal.",
+     "**Hit** on an item is a bonus: take it when the other stats are close.",
+     "**Stamina** is the tie-breaker.",
+     "**Ignore** Intellect, Spirit, spell damage and healing. They do nothing for you.",
+     "Armour type: mail until 40, then plate. Do not wear worse plate just because it is plate.",
+     "Nothing useful on offer? Take the reward that **sells for the most** to a vendor. You will need the gold for riding."
+    ]
+   ],
+   [
+    "note",
+    "**Addon shortcut:** search your GeForce Now addon list for **Pawn**. If it is there, it puts a green arrow on upgrades and marks the best quest reward. Choose its Warrior Fury scale. I have not confirmed it is on the list or how well its scale fits Forever, so use the rules above to sanity check it."
+   ]
+  ]
+ },
+ {
+  "id": "profs",
+  "t": "Professions step by step",
+  "s": "Exactly what to craft and mine at each skill, and where to train",
+  "b": [
+   [
+    "p",
+    "Routes from **wow-professions.com** (the standard Classic profession guide site, updated for Forever) checked against **Icy Veins**. Both are based on the beta, so prices and some numbers may shift. Stop each step when you reach the target skill: yellow and green recipes do not always give a point."
+   ],
+   [
+    "note",
+    "**The golden rule:** learn each new rank (Journeyman at 50 skill and level 10, Expert at 125 and level 20, Artisan at 200 or 225 and level 35) **before** you reach the cap, or every craft at the cap is wasted."
+   ],
+   [
+    "h",
+    "Mining (level it as you quest)"
+   ],
+   [
+    "table",
+    [
+     "Skill",
+     "Mine",
+     "Where (Horde)"
+    ],
+    [
+     [
+      "1-65",
+      "Copper",
+      "Zephras Isle lap, smelt at Shen’dar Village. Or the Durotar cave near Razor Hill"
+     ],
+     [
+      "65-125",
+      "Copper, Tin, Silver",
+      "Silverpine Forest cave (best), The Barrens, Stonetalon. Tin needs 65, Silver 75"
+     ],
+     [
+      "125-175",
+      "Iron, Gold",
+      "Thousand Needles around level 30, then Arathi Highlands or Desolace"
+     ],
+     [
+      "175-245",
+      "Mithril, Truesilver",
+      "The Hinterlands, Tanaris. Truesilver needs 230"
+     ],
+     [
+      "245-275",
+      "Thorium",
+      "Un’Goro Crater, Felwood, Blasted Lands"
+     ],
+     [
+      "275-300",
+      "Rich Thorium",
+      "Winterspring, Burning Steppes, Un’Goro"
+     ]
+    ]
+   ],
+   [
+    "ul",
+    [
+     "Turn on **Find Minerals** in your professions window. It switches off when you die.",
+     "Smelting gives points too: Copper to 65, then Tin and Bronze to about 105. Smelt Gold at 155 for points up to 170.",
+     "Forever ore respawns much faster than Classic, so short loops work."
+    ]
+   ],
+   [
+    "h",
+    "Blacksmithing (wow-professions route)"
+   ],
+   [
+    "table",
+    [
+     "Skill",
+     "Craft",
+     "Materials"
+    ],
+    [
+     [
+      "1-25",
+      "30 Rough Sharpening Stone",
+      "30 Rough Stone"
+     ],
+     [
+      "25-50",
+      "30 Rough Grinding Stone",
+      "60 Rough Stone. Keep 26"
+     ],
+     [
+      "50-67",
+      "36 Coarse Grinding Stone",
+      "72 Coarse Stone. Keep all"
+     ],
+     [
+      "67-75",
+      "8 Runed Copper Gauntlets",
+      "64 Copper Bar, 16 Rough Grinding Stone. Buy a Blacksmith Hammer"
+     ],
+     [
+      "75-80",
+      "5 Runed Copper Belt",
+      "50 Copper Bar"
+     ],
+     [
+      "80-95",
+      "15 Rough Bronze Leggings",
+      "90 Bronze Bar"
+     ],
+     [
+      "95-100",
+      "5 Patterned Bronze Bracers",
+      "25 Bronze Bar, 10 Coarse Grinding Stone"
+     ],
+     [
+      "100-112",
+      "20 Heavy Grinding Stone",
+      "60 Heavy Stone. Keep all for 175"
+     ],
+     [
+      "112-125",
+      "13 Patterned Bronze Bracers",
+      "65 Bronze Bar, 26 Coarse Grinding Stone"
+     ],
+     [
+      "125-140",
+      "24 Bronze Shortsword",
+      "120 Bronze Bar, 96 Weak Flux (vendor), 48 Medium Leather"
+     ],
+     [
+      "140-165",
+      "29 Bronze Warhammer",
+      "232 Bronze Bar, 29 Strong Flux, 29 Medium Leather"
+     ],
+     [
+      "165-175",
+      "15 Green Iron Bracers",
+      "90 Iron Bar, 15 Green Dye (Tamar, Orgrimmar)"
+     ],
+     [
+      "175-185",
+      "10 Golden Scale Bracers",
+      "50 Steel Bar, 20 Heavy Grinding Stone"
+     ],
+     [
+      "185-215",
+      "36 Mithril Plate Pants",
+      "432 Mithril Bar (or Steel Breastplate then Steel Plate Helm if Mithril is dear)"
+     ],
+     [
+      "215-225",
+      "10 Heavy Mithril Breastplate",
+      "160 Mithril Bar"
+     ],
+     [
+      "225-300",
+      "Not published yet",
+      "The guide could not test this on the beta. Check again later"
+     ]
+    ]
+   ],
+   [
+    "warn",
+    "**Blacksmithing is expensive.** Levelling it fully takes hundreds of bars. Mine as you go, level it in bursts when you are in a city, and buy bars on the Auction House only when they are cheap. Icy Veins notes you can skip crafting professions if you only care about levelling speed."
+   ],
+   [
+    "p",
+    "**Weapon stones by skill:** Rough Sharpening Stone at 1, Rough Weightstone at 15, Coarse at 40, Heavy at 100, Solid at 175, Dense at 225. Sharpening stones go on blades (swords, axes, daggers), weightstones on blunt weapons (maces, fist weapons)."
+   ],
+   [
+    "h",
+    "First Aid (two routes)"
+   ],
+   [
+    "table",
+    [
+     "Skill",
+     "Cheapest: bandages (wow-professions)",
+     "Icy Veins: potions you will drink"
+    ],
+    [
+     [
+      "1-75",
+      "Linen Bandage to 40, then Heavy Linen Bandage",
+      "Minor Healing Potion: Peacebloom, Empty Vial, Mild Spices"
+     ],
+     [
+      "75-150",
+      "Wool Bandage to 115, then Heavy Wool Bandage",
+      "Lesser Healing Potion to 110, then Healing Potion"
+     ],
+     [
+      "150-225",
+      "Silk, then Heavy Silk at 180, then Mageweave Bandage at 210",
+      "Same as bandages"
+     ],
+     [
+      "225-300",
+      "Heavy Mageweave at 240, Runecloth at 260, Heavy Runecloth at 290",
+      "Same as bandages"
+     ]
+    ]
+   ],
+   [
+    "ul",
+    [
+     "The bandage route uses cloth you loot anyway, so it is nearly free. The potion route needs herbs from the Auction House but gives you potions to carry.",
+     "Expert (125): buy **Expert First Aid: Under Wraps** and both manuals from **Balai Lok’Wein**, Dustwallow Marsh.",
+     "Artisan (225, level 35): the **Triage** quest at Hammerfall. Save 15 patients before 6 die: worst injured first, and use the doctor’s bandages.",
+     "Potion recipes: Minor at 1, Lesser at 55, Healing at 110 (trainer), Greater at 155 (Syndicate Mercenary, Arathi), Superior at 215, Major at 275 (Pexmit, Mount Hyjal)."
+    ]
+   ],
+   [
+    "h",
+    "Cooking"
+   ],
+   [
+    "table",
+    [
+     "Skill",
+     "Cook (Horde, pick one)"
+    ],
+    [
+     [
+      "1-50",
+      "Charred Wolf Meat or Roasted Boar Meat (trainer), or fish you catch"
+     ],
+     [
+      "50-100",
+      "Learn Journeyman first. Then Coyote Steak or Boiled Clams (trainer), Strider Stew (Tari’qa, The Barrens), or Longjaw Mud Snapper"
+     ],
+     [
+      "100-130",
+      "Crab Cake or Dry Pork Ribs (trainer), or Bristle Whisker Catfish"
+     ],
+     [
+      "130-150",
+      "Goblin Deviled Clams (trainer), Hot Lion Chops (Zargh, The Barrens), Curiously Tasty Omelet (Keena, Arathi)"
+     ],
+     [
+      "150-175",
+      "Hot Lion Chops or Curiously Tasty Omelet"
+     ],
+     [
+      "175-225",
+      "Roast Raptor (Keena or Ogg’marr), Mithril Headed Trout, or Soothing Turtle Bisque. All turn yellow at 215"
+     ],
+     [
+      "225-300",
+      "After Clamlette Surprise: Spotted Yellowtail, Monster Omelet or Tender Wolf Steak, then Nightfin Soup or Poached Sunscale Salmon (Gikkix, Tanaris)"
+     ]
+    ]
+   ],
+   [
+    "ul",
+    [
+     "Eat cooked food while levelling: most food gives **Well Fed XP Boost**, 5% more kill XP for 15 minutes. You must eat for 10 seconds to get the buff. Longjaw Mud Snapper also adds attack power (Wowhead).",
+     "Campfires: Basic at 1, Journeyman at 140 (blueprint from Lord Serpentis, Wailing Caverns), Expert at 220."
+    ]
+   ],
+   [
+    "h",
+    "Sources"
+   ],
+   [
+    "links",
+    [
+     [
+      "wow-professions: Blacksmithing",
+      "https://www.wow-professions.com/forever/blacksmithing-leveling-guide"
+     ],
+     [
+      "wow-professions: Mining",
+      "https://www.wow-professions.com/forever/mining-leveling-guide"
+     ],
+     [
+      "wow-professions: First Aid",
+      "https://www.wow-professions.com/forever/first-aid-leveling-guide"
+     ],
+     [
+      "wow-professions: Cooking",
+      "https://www.wow-professions.com/forever/cooking-leveling-guide"
+     ],
+     [
+      "Icy Veins: First Aid",
+      "https://www.icy-veins.com/wow-forever/first-aid"
+     ],
+     [
+      "Icy Veins: Cooking",
+      "https://www.icy-veins.com/wow-forever/cooking"
+     ],
+     [
+      "Icy Veins: Blacksmithing",
+      "https://www.icy-veins.com/wow-forever/blacksmithing"
+     ],
+     [
+      "Warcraft Wiki: Forever blacksmithing plans",
+      "https://warcraft.wiki.gg/wiki/Forever_blacksmithing_plans"
+     ]
     ]
    ]
   ]
