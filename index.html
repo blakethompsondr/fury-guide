@@ -2441,7 +2441,7 @@ function levelSheet(){
       $('shDown').onclick=()=>{ setLevel(level-1); upd(); };
       $('shUp').onclick=()=>{ setLevel(level+1); upd(); };
       $('sheet').querySelectorAll('.quick button').forEach(b=>b.onclick=()=>{ setLevel(+b.dataset.l); upd(); });
-      $('shDone').onclick=()=>{ closeSheet(); route(); };
+      $('shDone').onclick=()=>{ closeSheet(); refresh(); };
     });
 }
 $('lvlChip').onclick=levelSheet;
@@ -2555,7 +2555,7 @@ const TITLES={now:'Now',stages:'Stages',lookup:'Look up',progress:'Progress'};
 let backTo='now';
 function go(id, segIdx){ if(segIdx!==undefined){ seg=+segIdx; } else if(STAGES.some(s=>s.id===id)) seg=store.get('sfw2.seg.'+id,0);
   if(location.hash.slice(1)===id) route(); else location.hash=id; }
-function route(){
+function route(soft){
   const id=location.hash.slice(1)||'now';
   const st=STAGES.find(s=>s.id===id), rf=REF.find(r=>r.id===id);
   const tab = TABS.includes(id) ? id : st ? 'stages' : rf ? 'lookup' : 'now';
@@ -2565,8 +2565,10 @@ function route(){
   if(st){ $('abTitle').textContent=st.t; html=stageScreen(st); }
   else if(rf){ $('abTitle').textContent=rf.t; html='<section class="screen">'+refScreen(rf)+'</section>'; }
   else { $('abTitle').textContent=TITLES[tab]; html = tab==='stages'?stagesScreen(): tab==='lookup'?lookupScreen(): tab==='progress'?progressScreen(): nowScreen(); backTo=tab; }
-  $('app').innerHTML=html; window.scrollTo(0,0); wire(st);
+  if(soft) html=html.replace(/class="(screen|panel) enter"/g,'class="$1"');
+  const y=window.scrollY; $('app').innerHTML=html; window.scrollTo(0, soft?y:0); wire(st);
 }
+function refresh(){ route(true); }
 function wire(st){
   const app=$('app');
   app.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go, b.dataset.seg));
@@ -2574,9 +2576,9 @@ function wire(st){
     const k=inp.dataset.k; if(inp.checked) ticks[k]=1; else delete ticks[k]; store.set('sfw2.ticks',ticks);
     inp.closest('label').classList.toggle('on',inp.checked);
     const owner=ALL.find(c=>keysOf(c).includes(k)); if(owner){ const p=progress(owner); if(inp.checked && p.done===p.total) toast(owner.t+' complete'); }
-    if(!st && (location.hash.slice(1)||'now')==='now' && inp.checked) setTimeout(route,350);
+    if(!st && (location.hash.slice(1)||'now')==='now' && inp.checked){ const li=inp.closest('li'); if(li){ li.style.transition='opacity .25s ease, transform .25s ease'; li.style.opacity='0'; li.style.transform='translateX(14px)'; } setTimeout(refresh,300); }
   });
-  if($('lvDown')){ $('lvDown').onclick=()=>{ setLevel(level-1); route(); }; $('lvUp').onclick=()=>{ setLevel(level+1); route(); }; }
+  if($('lvDown')){ $('lvDown').onclick=()=>{ setLevel(level-1); refresh(); }; $('lvUp').onclick=()=>{ setLevel(level+1); refresh(); }; }
   if($('q')){ const q=$('q'); q.oninput=()=>{ lastQuery=q.value; store.set('sfw2.q',lastQuery); $('res').innerHTML=results(lastQuery); $('res').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go,b.dataset.seg)); }; }
   if($('resetBtn')) $('resetBtn').onclick=()=>openSheet('<h2 id="sheetTitle">Reset all progress?</h2><p style="margin:0">This clears every tick on this device. Your level stays.</p><div class="btn-row"><button type="button" class="btn ghost" id="rsNo">Keep it</button><button type="button" class="btn danger" id="rsYes">Reset</button></div>',
      ()=>{ $('rsNo').onclick=closeSheet; $('rsYes').onclick=()=>{ ticks={}; store.set('sfw2.ticks',ticks); closeSheet(); route(); toast('Progress reset'); }; });
