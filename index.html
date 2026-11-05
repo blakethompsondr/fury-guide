@@ -610,7 +610,7 @@ const MILESTONES = {
   "New button: Reckless Swings",
   "A new talent from the final patch.",
   [
-   "Take **Reckless Swings** and put it on your bars.",
+   "Take **Reckless Swings** and bind it to **L2 + ✕**.",
    "Press it when Rage is low and you have health to spare."
   ],
   []
@@ -819,21 +819,22 @@ const DUNGEONS = [
 // Every checklist item carries a permanent id (last element). Ticks are saved against it.
 // Never renumber or reuse an id. New items take the next unused number in their list.
 const BIND = {
- "1": "Heroic Strike on **RT + X**. Battle Stance on **LT + RT + X**. Battle Shout on **LT + up** once bought. No trigger: Hearthstone on **D-pad down**, food on **right**, Skysight on **left**, healing potions on **up** once you have them",
- "4": "Charge on **RT + up**. Rend on **RT + Y** for now (Bloodthirst takes that slot at 40)",
- "6": "Thunder Clap on **RT + B** for now (Whirlwind takes that slot at 36)",
- "8": "Hamstring on **LT + right**",
- "10": "Bloodrage on **LT + X**. Defensive Stance on **LT + RT + B**. Leave Taunt and Sunder Armor off. Switch stance once: if your no-trigger D-pad items vanish, bind them again in that stance",
- "12": "Overpower on **RT + right**. Leave Shield Bash off",
- "14": "Demoralizing Shout on **LT + down**",
- "20": "Victory Rush on **RT + down**. Cleave on **LT + RT + A**. Leave Retaliation off",
- "22": "Intimidating Shout on **LT + RT + right**",
- "24": "Execute on **RT + A**",
- "30": "Death Wish on **LT + Y**. Berserker Rage on **LT + B**. Intercept on **LT + left**. Berserker Stance on **LT + RT + Y**. Check your no-trigger D-pad in the new stance",
- "36": "Whirlwind on **RT + B**. Move Thunder Clap to **LT + RT + down**",
- "38": "Pummel on **RT + left**",
- "40": "Bloodthirst on **RT + Y**. Move Rend to **LT + RT + up**. Mount on **D-pad down** (Hearthstone goes back in your bags). Then switch to Protection and bind its bars (First login setup, step 5)",
- "50": "Recklessness on **LT + A**"
+ "1": "Heroic Strike on **R2 + □**. Battle Stance on **L2 + R2 + □**. Battle Shout on **L2 + up** once bought. No trigger: Hearthstone on **D-pad down**, food on **right**, Skysight on **left**, healing potions on **up** once you have them",
+ "4": "Charge on **R2 + up**. Rend on **R2 + △** for now (Bloodthirst takes that slot at 40)",
+ "6": "Thunder Clap on **R2 + ○** for now (Whirlwind takes that slot at 36)",
+ "8": "Hamstring on **L2 + right**",
+ "10": "Bloodrage on **L2 + □**. Defensive Stance on **L2 + R2 + ○**. Leave Taunt and Sunder Armor off. Switch stance once: if your no-trigger D-pad items vanish, bind them again in that stance",
+ "12": "Overpower on **R2 + right**. Leave Shield Bash off",
+ "14": "Demoralizing Shout on **L2 + down**",
+ "20": "Victory Rush on **R2 + down**. Cleave on **L2 + R2 + ✕**. Leave Retaliation off",
+ "22": "Intimidating Shout on **L2 + R2 + right**",
+ "24": "Execute on **R2 + ✕**",
+ "28": "Reckless Swings (talent) on **L2 + ✕**",
+ "30": "Death Wish on **L2 + △**. Berserker Rage on **L2 + ○**. Intercept on **L2 + left**. Berserker Stance on **L2 + R2 + △**. Check your no-trigger D-pad in the new stance",
+ "36": "Whirlwind on **R2 + ○**. Move Thunder Clap to **L2 + R2 + down**",
+ "38": "Pummel on **R2 + left**",
+ "40": "Bloodthirst on **R2 + △**. Move Rend to **L2 + R2 + up**. Mount on **D-pad down** (Hearthstone goes back in your bags). Then switch to Protection and bind its bars (First login setup, step 5)",
+ "50": "Recklessness on **L2 + R2 + right**. Intimidating Shout comes off the bar"
 };
 const STAGES = [
  {
@@ -1241,7 +1242,7 @@ const STAGES = [
    ],
    [
     28,
-    "New talent **Reckless Swings**: press it when you need Rage, have health to spare and can keep hitting. Put it on your bars.",
+    "New talent **Reckless Swings**: press it when you need Rage, have health to spare and can keep hitting. Bind it to **L2 + ✕**.",
     "d13"
    ],
    [
@@ -2168,15 +2169,15 @@ const REF = [
    ],
    [
     "p",
-    "The game labels buttons the Xbox way: **A** is Cross, **B** Circle, **X** Square, **Y** Triangle. With no trigger held, A jumps, B cancels, X interacts and Y opens the menu, and those four cannot be changed. Everything else is yours: hold **RT**, **LT** or **both** and press a face button or the D-pad."
+    "Written for your PS5 controller: **✕** Cross, **○** Circle, **□** Square, **△** Triangle. The game shows Xbox letters on screen (A = ✕, B = ○, X = □, Y = △). With no trigger held, ✕ jumps, ○ cancels, □ interacts and △ opens the menu, and those four cannot be changed. Everything else is yours: hold **R2**, **L2** or **both** and press a face button or an arrow on the D-pad (the four arrow buttons on the left)."
    ],
    [
     "p",
-    "**To bind:** open the spellbook, highlight an ability, press **X**, then press the buttons you want. **To remove one:** use the right stick as a mouse and drag it off the bar. New ranks replace the old one on the bar by themselves, so you only bind each ability once."
+    "**To bind:** open the spellbook, highlight an ability, press **□**, then press the buttons you want. For items: open your bags, highlight it, press **△**, choose Bind. **To remove one:** use the right stick as a mouse and drag it off the bar. New ranks replace the old one on the bar by themselves, so you only bind each ability once."
    ],
    [
     "p",
-    "**The plan:** the attacks you press every few seconds go on **RT + face buttons**, the easiest to reach. Shouts and cooldowns go on **LT**. Stances and rare buttons go on **LT + RT**. Two slots get a stand-in early so they are not empty for 30 levels: Rend borrows the Bloodthirst slot and Thunder Clap borrows the Whirlwind slot, and each moves when the real ability arrives. Your level guide tells you every binding on the day you learn the ability."
+    "**The plan:** the attacks you press every few seconds go on **R2 + face buttons**, the easiest to reach. Shouts and cooldowns go on **L2**. Stances and rare buttons go on **L2 + R2**. Two slots get a stand-in early so they are not empty for 30 levels: Rend borrows the Bloodthirst slot and Thunder Clap borrows the Whirlwind slot, and each moves when the real ability arrives. Your level guide tells you every binding on the day you learn the ability."
    ],
    [
     "table",
@@ -2187,123 +2188,123 @@ const REF = [
     ],
     [
      [
-      "RT + X",
+      "R2 + □",
       "Heroic Strike (1)",
       "Heroic Strike"
      ],
      [
-      "RT + Y",
+      "R2 + △",
       "Bloodthirst (40). Rend until then",
       "Shield Slam"
      ],
      [
-      "RT + B",
+      "R2 + ○",
       "Whirlwind (36). Thunder Clap until then",
       "Revenge"
      ],
      [
-      "RT + A",
+      "R2 + ✕",
       "Execute (24)",
       "Sunder Armor"
      ],
      [
-      "RT + up",
+      "R2 + up",
       "Charge (4)",
       "Charge"
      ],
      [
-      "RT + right",
+      "R2 + right",
       "Overpower (12)",
       "Taunt"
      ],
      [
-      "RT + down",
+      "R2 + down",
       "Victory Rush (20)",
       "Victory Rush"
      ],
      [
-      "RT + left",
+      "R2 + left",
       "Pummel (38)",
       "Shield Bash"
      ],
      [
-      "LT + X",
+      "L2 + □",
       "Bloodrage (10)",
       "Bloodrage"
      ],
      [
-      "LT + Y",
+      "L2 + △",
       "Death Wish (30)",
       "Shield Block"
      ],
      [
-      "LT + B",
+      "L2 + ○",
       "Berserker Rage (30)",
       "Shield Wall"
      ],
      [
-      "LT + A",
-      "Recklessness (50)",
+      "L2 + ✕",
+      "Reckless Swings (28)",
       "Last Stand"
      ],
      [
-      "LT + up",
+      "L2 + up",
       "Battle Shout (1)",
       "Battle Shout"
      ],
      [
-      "LT + right",
+      "L2 + right",
       "Hamstring (8)",
       "Mocking Blow"
      ],
      [
-      "LT + down",
+      "L2 + down",
       "Demoralizing Shout (14)",
       "Demoralizing Shout"
      ],
      [
-      "LT + left",
+      "L2 + left",
       "Intercept (30)",
       "Challenging Shout"
      ],
      [
-      "LT + RT + X",
+      "L2 + R2 + □",
       "Battle Stance (1)",
       "Battle Stance"
      ],
      [
-      "LT + RT + Y",
+      "L2 + R2 + △",
       "Berserker Stance (30)",
       "Berserker Stance"
      ],
      [
-      "LT + RT + B",
+      "L2 + R2 + ○",
       "Defensive Stance (10)",
       "Defensive Stance"
      ],
      [
-      "LT + RT + A",
+      "L2 + R2 + ✕",
       "Cleave (20)",
       "Cleave"
      ],
      [
-      "LT + RT + up",
+      "L2 + R2 + up",
       "Rend (moves here at 40)",
       "Concussion Blow"
      ],
      [
-      "LT + RT + right",
-      "Intimidating Shout (22)",
+      "L2 + R2 + right",
+      "Intimidating Shout (22). Recklessness from 50",
       "Disarm"
      ],
      [
-      "LT + RT + down",
+      "L2 + R2 + down",
       "Thunder Clap (moves here at 36)",
       "Thunder Clap"
      ],
      [
-      "LT + RT + left",
-      "Bandages",
+      "L2 + R2 + left",
+      "Walk on Air (bandages later)",
       "Bandages"
      ],
      [
@@ -2334,7 +2335,7 @@ const REF = [
    ],
    [
     "p",
-    "**Skyborne racials:** **Skysight** is worth its slot: 15% run and mount speed for 15 seconds, every 2 minutes. Use it near an **Elemental Convergence** (they show on your minimap) and it becomes **30% for an hour**, a big levelling boost, so pass through one whenever you can. **Walk on Air** is a slow fall on a 90 second cooldown, rarely needed in PvE, so it stays off the bar. **Throw** stays off too: Charge does your pulling."
+    "**Skyborne racials:** **Skysight** is worth its slot: 15% run and mount speed for 15 seconds, every 2 minutes. Use it near an **Elemental Convergence** (they show on your minimap) and it becomes **30% for an hour**, a big levelling boost, so pass through one whenever you can. **Walk on Air** is a slow fall on a 90 second cooldown. Some Zephras Isle quests need it (Falling With Style), so keep it on L2 + R2 + left until bandages take that slot. **Throw** stays off too: Charge does your pulling."
    ],
    [
     "p",
@@ -2342,7 +2343,7 @@ const REF = [
    ],
    [
     "p",
-    "**Protection bars:** dual spec keeps a separate set of bars for each spec. At 40, switch to Protection and bind the right-hand column. The slots match on purpose: your main hit is still RT + Y, your interrupt is still RT + left. If switching spec does not change your bars, tell Claude and the layout will be redone to share one set."
+    "**Protection bars:** dual spec keeps a separate set of bars for each spec. At 40, switch to Protection and bind the right-hand column. The slots match on purpose: your main hit is still R2 + △, your interrupt is still R2 + left. If switching spec does not change your bars, tell Claude and the layout will be redone to share one set."
    ],
    [
     "p",
@@ -2353,7 +2354,7 @@ const REF = [
     "bars",
     [
      [
-      "Level 1: **Heroic Strike** on RT + X, **Battle Stance** on LT + RT + X. No trigger: **Hearthstone** on D-pad down, **food** on right, **Skysight** on left",
+      "Level 1: **Heroic Strike** on R2 + □, **Battle Stance** on L2 + R2 + □. No trigger: **Hearthstone** on D-pad down, **food** on right, **Skysight** on left. **Walk on Air** on L2 + R2 + left",
       "bars-01"
      ],
      [
@@ -3997,12 +3998,12 @@ function refScreen(r){ return '<section class="panel enter">'+'<p class="muted">
 
 /* ===== pop-ups: what to know after a tick or a level up ===== */
 const FOLLOW=[
- [/The Skybreaker Bulwark/,'Defensive Stance unlocked','Put **Defensive Stance**, **Taunt** and **Sunder Armor** on your bars (stances go on LT + RT). You still fight in **Battle Stance** for now.'],
- [/^Trainer: Dual Wield/,'Two weapons from now','Equip **two one-handers**, ideally a fast one in your off-hand. Spend this level’s point on **Furious Precision**. Expect misses at first. Put **Victory Rush** on RT + D-pad.'],
- [/Reckless Swings/,'New button: Reckless Swings','Put **Reckless Swings** on your LT bar. Press it when Rage is low and you have health to spare.'],
+ [/The Skybreaker Bulwark/,'Defensive Stance unlocked','Bind **Defensive Stance** to L2 + R2 + ○. Leave Taunt and Sunder Armor off until you tank at 40. You still fight in **Battle Stance** for now.'],
+ [/^Trainer: Dual Wield/,'Two weapons from now','Equip **two one-handers**, ideally a fast one in your off-hand. Spend this level’s point on **Furious Precision**. Expect misses at first. Bind **Victory Rush** to R2 + down.'],
+ [/Reckless Swings/,'New button: Reckless Swings','Bind **Reckless Swings** to L2 + ✕. Press it when Rage is low and you have health to spare.'],
  [/The Islander/,'Berserker Stance unlocked','Fight in **Berserker Stance** from now. Put **Berserker Rage** and **Intercept** on your bars, and read the **Fight** tab for Levels 30 to 39: your rotation changes.'],
- [/^Trainer: Whirlwind/,'Whirlwind','Put **Whirlwind** on RT + face buttons. Use it **on cooldown**, even against one enemy. It needs Berserker Stance.'],
- [/^Trainer: Pummel/,'Interrupt','Put **Pummel** on RT + D-pad. Use it on enemy spellcasts, especially heals.'],
+ [/^Trainer: Whirlwind/,'Whirlwind','Bind **Whirlwind** to R2 + ○ and move Thunder Clap to L2 + R2 + down. Use it **on cooldown**, even against one enemy. It needs Berserker Stance.'],
+ [/^Trainer: Pummel/,'Interrupt','Bind **Pummel** to R2 + left. Use it on enemy spellcasts, especially heals.'],
  [/^Talent: Bloodthirst/,'Big day: level 40','Rotation changes: **Bloodthirst and Whirlwind on cooldown**. Read the **Fight** tab for Levels 40 to 49. Also due now: plate armour, riding and your Protection spec.'],
  [/Apprentice Riding/,'Mount up','Put your mount on a spare button (the unbound D-pad works) and ride everywhere you are not fighting.'],
  [/Turn on \*\*dual spec|Turn on dual spec/,'Protection spec ready','Keep a one-hander and shield in your bags. Re-read **Dungeons and raids** in Look up before your first tank run.'],
