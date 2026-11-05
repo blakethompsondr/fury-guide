@@ -819,7 +819,7 @@ const DUNGEONS = [
 // Every checklist item carries a permanent id (last element). Ticks are saved against it.
 // Never renumber or reuse an id. New items take the next unused number in their list.
 const BIND = {
- "1": "Heroic Strike on **RT + X**. Battle Shout on **LT + up**. Battle Stance on **LT + RT + X**. Hearthstone on **D-pad down** (no trigger). Potions and food on D-pad up and right once you have them",
+ "1": "Heroic Strike on **RT + X**. Battle Stance on **LT + RT + X**. Battle Shout on **LT + up** once bought. No trigger: Hearthstone on **D-pad down**, food on **right**, Skysight on **left**, healing potions on **up** once you have them",
  "4": "Charge on **RT + up**. Rend on **RT + Y** for now (Bloodthirst takes that slot at 40)",
  "6": "Thunder Clap on **RT + B** for now (Whirlwind takes that slot at 36)",
  "8": "Hamstring on **LT + right**",
@@ -2323,8 +2323,8 @@ const REF = [
      ],
      [
       "No trigger + left",
-      "Throw (pulling)",
-      "Throw"
+      "Skysight (Skyborne racial)",
+      "Skysight"
      ]
     ]
    ],
@@ -2334,7 +2334,11 @@ const REF = [
    ],
    [
     "p",
-    "**Stances:** Classic swaps part of your bar when you change stance. If the no-trigger D-pad (potion, food, Hearthstone, Throw) goes empty after you switch to Defensive at 10 or Berserker at 30, bind those four again while in that stance. You only do it once per stance."
+    "**Skyborne racials:** **Skysight** is worth its slot: 15% run and mount speed for 15 seconds, every 2 minutes. Use it near an **Elemental Convergence** (they show on your minimap) and it becomes **30% for an hour**, a big levelling boost, so pass through one whenever you can. **Walk on Air** is a slow fall on a 90 second cooldown, rarely needed in PvE, so it stays off the bar. **Throw** stays off too: Charge does your pulling."
+   ],
+   [
+    "p",
+    "**Stances:** Classic swaps part of your bar when you change stance. If the no-trigger D-pad (potion, food, Hearthstone, Skysight) goes empty after you switch to Defensive at 10 or Berserker at 30, bind those four again while in that stance. You only do it once per stance."
    ],
    [
     "p",
@@ -2349,7 +2353,7 @@ const REF = [
     "bars",
     [
      [
-      "Level 1: **Heroic Strike** on RT + X, **Battle Shout** on LT + up, **Battle Stance** on LT + RT + X, **Hearthstone** on D-pad down with no trigger",
+      "Level 1: **Heroic Strike** on RT + X, **Battle Stance** on LT + RT + X. No trigger: **Hearthstone** on D-pad down, **food** on right, **Skysight** on left",
       "bars-01"
      ],
      [
