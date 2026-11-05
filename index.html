@@ -818,6 +818,23 @@ const DUNGEONS = [
 /* ===== stages ===== */
 // Every checklist item carries a permanent id (last element). Ticks are saved against it.
 // Never renumber or reuse an id. New items take the next unused number in their list.
+const BIND = {
+ "1": "Heroic Strike on **RT + X**. Battle Shout on **LT + up**. Battle Stance on **LT + RT + X**. Hearthstone on **D-pad down** (no trigger). Potions and food on D-pad up and right once you have them",
+ "4": "Charge on **RT + up**. Rend on **RT + Y** for now (Bloodthirst takes that slot at 40)",
+ "6": "Thunder Clap on **RT + B** for now (Whirlwind takes that slot at 36)",
+ "8": "Hamstring on **LT + right**",
+ "10": "Bloodrage on **LT + X**. Defensive Stance on **LT + RT + B**. Leave Taunt and Sunder Armor off. Switch stance once: if your no-trigger D-pad items vanish, bind them again in that stance",
+ "12": "Overpower on **RT + right**. Leave Shield Bash off",
+ "14": "Demoralizing Shout on **LT + down**",
+ "20": "Victory Rush on **RT + down**. Cleave on **LT + RT + A**. Leave Retaliation off",
+ "22": "Intimidating Shout on **LT + RT + right**",
+ "24": "Execute on **RT + A**",
+ "30": "Death Wish on **LT + Y**. Berserker Rage on **LT + B**. Intercept on **LT + left**. Berserker Stance on **LT + RT + Y**. Check your no-trigger D-pad in the new stance",
+ "36": "Whirlwind on **RT + B**. Move Thunder Clap to **LT + RT + down**",
+ "38": "Pummel on **RT + left**",
+ "40": "Bloodthirst on **RT + Y**. Move Rend to **LT + RT + up**. Mount on **D-pad down** (Hearthstone goes back in your bags). Then switch to Protection and bind its bars (First login setup, step 5)",
+ "50": "Recklessness on **LT + A**"
+};
 const STAGES = [
  {
   "id": "stage-1",
@@ -2151,52 +2168,192 @@ const REF = [
    ],
    [
     "p",
-    "With no trigger held, A jumps, B cancels, X interacts and Y opens the menu, and they cannot be changed. Bind from the spellbook: highlight an ability, press **X**, then the button you want. To remove one, use the right stick as a mouse and drag it off."
+    "The game labels buttons the Xbox way: **A** is Cross, **B** Circle, **X** Square, **Y** Triangle. With no trigger held, A jumps, B cancels, X interacts and Y opens the menu, and those four cannot be changed. Everything else is yours: hold **RT**, **LT** or **both** and press a face button or the D-pad."
+   ],
+   [
+    "p",
+    "**To bind:** open the spellbook, highlight an ability, press **X**, then press the buttons you want. **To remove one:** use the right stick as a mouse and drag it off the bar. New ranks replace the old one on the bar by themselves, so you only bind each ability once."
+   ],
+   [
+    "p",
+    "**The plan:** the attacks you press every few seconds go on **RT + face buttons**, the easiest to reach. Shouts and cooldowns go on **LT**. Stances and rare buttons go on **LT + RT**. Two slots get a stand-in early so they are not empty for 30 levels: Rend borrows the Bloodthirst slot and Thunder Clap borrows the Whirlwind slot, and each moves when the real ability arrives. Your level guide tells you every binding on the day you learn the ability."
    ],
    [
     "table",
     [
-     "Hold",
-     "Face buttons",
-     "D-pad"
+     "Buttons",
+     "Fury (level)",
+     "Prot (40+)"
     ],
     [
      [
-      "RT",
-      "Bloodthirst, Whirlwind, Execute, Heroic Strike / Cleave",
-      "Charge / Intercept, Overpower, Victory Rush, Pummel"
+      "RT + X",
+      "Heroic Strike (1)",
+      "Heroic Strike"
      ],
      [
-      "LT",
-      "Death Wish, Recklessness, Berserker Rage, Bloodrage",
-      "Battle Shout, Demoralizing Shout, Hamstring, Intimidating Shout"
+      "RT + Y",
+      "Bloodthirst (40). Rend until then",
+      "Shield Slam"
      ],
      [
-      "LT + RT",
-      "Battle, Defensive, Berserker Stance, Thunder Clap",
-      "Healing potion, bandage, food, Retaliation"
+      "RT + B",
+      "Whirlwind (36). Thunder Clap until then",
+      "Revenge"
      ],
      [
-      "Nothing",
-      "Fixed by the game",
-      "Throw, mount, Hearthstone, Shield Block"
+      "RT + A",
+      "Execute (24)",
+      "Sunder Armor"
+     ],
+     [
+      "RT + up",
+      "Charge (4)",
+      "Charge"
+     ],
+     [
+      "RT + right",
+      "Overpower (12)",
+      "Taunt"
+     ],
+     [
+      "RT + down",
+      "Victory Rush (20)",
+      "Victory Rush"
+     ],
+     [
+      "RT + left",
+      "Pummel (38)",
+      "Shield Bash"
+     ],
+     [
+      "LT + X",
+      "Bloodrage (10)",
+      "Bloodrage"
+     ],
+     [
+      "LT + Y",
+      "Death Wish (30)",
+      "Shield Block"
+     ],
+     [
+      "LT + B",
+      "Berserker Rage (30)",
+      "Shield Wall"
+     ],
+     [
+      "LT + A",
+      "Recklessness (50)",
+      "Last Stand"
+     ],
+     [
+      "LT + up",
+      "Battle Shout (1)",
+      "Battle Shout"
+     ],
+     [
+      "LT + right",
+      "Hamstring (8)",
+      "Mocking Blow"
+     ],
+     [
+      "LT + down",
+      "Demoralizing Shout (14)",
+      "Demoralizing Shout"
+     ],
+     [
+      "LT + left",
+      "Intercept (30)",
+      "Challenging Shout"
+     ],
+     [
+      "LT + RT + X",
+      "Battle Stance (1)",
+      "Battle Stance"
+     ],
+     [
+      "LT + RT + Y",
+      "Berserker Stance (30)",
+      "Berserker Stance"
+     ],
+     [
+      "LT + RT + B",
+      "Defensive Stance (10)",
+      "Defensive Stance"
+     ],
+     [
+      "LT + RT + A",
+      "Cleave (20)",
+      "Cleave"
+     ],
+     [
+      "LT + RT + up",
+      "Rend (moves here at 40)",
+      "Concussion Blow"
+     ],
+     [
+      "LT + RT + right",
+      "Intimidating Shout (22)",
+      "Disarm"
+     ],
+     [
+      "LT + RT + down",
+      "Thunder Clap (moves here at 36)",
+      "Thunder Clap"
+     ],
+     [
+      "LT + RT + left",
+      "Bandages",
+      "Bandages"
+     ],
+     [
+      "No trigger + up",
+      "Healing potion",
+      "Healing potion"
+     ],
+     [
+      "No trigger + right",
+      "Food",
+      "Food"
+     ],
+     [
+      "No trigger + down",
+      "Hearthstone, mount at 40",
+      "Mount"
+     ],
+     [
+      "No trigger + left",
+      "Throw (pulling)",
+      "Throw"
      ]
     ]
    ],
    [
     "p",
-    "At level 1 you only have a few of these. Put each new ability in its slot as you train it, so your hands learn one layout. This is my suggestion, not a guide’s."
+    "**Left off the bar for Fury:** Taunt, Sunder Armor, Shield Bash, Shield Block, Mocking Blow, Disarm, Retaliation, Challenging Shout, Shield Wall, Slam and Revenge. You don’t use them while levelling Fury solo. They all go on the Protection bars instead."
+   ],
+   [
+    "p",
+    "**Stances:** Classic swaps part of your bar when you change stance. If the no-trigger D-pad (potion, food, Hearthstone, Throw) goes empty after you switch to Defensive at 10 or Berserker at 30, bind those four again while in that stance. You only do it once per stance."
+   ],
+   [
+    "p",
+    "**Protection bars:** dual spec keeps a separate set of bars for each spec. At 40, switch to Protection and bind the right-hand column. The slots match on purpose: your main hit is still RT + Y, your interrupt is still RT + left. If switching spec does not change your bars, tell Claude and the layout will be redone to share one set."
+   ],
+   [
+    "p",
+    "**Where this comes from:** controller guides (Warcraft Tavern) agree on the principle: most-used abilities on the face buttons, the D-pad for less urgent ones. No trusted source publishes a full Fury controller layout for Forever, so the slot choices are Claude’s, built on that principle and the Fury priority."
    ],
    [
     "check",
     "bars",
     [
      [
-      "Battle Shout and Heroic Strike bound now",
+      "Level 1: **Heroic Strike** on RT + X, **Battle Shout** on LT + up, **Battle Stance** on LT + RT + X, **Hearthstone** on D-pad down with no trigger",
       "bars-01"
      ],
      [
-      "Remember: check the spellbook after every trainer visit",
+      "After every trainer visit, bind what you learned. The level guide says where",
       "bars-02"
      ]
     ]
@@ -2246,7 +2403,7 @@ const REF = [
       "addcfg-09"
      ],
      [
-      "**Pawn** (if you have it): type **/pawn** and pick the **Warrior Fury** scale. Green arrows then mark upgrades. Use **Picking upgrades** to sanity check it.",
+      "**Pawn:** it would not load on GeForce Now at launch. Without it, use the **item level** Baganator shows on your bags, the game’s comparison tooltip, and **Picking upgrades**. If Pawn starts working, type **/pawn** and pick the **Warrior Fury** scale.",
       "addcfg-10"
      ],
      [
@@ -2960,7 +3117,7 @@ const REF = [
    ],
    [
     "note",
-    "**Addon shortcut:** search your GeForce Now addon list for **Pawn**. If it is there, it puts a green arrow on upgrades and marks the best quest reward. Choose its Warrior Fury scale. I have not confirmed it is on the list or how well its scale fits Forever, so use the rules above to sanity check it."
+    "**Addon shortcut:** Pawn would not load on GeForce Now at launch, so use the rules above. If it ever starts working, it puts a green arrow on upgrades and marks the best quest reward: choose its Warrior Fury scale and still sanity check it with these rules."
    ],
    [
     "h",
@@ -3612,7 +3769,6 @@ const REF = [
   "whenShort": "Optional"
  }
 ];
-
 const ALL = [...STAGES.map(s=>({...s,kind:'stage'})), ...REF.map(r=>({...r,kind:'ref'}))];
 /* ===== helpers ===== */
 const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -3661,7 +3817,7 @@ const TAL_LV=(()=>{ const m={}, have={}; TALENTS.forEach(([a,z,name,what])=>{ co
 function levelItems(st){ const out=[];
   for(let l=st.range[0]; l<=st.range[1]; l++){
     if(TAL_LV[l]) out.push({lv:l,kind:'tal',key:st.id+'#tal'+l,text:'**Talent:** '+TAL_LV[l].t+'. '+TAL_LV[l].w+'.'});
-    if(TRAIN_LV[l]) out.push({lv:l,kind:'trn',key:st.id+'#trn'+l,text:'**Trainer:** '+TRAIN_LV[l]+'.'}); }
+    if(TRAIN_LV[l]) out.push({lv:l,kind:'trn',key:st.id+'#trn'+l,text:'**Trainer:** '+TRAIN_LV[l]+'.'+(BIND[l]?' **Bind:** '+BIND[l]+'.':'')}); }
   st.do.forEach((d,i)=>out.push({lv:d[0],kind:'do',key:st.id+'#'+d[2],text:d[1],i}));
   const ord={tal:0,trn:1,do:2}; return out.sort((x,y)=>x.lv-y.lv||ord[x.kind]-ord[y.kind]||(x.i||0)-(y.i||0)); }
 function keysOf(ch){
@@ -3865,6 +4021,7 @@ function levelUpSheet(l){
   if(ms) body+='<p class="muted" style="margin:0">'+fmt(ms[1])+'</p><ul class="lvmust">'+ms[2].map(x=>'<li>'+fmt(x)+'</li>').join('')+'</ul>';
   const quick=[]; if(tal&&!(ms&&ms[2].some(x=>x.includes(tal.t.split(' ')[0])))) quick.push('**Talent:** '+tal.t+'.');
   if(trn&&!ms) quick.push('**Trainer:** '+trn+'.');
+  if(BIND[l]) quick.push('**Bind:** '+BIND[l]+'.');
   if(quick.length) body+='<p style="margin:0">'+quick.map(fmt).join('<br>')+'</p>';
   if(newStage) body+='<div class="note"><strong>New stage: '+esc(st.t)+'.</strong> Skim its <strong>Gear</strong> and <strong>Fight</strong> tabs once.</div>';
   if(!ms&&!quick.length&&!newStage&&!extra) return;
